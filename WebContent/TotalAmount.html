@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>결제 전 마지막 페이지</title>
+			<style>
+				#div{
+					float: left;
+					margin: 10px auto;
+					
+				}
+			</style>
+		</head>
+		
+		<body>
+			<div style="width: 90vw; height: 90vh; display: flex; align-items: center;">
+				<div style="text-align:center;  margin: 0 auto;">
+					<div>선택한 메뉴는 '불고기 세트'이며, 추가되거나 제외된 재료는 다음과 같습니다.</div>
+					<p></p>
+					<div>추가된 재료: 재료1, 재료2, 재료3</div>
+					<div>제외된 재료: 재료4, 재료5</div>
+				</div>
+			</div>
+		
+		
+			<span align="left">
+				<input type="button" value="취소" onclick="alert('취소 버튼')">
+			</span>
+			
+			<span align="center">
+				<input type="button" value="카드 결제" onclick="alert('카드 결제 버튼')">
+			</span>
+		
+			<span align="right">
+				<input type="button" value="현금 결제" onclick="alert('현금 결제 버튼')">
+			</span>
+		</body>
+	</html>
