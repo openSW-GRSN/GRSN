@@ -1,38 +1,58 @@
 <!DOCTYPE html>
-	<html>
-		<head>
-			<meta charset="UTF-8">
-			<title>결제 전 마지막 페이지</title>
-			<style>
-				#div{
-					float: left;
-					margin: 10px auto;
-					
-				}
-			</style>
-		</head>
-		
-		<body>
-			<div style="width: 90vw; height: 90vh; display: flex; align-items: center;">
-				<div style="text-align:center;  margin: 0 auto;">
-					<div>선택한 메뉴는 '불고기 세트'이며, 추가되거나 제외된 재료는 다음과 같습니다.</div>
-					<p></p>
-					<div>추가된 재료: 재료1, 재료2, 재료3</div>
-					<div>제외된 재료: 재료4, 재료5</div>
-				</div>
-			</div>
-		
-		
-			<span align="left">
-				<input type="button" value="취소" onclick="alert('취소 버튼')">
-			</span>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<!-- 캐시 삭제 -->
+<meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT"/>
+<meta http-equiv="Expires" content="-1"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+
+<title>결제 전 마지막 페이지</title>
+
+<style>
+	.total_screen{ width: 90vw; height: 90vh; display: flex; align-items: center; }
+	.div_text{ text-align: center; margin: 0 auto }
+	.button{
+		border: none;
+		width: 100px;
+		height: 50px;
+		padding: 15px 15px;
+		text-decoration: none;
+		font-size: 15px;
+		margin: 4px 2px;
+		cursor: pointer;
+		border-radius:10px;
+		display: inline-block;
+	}
+	.button.button_detail{
+		background-color: #000000; /* Black */
+		color: white;
+	}
+</style>
+</head>
+<body>
+<div>
+	<button class="button button_detail" onclick="location.href='Kiosk_3rdWindow.html'">이전 화면</button>
+</div>
+<div class="total_screen">
+	<div class="div_text">
+		<p>
+			<b>선택한 메뉴는 '불고기 세트'이며, 추가되거나 제외된 재료는 다음과 같습니다.</b>
+		</p>
+			추가된 재료: <br/>
+			제외된 재료: <br/>
 			
-			<span align="center">
-				<input type="button" value="카드 결제" onclick="alert('카드 결제 버튼')">
-			</span>
-		
-			<span align="right">
-				<input type="button" value="현금 결제" onclick="alert('현금 결제 버튼')">
-			</span>
-		</body>
-	</html>
+		<p>
+			총 금액: 0원
+		</p>
+	</div>
+</div>
+<div style="text-align: center; display: inline-block; ">
+	<button class="button button_detail">취소</button>
+	<button class="button button_detail">카드 결제</button>
+	<button class="button button_detail">현금 결제</button>
+</div>
+</body>
+</html>
