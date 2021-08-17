@@ -17,11 +17,18 @@
 
 <title>Kiosk 3rd window</title>
 
+<script src="./js/script.js"></script>
+
 <style>
 	*{ font-family: 'Jeju Gothic'; }
 	.basic_ingredient{ padding: 5px; border: 2px solid black; float: up; }
-	.select_ingredinet{ margin:10px; text-align: center }
-	.guide_text{ margin:10px; padding:10px; border:1px solid black; border-radius:10px; text-align: center }
+	.select_ingredinet{ margin: 10px; text-align: center }
+	.guide_text{
+		margin: 10px;
+		padding: 10px;
+		border: 1px solid black;
+		border-radius: 10px;
+	}
 	.basic_button{
 		border: none;
 		outline: none;
@@ -52,10 +59,8 @@
 	}
 	.footer{
 		bottom: 0;
-		padding:10px;
-		border:1px solid black;
-		background-color:white;
-		width:96%;		
+		height: 50px;
+		padding: 0;
 	}
 </style>
 </head>
@@ -63,7 +68,7 @@
 <body>
 <div>
 	<button style="float: left;" class="basic_button normal_button">이전 화면</button>
-	<button style="float: right;" class="basic_button normal_button" type="reset">reset</button>
+	<input type='reset' style="float: right;" class="basic_button normal_button"></input>
 	<div style="text-align: center">
 		<h1>선택한 음식 (불고기 세트)</h1>
 	</div>
@@ -75,7 +80,7 @@
 	<div style="text-align: center">
 		<p>불고기 세트에 반드시 들어가는 재료 항목입니다. (제외나 추가가 불가능합니다.)</p>
 	</div>
-	 <ul>
+	 <ul style="list-style-type: circle;">
 	 	<li>참깨빵 2장</li>
 	 	<li>불고기 패티 1장</li>
 	 	<li>양상추</li>
@@ -86,13 +91,14 @@
 <div class="select_ingredinet">
 	 <p>아래는 고객님의 기호에 맞게 추가/제외가 가능합니다.</p>
 </div>
-<div class="guide_text">
-	제외되었으면 하는 재료를 모두 선택해주세요.
+<div class="guide_text" style="text-align: center">
+	뺄 재료를 모두 선택해주세요.
 </div>
 
 <div>
 	<p>
-		<button class="basic_button exclude_ingredient">재료1</button>
+		<input type="button" class="basic_button exclude_ingredient" id='btn'
+				onClick='check()' value='재료1'></input>
 		<button class="basic_button exclude_ingredient">재료2</button>
 		<button class="basic_button exclude_ingredient">재료3</button>
 		<button class="basic_button exclude_ingredient">재료4</button>
@@ -100,13 +106,13 @@
 		<button class="basic_button exclude_ingredient">재료6</button>
 		<button class="basic_button exclude_ingredient">재료7</button>
 		<button class="basic_button exclude_ingredient">재료8</button>
+		<button class="basic_button exclude_ingredient">재료9</button>
+		<button class="basic_button exclude_ingredient">재료10</button>
 	</p><br/>
 </div>
 
-
-
-<div class="guide_text">
-	추가되었으면 하는 재료를 모두 선택해주세요.
+<div class="guide_text" style="text-align: center">
+	추가할 재료를 모두 선택해주세요.
 </div>
 
 <div>
@@ -119,15 +125,15 @@
 		<button class="basic_button add_ingredient">재료6</button>
 		<button class="basic_button add_ingredient">재료7</button>
 		<button class="basic_button add_ingredient">재료8</button>
+		<button class="basic_button add_ingredient">재료9</button>
+		<button class="basic_button add_ingredient">재료10</button>
 	</p><br/>
 </div>
 
-
-<footer class="footer">
-	<span>합계 금액: 0원</span>
-	<div style="float: right;">
-		<button class="basic_button normal_button" onclick="location.href='TotalAmount.html'">확인</button>
-	</div>
+<footer class="footer" style="border: 1px solid white;">
+	<button class="basic_button normal_button" style="float: right; border: 1px solid transparent;"
+			onclick="location.href='TotalAmount.html'">확인</button>
+	<div class="guide_text"><b>합계 금액: 0원</b></div>
 </footer>
 </body>
 </html>

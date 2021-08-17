@@ -16,7 +16,7 @@
 
 <style>
 	*{ font-family: 'Jeju Gothic'; }
-	.total_screen{ width: 90vw; height: 90vh; display: flex; align-items: center; }
+	.total_screen{ padding: 50px 5px 50px 5px; display: flex; align-items: center; }
 	.div_text{ text-align: center; margin: 0 auto }
 	.button{
 		border: none;
@@ -34,11 +34,13 @@
 		background-color: #000000; /* Black */
 		color: white;
 	}
+	.test{ background-color: orange; height: 100px; }
 </style>
 </head>
 <body>
 <div>
-	<button class="button button_detail" onclick="location.href='Kiosk_3rdWindow.html'">이전 화면</button>
+	<button class="button button_detail"
+			onclick="location.href='Kiosk_3rdWindow.html'">이전 화면</button>
 </div>
 <div class="total_screen">
 	<div class="div_text">
@@ -53,10 +55,26 @@
 		</p>
 	</div>
 </div>
+
+<div class="test">
+	<div style="border: 1px solid gold; float: left; width: 33%;">
+		<button class="button button_detail">취소</button>
+	</div>
+	<div style="border: 1px solid red; float: left; width: 33%;">
+		<button class="button button_detail">카드 결제</button>
+	</div>
+	<div style="border: 1px solid blue; float: left; width: 33%;">
+		<button class="button button_detail">현금 결제</button>
+	</div>
+</div>
+
+
+
 <div style="text-align: center; display: inline-block; ">
 	<button class="button button_detail">취소</button>
 	<button class="button button_detail">카드 결제</button>
 	<button class="button button_detail">현금 결제</button>
 </div>
+
 </body>
 </html>
