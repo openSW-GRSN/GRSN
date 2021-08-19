@@ -12,15 +12,16 @@
 <!-- 커스텀 CSS 추가하기 -->
 <link rel="stylesheet" href="./css/custom.css">
 
-<title>메뉴 추천</title>
+<title>메뉴 추천 결과 창</title>
 
 <style>
 	*{ font-family: 'Jeju Gothic'; }
 	.total_screen{ padding: 50px 5px 50px 5px; display: block; height: 100vh; }
-	.div_btn{ margin: auto; display: block; }
+	.div_text{ margin: 0 auto; text-align: center }
+	.div_btn{ margin: auto; display: block; position:absolute; }
 	.button{
 		border: none;
-		width: 300px;
+		width: 200px;
 		height: 50px;
 		padding: 15px 15px;
 		text-decoration: none;
@@ -35,18 +36,22 @@
 		color: white;
 	}
 </style>
-
 </head>
 
 <body>
 	<div class="total_screen">
-		<h1>메뉴 추천을 받으시겠습니까?</h1>
-		<br/><br/><br/><br/><br/>
+		<h1>질문에 답변해주셔서 감사합니다. 고객님이 드실 수 있을 만한 메뉴는...</h1>
+		<br/>
+		
+		<div class="div_text">
+			<h2>불고기 버거 세트입니다!</h2>
+		</div>
+		
+		<br/><br/><br/><br/>
 		
 		<div class="div_btn">
-			<input type="button" class="button button_detail" value="네, 메뉴 선정에 도움이 필요합니다."
-					onclick="location.href='recommendation_question.html'"/>
-			<input type="button" class="button button_detail" value="아니요, 괜찮습니다."/>
+			<input type="button" class="button button_detail" value="다른 메뉴 선택하기"/>
+			<input type="button" class="button button_detail" value="추천 메뉴 결제하기"/>
 		</div>
 	</div>
 </body>

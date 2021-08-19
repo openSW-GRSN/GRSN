@@ -20,9 +20,9 @@
 <script src="./js/script.js"></script>
 
 <style>
-	*{ font-family: 'Jeju Gothic'; }
-	.basic_ingredient{ padding: 5px; border: 2px solid black; float: up; }
-	.select_ingredinet{ margin: 10px; text-align: center }
+	*{ font-family: 'Cafe24Oneprettynight'; }
+	.basic_ingredient{ padding: 5px; border: 2px solid black; float: up; background-color: #ffffff; }
+	.select_ingredinet{ margin: 10px; text-align: center; }
 	.guide_text{
 		margin: 10px;
 		padding: 10px;
@@ -37,25 +37,24 @@
 		text-align: center;
 		text-decoration: none;
 		display: inline-block;
-		font-size: 15px;
 		margin: 4px 2px;
 		cursor: pointer;
 		border-radius:10px;
 	}
 	.normal_button{
-		background-color: #000000; /* Black */
-		color: white;
 		width: 100px;
 	}
 	.exclude_ingredient{
-		background-color: #ff0000; /* Red */
-		color: white;
+		background-color: #f55354; /* tomato color ^_^ */
 		width: 100px;
 	}
 	.add_ingredient{
-		background-color: #0000ff; /* Blue */
-		color: white;
+		background-color: #009000; /* pickle */
 		width: 100px;
+	}
+	.patty_color{
+		background-color: #754100;
+		color: white;
 	}
 	.footer{
 		bottom: 0;
@@ -69,7 +68,7 @@
 <div>
 	<button style="float: left;" class="basic_button normal_button">이전 화면</button>
 	<input type='reset' style="float: right;" class="basic_button normal_button"></input>
-	<div style="text-align: center">
+	<div style="text-align: center;">
 		<h1>선택한 음식 (불고기 세트)</h1>
 	</div>
 	<br/>
@@ -78,7 +77,7 @@
 
 <div class="basic_ingredient">
 	<div style="text-align: center">
-		<p>불고기 세트에 반드시 들어가는 재료 항목입니다. (제외나 추가가 불가능합니다.)</p>
+		<p><b>불고기 세트에 반드시 들어가는 재료 항목입니다. (제외나 추가가 불가능합니다.)</b></p>
 	</div>
 	 <ul style="list-style-type: circle;">
 	 	<li>참깨빵 2장</li>
@@ -91,14 +90,14 @@
 <div class="select_ingredinet">
 	 <p>아래는 고객님의 기호에 맞게 추가/제외가 가능합니다.</p>
 </div>
-<div class="guide_text" style="text-align: center">
+<div class="guide_text patty_color" style="text-align: center">
 	뺄 재료를 모두 선택해주세요.
 </div>
 
 <div>
 	<p>
-		<input type="button" class="basic_button exclude_ingredient" id='btn'
-				onClick='check()' value='재료1'></input>
+		<button class="basic_button exclude_ingredient" id='btn'
+				onClick='check()' value='재료1'>재료1</button>
 		<button class="basic_button exclude_ingredient">재료2</button>
 		<button class="basic_button exclude_ingredient">재료3</button>
 		<button class="basic_button exclude_ingredient">재료4</button>
@@ -111,7 +110,7 @@
 	</p><br/>
 </div>
 
-<div class="guide_text" style="text-align: center">
+<div class="guide_text patty_color" style="text-align: center">
 	추가할 재료를 모두 선택해주세요.
 </div>
 
@@ -130,10 +129,10 @@
 	</p><br/>
 </div>
 
-<footer class="footer" style="border: 1px solid white;">
+<footer class="footer" style="border: 1px solid #ffe3a8;">
 	<button class="basic_button normal_button" style="float: right; border: 1px solid transparent;"
 			onclick="location.href='TotalAmount.html'">확인</button>
-	<div class="guide_text"><b>합계 금액: 0원</b></div>
+	<div class="guide_text" style="background-color: white; color: black"><b>합계 금액: 0원</b></div>
 </footer>
 </body>
 </html>

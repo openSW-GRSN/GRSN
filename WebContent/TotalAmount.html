@@ -15,26 +15,29 @@
 <title>결제 전 마지막 페이지</title>
 
 <style>
-	*{ font-family: 'Jeju Gothic'; }
-	.total_screen{ padding: 50px 5px 50px 5px; display: flex; align-items: center; }
-	.div_text{ text-align: center; margin: 0 auto }
+	*{ font-family: 'Cafe24Oneprettynight'; }
+	.total_screen{
+		padding: 50px 5px 50px 5px;
+		display: flex;
+		align-items: center;
+		height: 100vh;
+		}
+	.div_text{ text-align: center; margin: 0 auto; }
 	.button{
 		border: none;
 		width: 100px;
 		height: 50px;
 		padding: 15px 15px;
 		text-decoration: none;
-		font-size: 15px;
 		margin: 4px 2px;
 		cursor: pointer;
-		border-radius:10px;
+		border-radius: 10px;
 		display: inline-block;
 	}
 	.button.button_detail{
-		background-color: #000000; /* Black */
+		background-color: #7fc638; /* 양상추 색 */
 		color: white;
 	}
-	.test{ background-color: orange; height: 100px; }
 </style>
 </head>
 <body>
@@ -50,25 +53,11 @@
 			추가된 재료: <br/>
 			제외된 재료: <br/>
 			
-		<p>
-			총 금액: 0원
-		</p>
+		<span style="background-color: #ffffff; ">
+			&nbsp; 총 금액: 0원 &nbsp;
+		</span>
 	</div>
 </div>
-
-<div class="test">
-	<div style="border: 1px solid gold; float: left; width: 33%;">
-		<button class="button button_detail">취소</button>
-	</div>
-	<div style="border: 1px solid red; float: left; width: 33%;">
-		<button class="button button_detail">카드 결제</button>
-	</div>
-	<div style="border: 1px solid blue; float: left; width: 33%;">
-		<button class="button button_detail">현금 결제</button>
-	</div>
-</div>
-
-
 
 <div style="text-align: center; display: inline-block; ">
 	<button class="button button_detail">취소</button>
