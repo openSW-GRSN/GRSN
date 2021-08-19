@@ -15,12 +15,12 @@
 <title>메뉴 추천</title>
 
 <style>
-	*{ font-family: 'Jeju Gothic'; }
+	*{ font-family: 'Cafe24Oneprettynight'; }
 	.total_screen{ padding: 50px 5px 50px 5px; display: block; height: 100vh; }
 	.div_btn{ margin: auto; display: block; }
-	.button{
+	.button_detail{
 		border: none;
-		width: 300px;
+		width: 250px;
 		height: 50px;
 		padding: 15px 15px;
 		text-decoration: none;
@@ -29,10 +29,13 @@
 		cursor: pointer;
 		border-radius:10px;
 		display: inline-block;
+		border-radius: 25px;
+		box-shadow: 1px 4px 0 black;
 	}
-	.button_detail{
-		background-color: #000000; /* Black */
-		color: white;
+	.button_detail:active{
+		box-shadow: 1px 1px 0 black;
+		position: relative;
+		top: 2px;
 	}
 </style>
 
@@ -44,9 +47,9 @@
 		<br/><br/><br/><br/><br/>
 		
 		<div class="div_btn">
-			<input type="button" class="button button_detail" value="네, 메뉴 선정에 도움이 필요합니다."
-					onclick="location.href='recommendation_question.html'"/>
-			<input type="button" class="button button_detail" value="아니요, 괜찮습니다."/>
+			<button class="button_detail" onclick="location.href='recommendation_question.html'">
+			네, 메뉴 선정에 도움이 필요합니다.</button>
+			<button class="button_detail">아니요, 괜찮습니다.</button>
 		</div>
 	</div>
 </body>

@@ -33,27 +33,29 @@
 		border: none;
 		outline: none;
 		height: 50px;
+		width: 100px;
 		padding: 15px;
 		text-align: center;
 		text-decoration: none;
 		display: inline-block;
 		margin: 4px 2px;
 		cursor: pointer;
-		border-radius:10px;
+		border-radius: 25px;
+		box-shadow: 1px 4px 0 black;
 	}
-	.normal_button{
-		width: 100px;
+	.basic_button:active{
+		box-shadow: 1px 1px 0 black;
+		position: relative;
+		top: 2px;
 	}
 	.exclude_ingredient{
 		background-color: #f55354; /* tomato color ^_^ */
-		width: 100px;
 	}
 	.add_ingredient{
 		background-color: #009000; /* pickle */
-		width: 100px;
 	}
 	.patty_color{
-		background-color: #754100;
+		background-color: #754100; /* patty */
 		color: white;
 	}
 	.footer{
@@ -66,7 +68,7 @@
 
 <body>
 <div>
-	<button style="float: left;" class="basic_button normal_button">이전 화면</button>
+	<button style="float: left;" class="basic_button">이전 화면</button>
 	<input type='reset' style="float: right;" class="basic_button normal_button"></input>
 	<div style="text-align: center;">
 		<h1>선택한 음식 (불고기 세트)</h1>

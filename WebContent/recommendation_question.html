@@ -15,7 +15,26 @@
 <title>메뉴 추천 질문</title>
 
 <style>
-	*{ font-family: 'Jeju Gothic'; }
+	*{ font-family: 'Cafe24Oneprettynight'; }
+	.button_detail{
+		border: none;
+		width: 100px;
+		height: 50px;
+		padding: 15px 15px;
+		text-decoration: none;
+		font-size: 15px;
+		margin: 4px 2px;
+		cursor: pointer;
+		border-radius:10px;
+		display: inline-block;
+		border-radius: 25px;
+		box-shadow: 1px 4px 0 black;
+	}
+	.button_detail:active{
+		box-shadow: 1px 1px 0 black;
+		position: relative;
+		top: 2px;
+	}
 </style>
 </head>
 
@@ -25,14 +44,14 @@
 	<br/>
 	
 	<div>
-		<input type="button" value="바나나"/><br/>
-		<input type="button" value="복숭아"/><br/>
-		<input type="button" value="견과류"/><br/>
+		<button class="button_detail">바나나</button><br/>
+		<button class="button_detail">복숭아</button><br/>
+		<button class="button_detail">견과류</button><br/>
 	</div>
 	
 	<p>
-		<input type="button" value="다음 항목으로"
-				onclick="location.href='recommendation_question_lastpage.html'"/>
+		<button class="button_detail" style="width: 130px;"
+				onclick="location.href='recommendation_question_lastpage.html'"> 다음 항목으로</button>
 	</p>
 </body>
 </html>
