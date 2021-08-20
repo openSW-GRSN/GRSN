@@ -1,0 +1,66 @@
+@charset "EUC-KR";
+@font-face {
+    font-family: 'IBMPlexSansKR-SemiBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-SemiBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+	font-family:"IBMPlexSansKR-SemiBold";			
+}
+p{
+	
+	font-size:50px;
+}
+
+.backgroundSet {
+  background-image: url(../images/managerbg.jpg);
+  background-size: 300px;
+  width: 3000px;
+  height: 3000px;
+  border: 1px solid;
+  text-shadow: white 0px 0px 2px;
+  font-size: 16px;
+}
+p1{
+	
+	font-size:20px;
+	
+}
+p2{
+	font-size:40px;
+}
+
+.buttons{
+			color:black;
+			 background-color:#ffaea8;
+			 font-size:2em;
+			 padding:15px 32px;
+			 display:inline-block;
+			 margin:15px 10px;
+			 
+			 font-family: 'Black Han Sans', sans-serif;
+			
+		}
+.button2{
+			 color:black;
+			 background-color:#ffaea8;
+			 padding:0px 0px;
+			 display:inline-block;
+			 margin:0px 0px;
+			 border:none;
+	
+}
+.submitBtn{
+			width:100px;
+			font-size:14px;
+			color:black;
+			background-color:#ffaea8;
+			padding:10px;
+			margin-bottom:10px;
+			border-radius:5px;
+			
+			font-family: 'Black Han Sans', sans-serif;
+			font-size:2em;
+}
