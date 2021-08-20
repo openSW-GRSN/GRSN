@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<!-- 캐시 삭제 -->
+<meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT"/>
+<meta http-equiv="Expires" content="-1"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+
+<!-- 커스텀 CSS 추가하기 -->
+<link rel="stylesheet" href="./css/custom.css">
+
+<title>메뉴 추천 질문</title>
+
+<style>
+	*{ font-family: 'Cafe24Oneprettynight'; }
+	.button_detail{
+		border: none;
+		width: 100px;
+		height: 50px;
+		padding: 15px 15px;
+		text-decoration: none;
+		font-size: 15px;
+		margin: 4px 2px;
+		cursor: pointer;
+		border-radius:10px;
+		display: inline-block;
+		border-radius: 25px;
+		box-shadow: 1px 4px 0 black;
+	}
+	.button_detail:active{
+		box-shadow: 1px 1px 0 black;
+		position: relative;
+		top: 2px;
+	}
+</style>
+</head>
+
+<body>
+	<h2>마지막 페이지 질문</h2>
+	
+	<br/>
+	
+	<div>
+		<button class="button_detail">목록 1</button><br/>
+		<button class="button_detail">목록 2</button><br/>
+		<button class="button_detail">목록 3</button><br/>
+	</div>
+	
+	<p>
+		<button class="button_detail"
+				onclick="location.href='recommendation_result.html'">결과 보기</button>
+	</p>
+</body>
+</html>
