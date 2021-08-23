@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script src="./functions.js"></script>
+	
 	<link rel="stylesheet" href="css/setMenu.css">
 	<style>
 		body{
@@ -8,47 +10,46 @@
 			background-repeat:repeat;
 			background-attachment:fixed;
 			color:black;
+			
+			font-family: 'Cafe24Oneprettynight';
+			}
+		@font-face {/* ë‚´ìš© ë¶€ë¶„ì˜ í°íŠ¸ */
+    		font-family: 'Cafe24Oneprettynight';
+   			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
+    		font-weight: normal;
+    		font-style: normal;
 			}
 	</style>
+
 <meta charset="EUC-KR">
-<title>ÆÇ¸Å·® Ã¼Å©ÇÏ±â</title>
+<title>íŒë§¤ëŸ‰ ì²´í¬í•˜ê¸°</title>
 </head>
 <body>
 
 <center>
-<p>¿À´ÃÀÇ ÆÇ¸Å·®</p>
+<p>ì˜¤ëŠ˜ì˜ íŒë§¤ëŸ‰</p>
 </center>
 
-<!-- ¸Ş´ºº° ÆÇ¸Å·® È®ÀÎ -->
-<!-- ¹öÆ°½ÄÀÌ ¾Æ´Ñ È­¸é¿¡ ÅØ½ºÆ®·Î ³ªÅ¸³ª°Ô²û ÇÏ°í½ÍÀºµ¥ ±× ºÎºĞÀº °øºÎ°¡ Á» ´õ ÇÊ¿äÇÔ. -->
+<!-- ë©”ë‰´ë³„ íŒë§¤ëŸ‰ í™•ì¸ -->
+<!-- post.jsp -->
 
-	<!-- Ã¹¹øÂ° ¸Ş´º -->
-		<a href='ratePopupMenu1.html' onclick="window.open(this.href,'ÆË¾÷Ã¢','width=500,height=500');
-			return false;">
-			<img width="250" height="250" alt="Ä¡Áî ¹ö°Å" src="images/cheeseBurgerMenu.PNG"/>	
-		</a>
+		<!-- ì´ íŒë§¤ëŸ‰ í™•ì¸ -->
+	
+		<script language="JavaScript">
+		<!-- //ë‚˜ì¤‘ì—” DBì—ì„œ ì½ì–´ì˜¤ê¸°
+			document.write("ì˜¤ëŠ˜ì˜ íŒë§¤ëŸ‰"+today);
+			document.write('</br>');
+			document.write("ì¹˜ì¦ˆë²„ê±°: "+sales_cheeseburger+"ê°œ"); 
+			document.write('</br>');
+			document.write("í† ë§ˆí† ë²„ê±°: "+sales_cheeseburger+"ê°œ"); 
+			document.write('</br>');
+			document.write("ë”ë¸”ë²„ê±°: "+sales_cheeseburger+"ê°œ"); 
+			document.write('</br>');
+			document.write("ì¼€ë°¥ë²„ê±°: "+sales_cheeseburger+"ê°œ"); 
+			document.write('</br>');
+			document.write("ì´: "+total_sales+"ê°œ");
+		//-->
+		</script>
 		
-			<!-- µÎ¹øÂ° ¸Ş´º -->
-		<a href='ratePopupMenu2.html' onclick="window.open(this.href,'ÆË¾÷Ã¢','width=500,height=500');
-			return false;">
-			<img width="250" height="250" alt="´õºí ¹ö°Å" src="images/doubleBurgerMenu.PNG"/>
-		</a>
-		
-			<!-- ¼¼¹øÂ° ¸Ş´º -->
-		<a href='ratePopupMenu3.html' onclick="window.open(this.href,'ÆË¾÷Ã¢','width=500,height=500');
-			return false;">
-			<img width="250" height="250" alt="ÄÉ¹ä ¹ö°Å" src="images/kebabBurgerMenu.PNG"/>
-		</a>
-		
-			<!-- ³×¹øÂ° ¸Ş´º -->
-		<a href='ratePopupMenu4.html' onclick="window.open(this.href,'ÆË¾÷Ã¢','width=500,height=500');
-			return false;">
-			<img width="250" height="250" alt="Åä¸¶Åä ¹ö°Å" src="images/tomatoBurgerMenu.PNG"/>
-		</a>
-		
-		<br><br>
-		<!-- ÃÑ ÆÇ¸Å·® È®ÀÎ -->
-		<p2>*ÃÑ ÆÇ¸Å·®:</p2> <!-- ÀÌ ºÎºĞ¿¡ º¯¼ö°ª ³Ö±â --> <br>
-		<p2>*ÃÑ ÆÇ¸Å ±İ¾×:</p2>
 </body>
 </html>
