@@ -1,24 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script language="JavaScript">
-	<!--
-		var sales_cheeseburger=0;	//최종 판매 수량
-		var order_cheeseburger=0;	//주문 버튼 누르면 증가하는 변수
-		
-		function count_sales_cheeseburger(){
-			sales_cheeseburger+=1;
-			return sales_cheeseburger;
-		}
-		
-		function count_order_cheeseburger(){
-			order_cheeseburger+=1;
-			alert(order_cheeseburger);
-		}
-		//생각해보니 취소 버튼도 만들어야 함.
-	//-->
-	</script>
-	<style>/* 배경 고쳐놓기 */
+<script src="./functions.js"></script>
+	<style>
 		body{
 			background-color:#FFE3A8;
 			background-repeat:repeat;
@@ -49,13 +33,17 @@
 		
 	</style>
 
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>메뉴 선택</title>
 </head>
 <body>
-	<p font-size:60px; align="center">
+<form action="checkSalesRate.html" id="sales"> <!-- 나중에 결제 화면으로 링크 바꾸기 -->
+	<p align="center">
 	메뉴를 선택해주세요!
 	</p>
+	
+	<a href="checkSalesRate.html">
+	<p align="right">매니저 화면(판매량)으로 이동하기</p></a>
 	
 	<hr/>	<!-- 전체 화면의 가로 분할 선 -->
 <!-- 첫번째 메뉴 -->
@@ -69,8 +57,14 @@
 	<div align="right">
 	<button type="button"
 		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
-		onClick="count_order_cheeseburger()"> <!--버튼 누르면 변수 1 증가 -->
+		onClick="count_sales_cheeseburger()"> <!--버튼 누르면 변수 1 증가 -->
 		선택하기
+		</button>
+	
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="cancel_sales_cheeseburger()"> <!--버튼 누르면 변수 1 감소 -->
+		취소하기
 		</button>
 	</div>
 	<hr/>
@@ -86,9 +80,16 @@
 	
 	<div align="right">
 	<button type="button"
-		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';">
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="count_sales_doubleburger()">
 		선택하기
 		</button>
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="cancel_sales_doubleburger()">
+		취소하기
+		</button>	
+	</div>
 	</div>
 	<hr/>
 </dl>
@@ -103,9 +104,15 @@
 	
 	<div align="right">
 	<button type="button"
-		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';">
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="count_sales_tomatoburger()">
 		선택하기
 		</button>
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="cancel_sales_tomatoburger()">
+		취소하기
+		</button>	
 	</div>
 	<hr/>
 </dl>
@@ -119,9 +126,15 @@
 	</dd>
 	
 	<div align="right">
-	<button type="button"
-		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';">
+		<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="count_sales_kebabburger()">
 		선택하기
+		</button>
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="cancel_sales_kebabburger()">
+		취소하기
 		</button>
 	</div>
 	<hr/>
@@ -129,6 +142,15 @@
 
 
 <br>
+<!-- 아랫부분 수정 -->
 <input type="submit" value="결정!" class="submitBtn">
+
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="sendSales()">
+		전송하기
+		</button>
+
+</form>
 </body>
 </html>
