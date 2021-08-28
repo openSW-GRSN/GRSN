@@ -1,94 +1,140 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="css/setMenu.css">
-	<style>/* ¹è°æ °íÃÄ³õ±â */
+<script src="./functions.js"></script>
+	<style>
 		body{
-			background-image:url("images/kioskBg.png");
+			background-color:#FFE3A8;
 			background-repeat:repeat;
 			background-attachment:fixed;
 			color:black;
+			
+			font-family: 'Cafe24Oneprettynight';
 			}
-		@font-face {
-    		font-family: 'BMDOHYEON';
-    		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
-   		 	font-weight: normal;
-   		 	font-style: normal;
-}
+		@font-face {/* ì œëª© ë¶€ë¶„ì˜ í°íŠ¸ */
+   			 	font-family: 'BMEULJIRO';
+    			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BMEULJIRO.woff') format('woff');
+    			font-weight: normal;
+    			font-style: normal;
+				}
+		@font-face {/* ë‚´ìš© ë¶€ë¶„ì˜ í°íŠ¸ */
+    			font-family: 'Cafe24Oneprettynight';
+   				src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
+    			font-weight: normal;
+    			font-style: normal;
+				}	
+				
+		p1{
+			font-family: 'Cafe24Oneprettynight';
+			font-size:30px;
+		
+		}
+		
+		
 	</style>
 
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>¸Ş´º ¼±ÅÃ</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ë©”ë‰´ ì„ íƒ</title>
 </head>
 <body>
+<form action="checkSalesRate.html" id="sales"> <!-- ë‚˜ì¤‘ì— ê²°ì œ í™”ë©´ìœ¼ë¡œ ë§í¬ ë°”ê¾¸ê¸° -->
 	<p align="center">
-	¸Ş´º¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä!
+	ë©”ë‰´ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”!
 	</p>
 	
-	<hr/>	<!-- ÀüÃ¼ È­¸éÀÇ °¡·Î ºĞÇÒ ¼± -->
-<!-- Ã¹¹øÂ° ¸Ş´º -->
+	<a href="checkSalesRate.html">
+	<p align="right">ë§¤ë‹ˆì € í™”ë©´(íŒë§¤ëŸ‰)ìœ¼ë¡œ ì´ë™í•˜ê¸°</p></a>
+	
+	<hr/>	<!-- ì „ì²´ í™”ë©´ì˜ ê°€ë¡œ ë¶„í•  ì„  -->
+<!-- ì²«ë²ˆì§¸ ë©”ë‰´ -->
 <dl>
-<dt><h1>Ä¡Áî ¹ö°Å</h1></dt>
+<dt><h1>ì¹˜ì¦ˆ ë²„ê±°</h1></dt>
 	<dd>
-	<img align="middle" width="250" height="250" src="images/cheeseburger.jpg">
-	<p1>ÁøÇÑ Ä¡Áî¸ÀÀÌ ´À²¸Áö´Â Ä¡Áî ¹ö°ÅÀÔ´Ï´Ù.</p1>
+	<img align="middle" width="150" height="150" src="images/cheeseburger.jpg">
+	<p1>ì§„í•œ ì¹˜ì¦ˆë§›ì´ ëŠê»´ì§€ëŠ” ì¹˜ì¦ˆ ë²„ê±°ì…ë‹ˆë‹¤.</p1>
 	</dd>
 	
 	<div align="right">
 	<button type="button"
-		style="color:black; background-color:#bfe8a2; font-size:2em; font-family: 'BMDOHYEON';">
-		¼±ÅÃÇÏ±â
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="count_sales_cheeseburger()"> <!--ë²„íŠ¼ ëˆ„ë¥´ë©´ ë³€ìˆ˜ 1 ì¦ê°€ -->
+		ì„ íƒí•˜ê¸°
+		</button>
+	
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="cancel_sales_cheeseburger()"> <!--ë²„íŠ¼ ëˆ„ë¥´ë©´ ë³€ìˆ˜ 1 ê°ì†Œ -->
+		ì·¨ì†Œí•˜ê¸°
 		</button>
 	</div>
 	<hr/>
 </dl>
 	
-<!-- µÎ¹øÂ° ¸Ş´º -->
+<!-- ë‘ë²ˆì§¸ ë©”ë‰´ -->
 <dl>
-<dt><h1>´õºí ¹ö°Å</h1></dt>
+<dt><h1>ë”ë¸” ë²„ê±°</h1></dt>
 	<dd>
-	<img align="middle" width="250" height="250" src="images/doubleburger.jpg">
-	<p1>ÆĞÆ¼°¡ µÎ ¹è! ´õ¿í ÁøÇØÁø °í±â ¸ÀÀ» ´À³¢¼¼¿ä.</p1>
+	<img align="middle" width="150" height="150" src="images/doubleburger.jpg">
+	<p1>íŒ¨í‹°ê°€ ë‘ ë°°! ë”ìš± ì§„í•´ì§„ ê³ ê¸° ë§›ì„ ëŠë¼ì„¸ìš”.</p1>
 	</dd>
 	
 	<div align="right">
 	<button type="button"
-		style="color:black; background-color:#bfe8a2; font-size:2em; font-family: 'BMDOHYEON';">
-		¼±ÅÃÇÏ±â
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="count_sales_doubleburger()">
+		ì„ íƒí•˜ê¸°
 		</button>
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="cancel_sales_doubleburger()">
+		ì·¨ì†Œí•˜ê¸°
+		</button>	
+	</div>
 	</div>
 	<hr/>
 </dl>
 
-<!-- ¼¼¹øÂ° ¸Ş´º -->
+<!-- ì„¸ë²ˆì§¸ ë©”ë‰´ -->
 <dl>
-<dt><h1>Åä¸¶Åä ¹ö°Å</h1></dt>
+<dt><h1>í† ë§ˆí†  ë²„ê±°</h1></dt>
 	<dd>
-	<img align="middle" width="250" height="250" src="images/tomatoburger.jpg">
-	<p1>½Å¼±ÇÑ Åä¸¶Åä¿Í ÆĞÆ¼ÀÇ Á¶ÇÕÀ» Áñ±â¼¼¿ä!</p1>
+	<img align="middle" width="150" height="150" src="images/tomatoburger.jpg">
+	<p1>ì‹ ì„ í•œ í† ë§ˆí† ì™€ íŒ¨í‹°ì˜ ì¡°í•©ì„ ì¦ê¸°ì„¸ìš”!</p1>
 	</dd>
 	
 	<div align="right">
 	<button type="button"
-		style="color:black; background-color:#bfe8a2; font-size:2em; font-family: 'BMDOHYEON';">
-		¼±ÅÃÇÏ±â
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="count_sales_tomatoburger()">
+		ì„ íƒí•˜ê¸°
 		</button>
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="cancel_sales_tomatoburger()">
+		ì·¨ì†Œí•˜ê¸°
+		</button>	
 	</div>
 	<hr/>
 </dl>
 
-<!-- ³×¹øÂ° ¸Ş´º -->
+<!-- ë„¤ë²ˆì§¸ ë©”ë‰´ -->
 <dl>
-<dt><h1>ÄÉ¹ä ¹ö°Å</h1></dt>
+<dt><h1>ì¼€ë°¥ ë²„ê±°</h1></dt>
 	<dd>
-	<img align="middle" width="250" height="250" src="images/kebabburger.jpg">
-	<p1>ÀÌ±¹ÀûÀÎ ÄÉ¹äÀÇ ¸ÀÀ» ÇÜ¹ö°Å¿¡¼­?!</p1>
+	<img align="middle" width="150" height="150" src="images/kebabburger.jpg">
+	<p1>ì´êµ­ì ì¸ ì¼€ë°¥ì˜ ë§›ì„ í–„ë²„ê±°ì—ì„œ?!</p1>
 	</dd>
 	
 	<div align="right">
+		<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="count_sales_kebabburger()">
+		ì„ íƒí•˜ê¸°
+		</button>
 	<button type="button"
-		style="color:black; background-color:#bfe8a2; font-size:2em; font-family: 'BMDOHYEON';">
-		¼±ÅÃÇÏ±â
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="cancel_sales_kebabburger()">
+		ì·¨ì†Œí•˜ê¸°
 		</button>
 	</div>
 	<hr/>
@@ -96,6 +142,15 @@
 
 
 <br>
-<input type="submit" value="°áÁ¤!" class="submitBtn">
+<!-- ì•„ë«ë¶€ë¶„ ìˆ˜ì • -->
+<input type="submit" value="ê²°ì •!" class="submitBtn">
+
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="sendSales()">
+		ì „ì†¡í•˜ê¸°
+		</button>
+
+</form>
 </body>
 </html>
