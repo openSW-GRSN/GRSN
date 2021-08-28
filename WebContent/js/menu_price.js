@@ -17,8 +17,8 @@ var soldOut = false;
 
 if(menu_name == "불고기버거 세트"){
 	price = 5900;
-}else if(menu_name == "싸이버거 세트"){
-	price = 8600;
+}else if(menu_name == "토마토버거 세트"){
+	price = 6000;
 }else if(menu_name == "더블버거 세트"){
 	price = 7500;
 }else if(menu_name == "케밥버거 세트"){
