@@ -12,14 +12,17 @@ var menu_name = "치즈버거 세트";
 var price = 5000;
 var count = 1;
 var Material_list = ['참깨빵 2장', '양상추', '치즈', '특별 소스'];
-var Material_subtract = ['감자튀김', '피클', '양파', '소스1', '소스2', '음료'];
-var Material_add = ['음료 두 잔', '치즈', '소스1', '소스2', '피클 두 배', '양파 두 배'];
+var Material_add = ['토마토', '치즈', '소스', '피클 두 배'];
 var soldOut = false;
 
 if(menu_name == "불고기버거 세트"){
 	price = 5900;
 }else if(menu_name == "싸이버거 세트"){
 	price = 8600;
+}else if(menu_name == "더블버거 세트"){
+	price = 7500;
+}else if(menu_name == "케밥버거 세트"){
+	price = 5000;
 }
 
 window.onload = function(){
@@ -42,16 +45,8 @@ window.onload = function(){
 	}
 	
 	// 재료 수정할 수 없는 칸의 메뉴명
-	document.getElementById("menu_detail").innerHTML = menu_name + "에 반드시 들어가는 재료 항목입니다. (제외나 추가가 불가능합니다.)";
+	document.getElementById("menu_detail").innerHTML = menu_name + "에 반드시 들어가는 재료 항목입니다.";
 	document.getElementById("menu_detail").style.fontWeight = "900";
-	
-	// 뺄 재료 버튼
-	// 숫자 대신 Material 길이로 지정해야 할 듯!!
-	for(var i = 0; i < Material_subtract.length; i++){
-		const btnString = "subtract_btn";
-		
-		document.getElementById(btnString+i).childNodes[0].textContent = Material_subtract[i];
-	}
 	
 	// 추가할 재료 버튼
 	for(var i = 0; i < Material_add.length; i++){
