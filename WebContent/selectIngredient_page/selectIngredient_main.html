@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- 캐시 삭제 -->
+<meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT"/>
+<meta http-equiv="Expires" content="-1"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- 커스텀 CSS 추가하기 -->
+<link rel="stylesheet" href="../css/custom.css">
+
+<title>재료 제외/추가 창</title>
+
+<style>
+	.basic_ingredient{ padding: 5px; border: 2px solid black; float: up; background-color: #ffffff; }
+	.select_ingredinet{ margin: 10px; text-align: center; }
+	.guide_text{
+		margin: 10px;
+		padding: 10px;
+		border: 1px solid black;
+		border-radius: 10px;
+	}
+	.basic_button{
+		border: none;
+		outline: none;
+		height: 50px;
+		width: 100px;
+		padding: 15px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		margin: 4px 2px;
+		cursor: pointer;
+		border-radius: 25px;
+		box-shadow: 1px 4px 0 black;
+	}
+	.basic_button:active{
+		box-shadow: 1px 1px 0 black;
+		position: relative;
+		top: 2px;
+	}
+	.exclude_ingredient{
+		background-color: #f55354; /* tomato color ^_^ */
+	}
+	.add_ingredient{
+		background-color: #009000; /* pickle */
+	}
+	.patty_color{
+		background-color: #754100; /* patty */
+		color: white;
+	}
+	.footer{
+		bottom: 0;
+		height: 50px;
+		padding: 0;
+	}
+</style>
+</head>
+
+<body>
+<div>
+	<button style="float: left;" class="basic_button">이전 화면</button>
+	<input type='reset' style="float: right;" class="basic_button normal_button"
+			value="초기화"></input>
+	<div id="menu_name" style="text-align: center;">
+		<h1>선택한 음식 (불고기 세트)</h1>
+	</div>
+</div>
+
+<br/>
+<hr>
+
+<div class="basic_ingredient">
+	<p></p>
+	<div id="menu_detail" style="text-align: center">
+		<p><b>불고기 세트에 반드시 들어가는 재료 항목입니다. (제외나 추가가 불가능합니다.)</b></p>
+	</div>
+	 <ul id="static_list" style="list-style-type: circle;">
+	 	<li>참깨빵 2장</li>
+	 	<li>불고기 패티 1장</li>
+	 	<li>양상추</li>
+	 	<li>콜라 1인</li>
+	 	<li>감자튀김(중)</li>
+	 </ul>
+</div>
+<div class="select_ingredinet">
+	 <p>아래는 고객님의 기호에 맞게 추가/제외가 가능합니다.</p>
+</div>
+<div class="guide_text patty_color" style="text-align: center">
+	뺄 재료를 모두 선택해주세요.
+</div>
+
+<div>
+	<p>
+		<button id="subtract_btn0" class="basic_button exclude_ingredient">재료1</button>
+		<button id="subtract_btn1" class="basic_button exclude_ingredient">재료2</button>
+		<button id="subtract_btn2" class="basic_button exclude_ingredient">재료3</button>
+		<button id="subtract_btn3" class="basic_button exclude_ingredient">재료4</button>
+		<button id="subtract_btn4" class="basic_button exclude_ingredient">재료5</button>
+		<button id="subtract_btn5" class="basic_button exclude_ingredient">재료6</button>
+		<button id="subtract_btn6" class="basic_button exclude_ingredient">재료7</button>
+		<button id="subtract_btn7" class="basic_button exclude_ingredient">재료8</button>
+		<button id="subtract_btn8" class="basic_button exclude_ingredient">재료9</button>
+		<button id="subtract_btn9" class="basic_button exclude_ingredient">재료10</button>
+	</p><br/>
+</div>
+
+<div class="guide_text patty_color" style="text-align: center">
+	추가할 재료를 모두 선택해주세요.
+</div>
+
+<div>
+	<p>
+		<button id="add_btn0" class="basic_button add_ingredient">재료1</button>
+		<button id="add_btn1" class="basic_button add_ingredient">재료2</button>
+		<button id="add_btn2" class="basic_button add_ingredient">재료3</button>
+		<button id="add_btn3" class="basic_button add_ingredient">재료4</button>
+		<button id="add_btn4" class="basic_button add_ingredient">재료5</button>
+		<button id="add_btn5" class="basic_button add_ingredient">재료6</button>
+		<button id="add_btn6" class="basic_button add_ingredient">재료7</button>
+		<button id="add_btn7" class="basic_button add_ingredient">재료8</button>
+		<button id="add_btn8" class="basic_button add_ingredient">재료9</button>
+		<button id="add_btn9" class="basic_button add_ingredient">재료10</button>
+	</p><br/>
+</div>
+
+<footer class="footer" style="border: 1px solid #ffe3a8;">
+	<button class="basic_button normal_button" style="float: right; border: 1px solid transparent;"
+			onclick="location.href='selectIngredient_total_amount.html'">확인</button>
+	<div id="total_price1" class="guide_text"
+		style="background-color: white; color: black"><b>합계 금액: 0원</b></div>
+</footer>
+
+<script type="text/javascript" src="../js/menu_price.js"></script>
+</body>
+</html>
