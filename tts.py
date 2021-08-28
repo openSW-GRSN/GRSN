@@ -25,6 +25,19 @@ import os
 credential_path = "polar-cyclist-322301-6eaca42ece96.json"
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
+import firebase_admin
+from firebase_admin import credentials
+# Import database module.
+from firebase_admin import db
+
+cred = credentials.Certificate("grsn-43bdc-firebase-adminsdk-vw9kb-d9cfd744cb.json")
+
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://grsn-43bdc-default-rtdb.firebaseio.com/'
+})
+
+ref = db.reference('stt') #db 위치 지정
+
 
 def run_quickstart():
     # [START tts_quickstart]
@@ -38,16 +51,16 @@ def run_quickstart():
     # Instantiates a client
     client = texttospeech.TextToSpeechClient()
 
-    sentence = input("음성으로 변환할 텍스트를 입력하세요 : ")
+    #sentence = input("음성으로 변환할 텍스트를 입력하세요 : ")
 
     # Set the text input to be synthesized
     # 읽어줄 텍스트 입력하기
-    synthesis_input = texttospeech.SynthesisInput(text=sentence)
+    synthesis_input = texttospeech.SynthesisInput(text="안녕하세요")
 
     # Build the voice request, select the language code ("en-US") and the ssml
     # voice gender ("neutral")
     voice = texttospeech.VoiceSelectionParams(
-        language_code="ko-KR", 
+        language_code="ko-KR",
         ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL
     )
 
@@ -62,14 +75,16 @@ def run_quickstart():
         input=synthesis_input, voice=voice, audio_config=audio_config
     )
 
-    ttsOutput = input("저장할 파일의 이름과 확장자명을 입력하세요(파일이름.mp3) : ")
+    #ttsOutput = input("저장할 파일의 이름과 확장자명을 입력하세요(파일이름.mp3) : ")
 
     # The response's audio_content is binary.
     # 음성으로 변환한 파일 저장할 때 설정
-    with open(ttsOutput, "wb") as out:
+    with open("hello.mp3", "wb") as out:
         # Write the response to the output file.
+        ref.update({'stt 결과값': 0})
         out.write(response.audio_content)
         print('음성파일이 저장되었습니다.')
+
     # [END tts_quickstart]
 
 

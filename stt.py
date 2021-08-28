@@ -30,6 +30,7 @@ from __future__ import division
 
 import re
 import sys
+import threading
 
 from google.cloud import speech
 
@@ -40,6 +41,19 @@ import os
 
 credential_path = "polar-cyclist-322301-6eaca42ece96.json"
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
+
+import firebase_admin
+from firebase_admin import credentials
+# Import database module.
+from firebase_admin import db
+
+cred = credentials.Certificate("grsn-43bdc-firebase-adminsdk-vw9kb-d9cfd744cb.json")
+
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://grsn-43bdc-default-rtdb.firebaseio.com/'
+})
+
+ref = db.reference('stt') #db 위치 지정
 
 # Audio recording parameters
 RATE = 16000
@@ -162,8 +176,10 @@ def listen_print_loop(responses):
 
             # Exit recognition if any of the transcribed phrases could be
             # one of our keywords.
-            if re.search(r"\b(exit|quit)\b", transcript, re.I):
-                print("Exiting..")
+            # '주문'이 들어간 문구를 말하면 종료하고 1초뒤에 다시 실행함
+            if re.search("주문", transcript, re.I):
+                ref.update({'stt 결과값': 1})
+                print("종료하는중...")
                 break
 
             num_chars_printed = 0
@@ -197,7 +213,9 @@ def main():
         # Now, put the transcription responses to use.
         listen_print_loop(responses)
 
+        threading.Timer(1, main).start()
+
 
 if __name__ == "__main__":
     main()
-# [END speech_transcribe_streaming_mic]
+# [END stt]
