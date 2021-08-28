@@ -8,13 +8,39 @@
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Cache-Control" content="no-cache"/>
 
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <link rel="stylesheet" href="../css/custom.css">
 
 <title>계정을 선택하세요.</title>
+
+<style>
+	.button_detail{
+		height: 130px;
+		width: 200px;
+		font-size: 30px;
+	}
+	.center {
+		width: 100%;
+		height: 100vh;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-align: center;
+		    -ms-flex-align: center;
+		        align-items: center;
+		-webkit-box-pack: center;
+		    -ms-flex-pack: center;
+		        justify-content: center;
+	}
+</style>
 </head>
 <body>
-
+	<div class="center">
+		<button class="custom_button button_detail"
+			onclick="location.href='../menuLlst.html'">매장용 화면</button>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<button class="custom_button button_detail"
+			onclick="location.href='../managermenu.html'">매니저 화면</button>
+	</div>
 </body>
 </html>
