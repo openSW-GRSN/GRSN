@@ -15,7 +15,6 @@
 # limitations under the License.
 
 """Google Cloud Text-To-Speech API sample application .
-
 Example usage:
     python quickstart.py
 """
@@ -42,7 +41,6 @@ ref = db.reference('stt') #db 위치 지정
 def run_quickstart():
     # [START tts_quickstart]
     """Synthesizes speech from the input string of text or ssml.
-
     Note: ssml must be well-formed according to:
         https://www.w3.org/TR/speech-synthesis/
     """

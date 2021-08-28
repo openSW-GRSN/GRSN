@@ -35,6 +35,7 @@ import threading
 from google.cloud import speech
 
 import pyaudio
+from playsound import playsound
 from six.moves import queue
 
 import os
@@ -178,7 +179,10 @@ def listen_print_loop(responses):
             # one of our keywords.
             # '주문'이 들어간 문구를 말하면 종료하고 1초뒤에 다시 실행함
             if re.search("주문", transcript, re.I):
-                ref.update({'stt 결과값': 1})
+                playsound("hello.mp3")
+
+                #ref.update({'stt 결과값': 1})
+
                 print("종료하는중...")
                 break
 
