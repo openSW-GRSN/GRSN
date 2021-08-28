@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "polar-cyclist-322301",
+  "private_key_id": "6eaca42ece9656d44df8ff3efe04f42190ef33a7",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQD2hUroFS1NH0OZ\nZeFrVTaRO0sly7j05PibZBFAVmKYnU2T0eM+cDyq8iRzGawcuijxDa5zz1xeaQ8d\np7PGhvV4/gqliSceYDKGJ5/3RbCXMdqL0dj9HfwE8IjneNeFeOqPfp5w0ab7vJOd\nHf3YED8yBjguY9G/ufqjmkID5uHLaVelgqN76GbK7neX+OOl4Z6LgPOqQ6VYxleS\nbBsdmQx9bNtbZou5EV64hKc5L8D2S74IK6/5eyuPI32YxdRNhFgLrnv4vRLZa+FP\nF7Q0aC8aKgRBL8m8+eVmH9tzAHeMH//8Vd6gCXkuvOlgTmYMkn7YzaGT0mCziPOl\nBq1JfwLHAgMBAAECggEAI88v7C+ApvEcK4ZiQhTyOhLQCIZOcHsUO9TuMUIlzKpz\nmuiEUc0RmvlVNHJYZHc25vEdqWKdNcpIBlRBJ9zx1RNTQ5bShmCN5kaPlOaGz3z6\nlJCKgcDJxi6UjHSAG2TO7xeC92YU6KtiET11OAiqzV7xk+zZtTfUQdCbYfVh+4nM\nU4+Bz2DgRKUAbJV4kQisb1y7Z6fGbeeBvuPfwP/EkzPlSUSBhWKvfewRO7VeAM9l\n7gbqlkdRLVKQmvGCV3ugXRSVJP4Y2jSM9kllDRRWl856wAG3FDwUEkbQnRfD2YYi\n93ozDejwjYMpxGjBDD2ZhXwcZmUdbSquBvZoyIGHIQKBgQD9PmWM0XwXDuJKFVTi\nt4Zvm4keiGPDwLRST+RP/5iZmh7ez2whAERSzAq2/TN8C+ZJugB6Ng1+ZoK5hN1Y\nYXMabSpt7P3oIJ4JKcpeCyZp3u23StpTA7CsWptT/Jz5NhJi8HDMQkqpDIuTrxiq\nbGMOYE+mnv+Jvkdrw92DHNvSpwKBgQD5NCnpAMUyTA1CssPrYvfP6ESqw4Rwl56T\ns3T5gzA5OZX/PZCBydue1QRA9XcH6sQ3j2EyEKmgidnoQVVT3iyloQAP6/kF5lDL\nrVJfwxPk0x6myvIe67iEc68VPpRESulfkMlq8WVzMuLobT8IsQ9gwUUIQiT5iqJG\nlXRpya/y4QKBgQC57jb21dNKxqXECLdjIaW1ibd50F+XGIQMLxYM2jc7B1oE8ruL\n2ztOovp28Z38RGxW0xaIo+jyVedCuFcfDaVJ0L6nKKoe5NvDFIi81WjlsEROH8n9\nyybK1FdYqY7Ctj13oNrgTQet6EUOMC9m6N8tbe7tAa3Sfv7HE24uVmDa3wKBgQCe\nfded0hiYuZfBcNJ8FVCIkS+C76B+v19ijsL5ob781iwYzj3m3cvpA4+WBMe0aFJt\nB6qIXeKUMLg/J7YuBeKdYH0aoziY0PdX4p6+OuKfKMqYyAAfPEn5K14SA9/mY0Jz\nvjDr7CVak+WOb1SkoX+nSKQv8Wl0sAAvJgSI93YI4QKBgEkb8GSgJTpT6pQdKXAP\n39Mrdu9xeBoVqhxe9BjWLWnJHUbKgmxUm5+bId6q5xnfUflY1//48cBPi36zKEaj\nDkbjQqj7CHs5RTgaht+ZifoIIBcOU3nHLoaTCNySbJ5VwuE0vQg1c6oTYXJxGv1N\nFEyWBPdiB0z3XOwxFG8XHsz/\n-----END PRIVATE KEY-----\n",
+  "client_email": "stt-n-tts@polar-cyclist-322301.iam.gserviceaccount.com",
+  "client_id": "104110523664354237700",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/stt-n-tts%40polar-cyclist-322301.iam.gserviceaccount.com"
+}
