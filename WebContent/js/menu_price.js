@@ -12,7 +12,7 @@ var menu_name = "치즈버거 세트";
 var price = 5000;
 var count = 1;
 var Material_list = ['참깨빵 2장', '양상추', '치즈', '특별 소스'];
-var Material_add = ['토마토', '치즈', '소스', '피클 두 배'];
+var Material_add = ['토마토', '치즈', '소스', '피클 두 배', '양파 두 배'];
 var soldOut = false;
 
 if(menu_name == "불고기버거 세트"){
@@ -59,6 +59,29 @@ window.onload = function(){
 	// 목록을 데베에 저장해놓고 그냥 출력하는 방법도 있을 것 같다.	
 	document.getElementById("total_price1").innerHTML = "합계 금액: " + price + "원";
 }
+
+// 버튼 동적 생성(제이쿼리 사용)
+$(document).ready(function(){
+	var str_html = '';
+	
+	// 버튼을 추가한다.
+	for (var i = 0; i < Material_add.length; i++) {
+		var html_btn = '<button id="add_btn" class="custom_button add_ingredient">{}</button>';
+		html_btn = html_btn.replace('{}', Material_add[i]);
+		str_html = str_html + html_btn + '\n';
+	}
+	
+	$('#create_dynamic_btn').html(str_html);
+	
+	// 버튼 동적 연결
+	$(document).on("click", "#add_btn", function(){
+		// var idx = $(this).index();
+		var idx = Material_add[$(this).index()];
+		
+		alert('{}'.replace('{}', idx))
+	});
+
+});
 
 window.addEventListener('load', function() {
   // 마지막 총 금액
