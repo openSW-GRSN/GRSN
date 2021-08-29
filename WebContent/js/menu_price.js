@@ -8,11 +8,11 @@
  */
 
 // defalut: 치즈버거(세트)
-var menu_name = "치즈버거 세트";
+var menu_name = "더블버거 세트";
 var price = 5000;
 var count = 1;
 var Material_list = ['참깨빵 2장', '양상추', '치즈', '특별 소스'];
-var Material_add = ['토마토', '치즈', '소스', '피클 두 배', '양파 두 배'];
+var Material_add = ['토마토', '치즈', '소스', '피클 두 배'];
 var soldOut = false;
 
 if(menu_name == "불고기버거 세트"){
@@ -32,7 +32,7 @@ window.onload = function(){
 	document.getElementById("menu_name").style.fontSize = "40px";
 	
 	// 수정할 수 없는 재료 목록
-	for(var i=0; i<Material_list.length; i++){
+	for(var i = 0; i < Material_list.length; i++){
 		var staticSymbol = "ㅇ&nbsp";
 		
 		if(i == 0){
@@ -48,26 +48,12 @@ window.onload = function(){
 	document.getElementById("menu_detail").innerHTML = menu_name + "에 반드시 들어가는 재료 항목입니다.";
 	document.getElementById("menu_detail").style.fontWeight = "900";
 	
-	// 버튼 동적 생성(제이쿼리 사용)
-	$(document).ready(function(){
-		var str_html = '';
+	// 추가할 재료 버튼
+	for(var i = 0; i < Material_add.length; i++){
+		const btnString = "add_btn";
 		
-		// 버튼을 추가한다.
-		for (var i = 0; i < Material_add.length; i++) {
-			var html_btn = '<button id="add_btn" class="custom_button add_ingredient">{}</button>';
-			html_btn = html_btn.replace('{}', Material_add[i]);
-			str_html = str_html + html_btn + '\n';
-		}
-		
-		$('#create_dynamic_btn').html(str_html);
-		
-		// 버튼 동적 연결
-		$(document).on("click", "#add_btn", function(){
-			var idx = Material_add[$(this).index()];
-			
-			alert('{}'.replace('{}', idx))
-		});
-	});
+		document.getElementById(btnString+i).childNodes[0].textContent = Material_add[i];
+	}
 	
 	// 맨 아래 가격
 	// 목록을 데베에 저장해놓고 그냥 출력하는 방법도 있을 것 같다.	
@@ -76,10 +62,11 @@ window.onload = function(){
 }
 
 window.addEventListener('load', function() {
-  // 마지막 총 금액
 	document.getElementById("last_check_menu").innerHTML =
 		"선택한 메뉴는 " + menu_name + "이며, 추가 요청사항을 다시 한 번 더 확인해주세요.";
 	document.getElementById("last_check_menu").style.fontWeight = "900";
 
+	document.getElementById("total_added_ingredinet").innerHTML =
+		"&nbsp&nbsp추가된 재료:&nbsp" + add_list;
 	document.getElementById("total_price2").innerHTML = "&nbsp&nbsp결제할 총 금액은 " + price + "원입니다.&nbsp&nbsp";
 });
