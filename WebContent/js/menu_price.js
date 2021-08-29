@@ -48,40 +48,32 @@ window.onload = function(){
 	document.getElementById("menu_detail").innerHTML = menu_name + "에 반드시 들어가는 재료 항목입니다.";
 	document.getElementById("menu_detail").style.fontWeight = "900";
 	
-	// 추가할 재료 버튼
-	for(var i = 0; i < Material_add.length; i++){
-		const btnString = "add_btn";
+	// 버튼 동적 생성(제이쿼리 사용)
+	$(document).ready(function(){
+		var str_html = '';
 		
-		document.getElementById(btnString+i).childNodes[0].textContent = Material_add[i];
-	}
+		// 버튼을 추가한다.
+		for (var i = 0; i < Material_add.length; i++) {
+			var html_btn = '<button id="add_btn" class="custom_button add_ingredient">{}</button>';
+			html_btn = html_btn.replace('{}', Material_add[i]);
+			str_html = str_html + html_btn + '\n';
+		}
+		
+		$('#create_dynamic_btn').html(str_html);
+		
+		// 버튼 동적 연결
+		$(document).on("click", "#add_btn", function(){
+			var idx = Material_add[$(this).index()];
+			
+			alert('{}'.replace('{}', idx))
+		});
+	});
 	
 	// 맨 아래 가격
 	// 목록을 데베에 저장해놓고 그냥 출력하는 방법도 있을 것 같다.	
 	document.getElementById("total_price1").innerHTML = "합계 금액: " + price + "원";
+	document.getElementById("total_price1").style.fontWeight = "900";
 }
-
-// 버튼 동적 생성(제이쿼리 사용)
-$(document).ready(function(){
-	var str_html = '';
-	
-	// 버튼을 추가한다.
-	for (var i = 0; i < Material_add.length; i++) {
-		var html_btn = '<button id="add_btn" class="custom_button add_ingredient">{}</button>';
-		html_btn = html_btn.replace('{}', Material_add[i]);
-		str_html = str_html + html_btn + '\n';
-	}
-	
-	$('#create_dynamic_btn').html(str_html);
-	
-	// 버튼 동적 연결
-	$(document).on("click", "#add_btn", function(){
-		// var idx = $(this).index();
-		var idx = Material_add[$(this).index()];
-		
-		alert('{}'.replace('{}', idx))
-	});
-
-});
 
 window.addEventListener('load', function() {
   // 마지막 총 금액
