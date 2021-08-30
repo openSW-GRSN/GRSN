@@ -10,47 +10,26 @@
 <meta http-equiv="Cache-Control" content="no-cache"/>
 
 <link rel="stylesheet" href="../css/custom.css">
+<script src="../function.js"></script>
+
 
 <title>메뉴 추천 질문</title>
-<style>
-	.custom_button{
-		border: none;
-		outline: none;
-		height: 50px;
-		width: 100px;
-		padding: 15px;
-		text-align: center;
-		text-decoration: none;
-		display: inline-block;
-		margin: 4px 2px;
-		cursor: pointer;
-		border-radius: 25px;
-		box-shadow: 1px 4px 0 black;
-	}
-	
-	.custom_button:active{
-		box-shadow: 1px 1px 0 black;
-		position: relative;
-		top: 2px;
-	}
-</style>
+
 </head>
 
 <body>
 	<h2>마지막 질문</h2>
 	
 	<br/>
-	
-	<br/>
 		고객님께서 좋아하시는 맛은 어떤 맛인가요?
 	<div>
-		<button>상큼한 맛</button>
-		<button>화끈한 맛</button>
-		<button>담백한 맛</button>
+		<button value="fresh" onClick="recommendation_taste('fresh')">상큼한 맛</button>
+		<button value="hot">화끈한 맛</button>
+		<button value="simple">담백한 맛</button>
 	</div>
+	
 	<p>
-		<button class="custom_button"
-				onclick="location.href='client_question_result.html'">결과 보기</button>
+		<button onclick="location.href='client_question_result.html'">결과 보기</button>
 	</p>
 </body>
 </html>
