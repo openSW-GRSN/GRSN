@@ -1,0 +1,66 @@
+  
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- 캐시 삭제 -->
+<meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT"/>
+<meta http-equiv="Expires" content="-1"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+
+
+<link rel="stylesheet" href="../css/custom.css">
+
+<title>계정을 선택하세요.</title>
+
+<style>
+	.custom_button{
+		border: none;
+		outline: none;
+		height: 50px;
+		width: 100px;
+		padding: 15px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		margin: 4px 2px;
+		cursor: pointer;
+		border-radius: 25px;
+		box-shadow: 1px 4px 0 black;
+	}
+	.custom_button:active{
+		box-shadow: 1px 1px 0 black;
+		position: relative;
+		top: 2px;
+	}
+	.button_detail{
+		height: 130px;
+		width: 200px;
+		font-size: 30px;
+	}
+	.center {
+		width: 100%;
+		height: 100vh;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-align: center;
+		    -ms-flex-align: center;
+		        align-items: center;
+		-webkit-box-pack: center;
+		    -ms-flex-pack: center;
+		        justify-content: center;
+	}
+</style>
+</head>
+<body>
+	<div class="center">
+		<button class="button_detail"
+			onclick="location.href='../needRecommendation.html'">매장용 화면</button>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<button class="button_detail"
+			onclick="location.href='../manager/managermenu.html'">매니저 화면</button>
+	</div>
+</body>
+</html>
