@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 
+<meta charset="UTF-8">
+<script src="../functions.js"></script>
 <!-- 캐시 삭제 -->
 <meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT"/>
 <meta http-equiv="Expires" content="-1"/>
@@ -42,15 +43,20 @@
 	<br/>
 	
 	<div>
-		<button class="custom_button">바나나</button><br/>
-		<button class="custom_button">복숭아</button><br/>
-		<button class="custom_button">견과류</button><br/>
+		<a href="alergy_meat.html">
+		<button class="custom_button" value="meat" onClick="recommendation_alergy('meat')">육류</button>
+		</a>
+		
+		<a href="alergy_tomato.html">
+		<button class="custom_button" value="tomato" onClick="recommendation_alergy('tomato')">토마토</button>
+		</a>
+		
+		<a href="alergy_milk.html">
+		<button class="custom_button" value="milk" onClick="recommendation_alergy('milk')">유제품</button><br/>
+		</a>
+		
 	</div>
-	
-	<p>
-		<button class="custom_button" style="width: 130px;"
-			onclick="location.href='client_question_lastpage.html'">
-			다음 항목으로</button>
-	</p>
+
+
 </body>
 </html>
