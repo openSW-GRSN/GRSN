@@ -24,6 +24,26 @@
 		border: 1px solid black;
 		border-radius: 10px;
 	}
+	.custom_button{
+		border: none;
+		outline: none;
+		height: 50px;
+		width: 100px;
+		padding: 15px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		margin: 4px 2px;
+		cursor: pointer;
+		border-radius: 25px;
+		box-shadow: 1px 4px 0 black;
+	}
+	
+	.custom_button:active{
+		box-shadow: 1px 1px 0 black;
+		position: relative;
+		top: 2px;
+	}
 	.add_ingredient{
 		background-color: #009000; /* pickle */
 	}
@@ -41,7 +61,7 @@
 
 <body>
 <div>
-	<button style="float: left;">이전 화면</button>
+	<button class="custom_button" style="float: left;">이전 화면</button>
 	<!-- input type='reset' style="float: right;" class="custom_button normal_button"
 			value="초기화"></input -->
 	<div id="menu_name" style="text-align: center;">
@@ -75,18 +95,18 @@
 </div>
 
 <div>
-	<button id="0" class="add_ingredient"
+	<button id="0" class="custom_button add_ingredient"
 			onClick='btnClick(this.id);'>재료0</button>
-	<button id="1" class="add_ingredient"
+	<button id="1" class="custom_button add_ingredient"
 			onClick='btnClick(this.id);'>재료1</button>
-	<button id="2" class="add_ingredient"
+	<button id="2" class="custom_button add_ingredient"
 			onClick='btnClick(this.id);'>재료2</button>
-	<button id="3" class="add_ingredient"
+	<button id="3" class="custom_button add_ingredient"
 		onClick='btnClick(this.id);'>재료3</button>
 </div>
 <br/>
 <footer class="footer" style="border: 1px solid #ffe3a8;">
-	<button class="normal_button"
+	<button class="custom_button normal_button"
 			style="float: right; border: 1px solid transparent;"
 			onclick="location.href='selectIngredient_total_amount.html'">확인</button>
 	<div id="total_price1" class="guide_text"

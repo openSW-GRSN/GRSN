@@ -20,12 +20,33 @@
 		align-items: center;
 		height: 100vh;
 	}
+	.custom_button{
+		border: none;
+		outline: none;
+		height: 50px;
+		width: 100px;
+		padding: 15px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		margin: 4px 2px;
+		cursor: pointer;
+		border-radius: 25px;
+		box-shadow: 1px 4px 0 black;
+	}
+	
+	.custom_button:active{
+		box-shadow: 1px 1px 0 black;
+		position: relative;
+		top: 2px;
+	}
 	.div_text{ text-align: center; margin: 0 auto; }
 </style>
 </head>
 <body>
 <div>
-	<button onclick="location.href='selectIngredient_main.html'">이전 화면</button>
+	<button class="custom_button"
+			onclick="location.href='selectIngredient_main.html'">이전 화면</button>
 </div>
 <div class="total_screen">
 	<div class="div_text">
@@ -34,9 +55,8 @@
 				<b>선택한 메뉴는 '불고기 버거 세트'이며, 추가되거나 제외된 재료는 다음과 같습니다.</b>
 			</span>
 		</p>
-			<span id="total_added_ingredinet" style="background-color: #ffffff; ">
-			&nbsp;추가된 재료:&nbsp;
-			</span> 
+			<span id="total_added_ingredinet"
+					style="background-color: #ffffff;"> &nbsp;추가된 재료:&nbsp;</span> 
 			<br/><br/>
 		<span id="total_price2" style="background-color: #ffffff; ">
 			&nbsp;총 금액: 0원 &nbsp;
@@ -45,9 +65,9 @@
 </div>
 
 <div style="text-align: center; display: inline-block; ">
-	<button>취소</button>
-	<button>카드 결제</button>
-	<button>현금 결제</button>
+	<button class="custom_button">취소</button>
+	<button class="custom_button">카드 결제</button>
+	<button class="custom_button">현금 결제</button>
 </div>
 
 <script type="text/javascript" src="../js/menu_price.js"></script>

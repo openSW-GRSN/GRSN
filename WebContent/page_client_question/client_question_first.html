@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<!-- 캐시 삭제 -->
+<meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT"/>
+<meta http-equiv="Expires" content="-1"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+
+<link rel="stylesheet" href="../css/custom.css">
+
+<title>메뉴 추천 질문</title>
+<style>
+	.custom_button{
+		border: none;
+		outline: none;
+		height: 50px;
+		width: 100px;
+		padding: 15px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		margin: 4px 2px;
+		cursor: pointer;
+		border-radius: 25px;
+		box-shadow: 1px 4px 0 black;
+	}
+	
+	.custom_button:active{
+		box-shadow: 1px 1px 0 black;
+		position: relative;
+		top: 2px;
+	}
+</style>
+</head>
+
+<body>
+	<h2>다음 항목 중 알레르기 반응이 있는 것을 모두 선택해주세요.</h2>
+	
+	<br/>
+	
+	<div>
+		<button class="custom_button">바나나</button><br/>
+		<button class="custom_button">복숭아</button><br/>
+		<button class="custom_button">견과류</button><br/>
+	</div>
+	
+	<p>
+		<button class="custom_button" style="width: 130px;"
+			onclick="location.href='client_question_lastpage.html'">
+			다음 항목으로</button>
+	</p>
+</body>
+</html>

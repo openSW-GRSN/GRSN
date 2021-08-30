@@ -14,6 +14,25 @@
 <title>계정을 선택하세요.</title>
 
 <style>
+	.custom_button{
+		border: none;
+		outline: none;
+		height: 50px;
+		width: 100px;
+		padding: 15px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		margin: 4px 2px;
+		cursor: pointer;
+		border-radius: 25px;
+		box-shadow: 1px 4px 0 black;
+	}
+	.custom_button:active{
+		box-shadow: 1px 1px 0 black;
+		position: relative;
+		top: 2px;
+	}
 	.button_detail{
 		height: 130px;
 		width: 200px;
@@ -36,10 +55,10 @@
 </head>
 <body>
 	<div class="center">
-		<button class="button_detail"
+		<button class="custom_button button_detail"
 			onclick="location.href='../menuLlst.html'">매장용 화면</button>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<button class="button_detail"
+		<button class="custom_button button_detail"
 			onclick="location.href='../managermenu.html'">매니저 화면</button>
 	</div>
 </body>

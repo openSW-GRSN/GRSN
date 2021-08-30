@@ -16,6 +16,26 @@
 <style>
 	.total_screen{ padding: 50px 5px 50px 5px; display: block; height: 100vh; }
 	.div_btn{ margin: auto; display: block; }
+	.custom_button{
+		border: none;
+		outline: none;
+		height: 50px;
+		width: 100px;
+		padding: 15px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		margin: 4px 2px;
+		cursor: pointer;
+		border-radius: 25px;
+		box-shadow: 1px 4px 0 black;
+	}
+	
+	.custom_button:active{
+		box-shadow: 1px 1px 0 black;
+		position: relative;
+		top: 2px;
+	}
 	.button_detail{ height: 60px; width: 270px; padding: 15px 15px; }
 </style>
 
@@ -27,10 +47,11 @@
 		<br/><br/><br/><br/><br/>
 		
 		<div class="div_btn">
-			<button class="button_detail"
-					onclick="location.href='recommendation_question.html'">
+			<button class="custom_button button_detail"
+					onclick="location.href='client_question_first.html'">
 			네, 메뉴 선정에 도움이 필요합니다.</button>
-			<button class="button_detail">아니요, 괜찮습니다.</button>
+			<!-- 메뉴 선택화면으로 돌아가기 -->
+			<button class="custom_button button_detail">아니요, 괜찮습니다.</button>
 		</div>
 	</div>
 </body>
