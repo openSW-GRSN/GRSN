@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="./functions.js"></script>
+	<style>
+		body{
+			background-color:#FFE3A8;
+			background-repeat:repeat;
+			background-attachment:fixed;
+			color:black;
+			
+			font-family: 'Cafe24Oneprettynight';
+			}
+		@font-face {/* 제목 부분의 폰트 */
+   			 	font-family: 'BMEULJIRO';
+    			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BMEULJIRO.woff') format('woff');
+    			font-weight: normal;
+    			font-style: normal;
+				}
+		@font-face {/* 내용 부분의 폰트 */
+    			font-family: 'Cafe24Oneprettynight';
+   				src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
+    			font-weight: normal;
+    			font-style: normal;
+				}	
+				
+		p1{
+			font-family: 'Cafe24Oneprettynight';
+			font-size:30px;
+		
+		}
+		
+		
+	</style>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>메뉴 선택</title>
+</head>
+<body>
+<form action="checkSalesRate.html" id="sales"> <!-- 나중에 결제 화면으로 링크 바꾸기 -->
+	<p align="center">
+	메뉴를 선택해주세요!
+	</p>
+	
+	<a href="checkSalesRate.html">
+	<p align="right">매니저 화면(판매량)으로 이동하기</p></a>
+	
+	<hr/>	<!-- 전체 화면의 가로 분할 선 -->
+<dl>
+<dt><h1>오늘의 추천메뉴입니다.</h1>
+<a href="recommend_popup.html">
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; 
+		font-family: 'Cafe24Oneprettynight';">
+		오늘의 추천 메뉴확인하기
+		</button>
+</a>
+<hr/>
+	
+	
+	
+	
+<!-- 첫번째 메뉴 -->
+<dl>
+<dt><h1>치즈 버거</h1></dt>
+	<dd>
+	<img align="middle" width="150" height="150" src="images/cheeseburger.jpg">
+	<p1>진한 치즈맛이 느껴지는 치즈 버거입니다.</p1>
+	</dd>
+	
+	<div align="right">
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="count_sales_cheeseburger()"> <!--버튼 누르면 변수 1 증가 -->
+		선택하기
+		</button>
+	
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="cancel_sales_cheeseburger()"> <!--버튼 누르면 변수 1 감소 -->
+		취소하기
+		</button>
+	</div>
+	<hr/>
+</dl>
+	
+<!-- 두번째 메뉴 -->
+<dl>
+<dt><h1>더블 버거</h1></dt>
+	<dd>
+	<img align="middle" width="150" height="150" src="images/doubleburger.jpg">
+	<p1>패티가 두 배! 더욱 진해진 고기 맛을 느끼세요.</p1>
+	</dd>
+	
+	<div align="right">
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="count_sales_doubleburger()">
+		선택하기
+		</button>
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="cancel_sales_doubleburger()">
+		취소하기
+		</button>	
+	</div>
+	</div>
+	<hr/>
+</dl>
+
+<!-- 세번째 메뉴 -->
+<dl>
+<dt><h1>토마토 버거</h1></dt>
+	<dd>
+	<img align="middle" width="150" height="150" src="images/tomatoburger.jpg">
+	<p1>신선한 토마토와 패티의 조합을 즐기세요!</p1>
+	</dd>
+	
+	<div align="right">
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="count_sales_tomatoburger()">
+		선택하기
+		</button>
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="cancel_sales_tomatoburger()">
+		취소하기
+		</button>	
+	</div>
+	<hr/>
+</dl>
+
+<!-- 네번째 메뉴 -->
+<dl>
+<dt><h1>케밥 버거</h1></dt>
+	<dd>
+	<img align="middle" width="150" height="150" src="images/kebabburger.jpg">
+	<p1>이국적인 케밥의 맛을 햄버거에서?!</p1>
+	</dd>
+	
+	<div align="right">
+		<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="count_sales_kebabburger()">
+		선택하기
+		</button>
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="cancel_sales_kebabburger()">
+		취소하기
+		</button>
+	</div>
+	<hr/>
+</dl>
+
+
+<br>
+<!-- 아랫부분 수정 -->
+<input type="submit" value="결정!" class="submitBtn">
+
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="sendSales()">
+		전송하기
+		</button>
+
+</form>
+</body>
+</html>
