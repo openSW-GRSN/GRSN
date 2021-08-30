@@ -11,9 +11,10 @@
 var menu_name = "더블버거 세트";
 var price = 5000;
 var count = 1;
-var Material_list = ['참깨빵 2장', '양상추', '치즈', '특별 소스'];
+const Material_list = ['참깨빵 2장', '양상추', '치즈', '특별 소스'];
 var Material_add = ['토마토', '치즈', '소스', '피클 두 배'];
 var soldOut = false;
+var save_list = "";
 
 if(menu_name == "불고기버거 세트"){
 	price = 5900;
@@ -26,7 +27,7 @@ if(menu_name == "불고기버거 세트"){
 }
 
 window.onload = function(){
-	// 상단 메뉴명
+// 상단 메뉴명
 	document.getElementById("menu_name").innerHTML = "선택한 메뉴(" + menu_name + ")";
 	document.getElementById("menu_name").style.fontWeight = "900";
 	document.getElementById("menu_name").style.fontSize = "40px";
@@ -50,15 +51,23 @@ window.onload = function(){
 	
 	// 추가할 재료 버튼
 	for(var i = 0; i < Material_add.length; i++){
-		const btnString = "add_btn";
-		
-		document.getElementById(btnString+i).childNodes[0].textContent = Material_add[i];
+		document.getElementById(i).childNodes[0].textContent = Material_add[i];	
 	}
-	
 	// 맨 아래 가격
 	// 목록을 데베에 저장해놓고 그냥 출력하는 방법도 있을 것 같다.	
 	document.getElementById("total_price1").innerHTML = "합계 금액: " + price + "원";
 	document.getElementById("total_price1").style.fontWeight = "900";
+}
+
+// 무명함수의 선언
+var btnClick = function (id){
+	if(save_list){
+		save_list = save_list + ", " + Material_add[id];
+	}else{
+		save_list = Material_add[id];
+	}
+	
+	document.getElementById("test").innerHTML = save_list;
 }
 
 window.addEventListener('load', function() {
@@ -67,6 +76,6 @@ window.addEventListener('load', function() {
 	document.getElementById("last_check_menu").style.fontWeight = "900";
 
 	document.getElementById("total_added_ingredinet").innerHTML =
-		"&nbsp&nbsp추가된 재료:&nbsp" + add_list;
+		"&nbsp&nbsp추가된 재료:&nbsp" + save_list + "&nbsp;&nbsp;";
 	document.getElementById("total_price2").innerHTML = "&nbsp&nbsp결제할 총 금액은 " + price + "원입니다.&nbsp&nbsp";
 });

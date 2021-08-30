@@ -13,7 +13,20 @@
 	font-style: normal;
 }
 
-.custom_button{
+body{
+	font-family: 'Cafe24Oneprettynight';
+	font-size: 20px;
+	background-color: #ffe3a8;
+}
+
+button, input{
+	font-family: 'Cafe24Oneprettynight';
+	font-size: 18px;
+	background-color: #f59b25;
+	color: white;
+}
+
+button{
 	border: none;
 	outline: none;
 	height: 50px;
@@ -27,21 +40,9 @@
 	border-radius: 25px;
 	box-shadow: 1px 4px 0 black;
 }
-.custom_button:active{
+
+button:active{
 	box-shadow: 1px 1px 0 black;
 	position: relative;
 	top: 2px;
-}
-
-body{
-	font-family: 'Cafe24Oneprettynight';
-	font-size: 20px;
-	background-color: #ffe3a8;
-}
-
-button, input{
-	font-family: 'Cafe24Oneprettynight';
-	font-size: 18px;
-	background-color: #f59b25;
-	color: white;
 }
