@@ -15,13 +15,13 @@
 
 body{
 	font-family: 'Cafe24Oneprettynight';
-	font-size: 20px;
+	font-size: 25px;
 	background-color: #ffe3a8;
 }
 
 button, input{
 	font-family: 'Cafe24Oneprettynight';
-	font-size: 18px;
+	font-size: 25px;
 	background-color: #f59b25;
 	color: white;
 }
