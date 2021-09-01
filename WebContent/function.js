@@ -78,3 +78,67 @@ function cancel_sales_doubleburger(){	//더블버거 주문 취소
 }
 
 
+//메뉴 추천 기능 만들기
+var alergy_num;
+var taste;
+var recommended_menus=["tomatoburger","cheeseburger","doubleburger","kebabburger"];
+
+
+//알러지
+function recommendation_alergy(alergy_num){
+	if(alergy_num=="meat"){
+		//육류 선택시
+		recommended_menus.splice(2,2);
+		alert(recommended_menus); //확인용
+		location.href="alergy_meat.html?"+recommended_menu;
+		
+	}
+
+	else if(alergy_num=="tomato"){
+		recommended_menus.splice(0,1);
+		alert(recommended_menus);
+		location.href="alergy_tomato.html?"+recommended_menu;
+	}
+		
+	else if (alergy_num=="milk"){
+		recommended_menus.splice(1,1);
+		alert(recommended_menus);
+		location.href="alergy_milk.html?"+recommended_menu;
+	
+	}
+
+}
+
+//입맛
+function recommendation_taste(taste){
+
+	if(taste=="hot"){
+		if(recommended_menus.includes('doubleburger')||recommended_menus.includes('kebabburger')){
+			recommended_menus=["doubleburger","kebabburger"];
+			alert(recommended_menus);
+		}
+		else{
+			alert("죄송합니다. 해당하는 메뉴가 없습니다.");
+		}
+	}
+	else if(taste=="simple"){
+		if(recommended_menus.includes('cheeseburger')){
+			recommended_menus=["cheeseburger"];
+			alert(recommended_menus);
+		}
+		else{
+			alert("죄송합니다. 해당하는 메뉴가 없습니다.");
+		}
+	}
+	else if(taste=="fresh"){
+		if(recommended_menus.includes('tomatoburger')){
+			recommended_menus=["tomatoburger"];
+			alert(recommended_menus);
+		}
+		else{
+			alert("죄송합니다. 해당하는 메뉴가 없습니다.");
+		}
+	}
+}
+
+
