@@ -37,7 +37,7 @@ var menu_name = "더블버거";
 var price = 5000;
 var count = 1;
 const Material_list = ['빵 2장', '패티', '양상추', '소스'];
-var Material_add = ['토마토', '치즈', '소스'];
+var Material_add = ['감자튀김(중)', '음료(중)', '케찹+5'];
 var Material_add_bool = [];
 var soldOut = false;
 var save_list = "";
@@ -46,11 +46,6 @@ var text = [];		// 재료 수정 잘 되는지 확인
 
 // firebase에서 가져오기(메뉴명)
 var select_menu = firebase.database().ref().child("hamburger/치즈버거/name");
-
-
-if(select_menu == "Cheese_Burger"){
-	select_menu = "치즈 버거";
-}
 
 // 메뉴 이름 쓰는 div를 변수에 저장
 var menu_name_print = document.getElementById("menu_name");
