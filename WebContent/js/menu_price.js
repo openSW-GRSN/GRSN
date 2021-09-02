@@ -105,6 +105,9 @@ if(menu_name == "불고기버거"){
 		// 추가되는 항목도 배열로 해주삼.
 		text[i] = "0";
 	}
+	
+	price = compute_count_menu(price, count);
+	
 	// 맨 아래 가격
 	// 목록을 데베에 저장해놓고 그냥 출력하는 방법도 있을 것 같다.	
 	document.getElementById("total_price1").innerHTML = "합계 금액: " + price + "원";
@@ -172,3 +175,7 @@ window.addEventListener('load', function() {
 	
 });
 */
+
+function compute_count_menu(price, count){
+	return price*count;
+}
