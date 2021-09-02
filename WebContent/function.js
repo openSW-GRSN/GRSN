@@ -10,18 +10,24 @@ var alert_string="이미 0개 입니다!";
 
 var total_sales=sales_cheeseburger+sales_tomatoburger+sales_doubleburger+sales_kebabburger;
 
+
+
 function sendSales(){
 	location.href="test.html?치즈버거: "+sales_cheeseburger;
 	
 }
 
+
 	
 
 //치즈버거
 function count_sales_cheeseburger(){	//치즈버거 주문 개수
+	
 	sales_cheeseburger+=1;
 	alert("치즈 버거 "+sales_cheeseburger+"개");
 	
+	 var dbRefObject = firebase.database().ref();
+     dbRefObject.child("sales_cheeseburger").set(sales_cheeseburger);
 }
 function cancel_sales_cheeseburger(){	//치즈버거 주문 취소
 	sales_cheeseburger-=1;
@@ -30,6 +36,8 @@ function cancel_sales_cheeseburger(){	//치즈버거 주문 취소
 		sales_cheeseburger+=1;
 	}
 	alert("치즈 버거 "+sales_cheeseburger+"개");
+	var dbRefObject = firebase.database().ref();
+    dbRefObject.child("sales_cheeseburger").set(sales_cheeseburger);
 
 }
 
@@ -37,6 +45,9 @@ function cancel_sales_cheeseburger(){	//치즈버거 주문 취소
 function count_sales_kebabburger(){	//케밥버거 주문 개수
 	sales_kebabburger+=1;
 	alert("케밥 버거 "+sales_kebabburger+"개");
+	
+	var dbRefObject = firebase.database().ref();
+    dbRefObject.child("sales_kebabburger").set(sales_kebabburger);
 
 }
 function cancel_sales_kebabburger(){	//케밥버거 주문 취소
@@ -46,6 +57,8 @@ function cancel_sales_kebabburger(){	//케밥버거 주문 취소
 		sales_kebabburger+=1;
 	}
 	alert("케밥 버거 "+sales_kebabburger+"개");
+	var dbRefObject = firebase.database().ref();
+    dbRefObject.child("sales_kebabburger").set(sales_kebabburger);
 }
 
 
@@ -53,6 +66,9 @@ function cancel_sales_kebabburger(){	//케밥버거 주문 취소
 function count_sales_tomatoburger(){	//토마토버거 주문 개수
 	sales_tomatoburger+=1;
 	alert("토마토 버거 "+sales_tomatoburger+"개");
+	
+	var dbRefObject = firebase.database().ref();
+    dbRefObject.child("sales_tomatoburger").set(sales_tomatoburger);
 }
 function cancel_sales_tomatoburger(){	//토마토버거 주문 취소
 	sales_tomatoburger-=1;
@@ -61,12 +77,16 @@ function cancel_sales_tomatoburger(){	//토마토버거 주문 취소
 		sales_tomatoburger+=1;
 	}
 	alert("토마토 버거 "+sales_tomatoburger+"개");
+	var dbRefObject = firebase.database().ref();
+    dbRefObject.child("sales_tomatoburger").set(sales_tomatoburger);
 }
 
 //더블 버거
 function count_sales_doubleburger(){	//더블버거 주문 개수
 	sales_doubleburger+=1;
 	alert("더블 버거 "+sales_doubleburger+"개");
+	var dbRefObject = firebase.database().ref();
+    dbRefObject.child("sales_doubleburger").set(sales_doubleburger);
 }
 function cancel_sales_doubleburger(){	//더블버거 주문 취소
 	sales_doubleburger-=1;
@@ -75,7 +95,18 @@ function cancel_sales_doubleburger(){	//더블버거 주문 취소
 		sales_doubleburger+=1;
 	}
 	alert("더블 버거 "+sales_doubleburger+"개");
+	var dbRefObject = firebase.database().ref();
+    dbRefObject.child("sales_doubleburger").set(sales_doubleburger);
 }
+
+//모든 손님들의 총 주문량
+
+var all_sales_cheeseburger;
+function count_all_sales(){
+	
+}
+
+
 
 
 //메뉴 추천 기능 만들기
@@ -140,5 +171,3 @@ function recommendation_taste(taste){
 		}
 	}
 }
-
-
