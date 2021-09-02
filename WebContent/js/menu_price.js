@@ -32,12 +32,11 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-
-//var menu_name = "더블버거";
+var menu_name = "더블버거";
 var price = 5000;
 var count = 1;
 const Material_list = ['빵 2장', '패티', '양상추', '소스'];
-var Material_add = ['감자튀김(중)', '음료(중)', '케찹+5'];
+var Material_add = ['감자튀김(중)', '음료(중)', '케첩+5'];
 var Material_add_bool = [];
 var soldOut = false;
 var save_list = "";
@@ -49,46 +48,49 @@ var text = [];		// 재료 수정 잘 되는지 확인
  * 파이어베이스에 저장시켜 값을 읽어오고 파이어베이스 내 데이터 검색 코드를 통해
  * 가격과 고정 재료들을 수정하는 쪽으로 코드를 구성해야 할 듯.
  */
-/**
-// 버거별 가격
-if(menu_name == "불고기버거"){
-	price = 5900;
-}else if(menu_name == "토마토버거"){
-	price = 6000;
-}else if(menu_name == "더블버거"){
-	price = 7500;
-}else if(menu_name == "케밥버거"){
-	price = 5000;
-}else if(menu_name == "치즈버거"){
-	price = 5000;
-}
- */
+
 //window.onload = function(){
 // 상단 메뉴명
 //document.getElementById("menu_name").innerHTML = "선택한 메뉴(" + menu_name + ")";
 
+// 파이어베이스 리얼 타임 상위 경로
+var path = "test/치즈버거";
 // firebase에서 가져오기(메뉴명)
-var firebase_menu_name = firebase.database().ref().child("hamburger/치즈버거/name");
+var firebase_menu_name = firebase.database().ref().child(path+'/name');
 // 메뉴 이름 쓰는 div를 변수에 저장
 var menu_name_print = document.getElementById("menu_name");
 
-firebase_menu_name.on('value', snap =>
-				menu_name_print.innerHTML = "선택한 메뉴(" + snap.val() + ")");
-document.getElementById("menu_name").style.fontWeight = "900";
-document.getElementById("menu_name").style.fontSize = "40px";
-
-// 가격
-// 추후에 입력 값에 따라 가격을 가져오는 코드(if문)로 수정할 예정
-var firebase_menu_price = firebase.database().ref().child("hamburger/치즈버거/price");
+firebase_menu_name.on('value', snap => {
+				menu_name = snap.val();
+				menu_name_print.innerHTML = "선택한 메뉴(" + menu_name + ")"});
+menu_name_print.style.fontWeight = "900";
+menu_name_print.style.fontSize = "40px";
+/*
+// 버거별 가격
+var path_name = '';
+if(menu_name == "Cheese_Burger"){
+	path_name = 'test/치즈버거/price';
+	readMenuPrice(path);
+}else if(menu_name == "Bulgogi_Set"){
+	path_name = 'hamburger/불고기버거세트/price';
+	readMenuPrice(path_name);
+}else if(menu_name == "Bulgogi_Burger"){
+	path_name = 'hamburger/불고기버거/price';
+	readMenuPrice(path_name);
+}
+*/
+// 버거 가격
+var firebase_menu_price = firebase.database().ref().child(path + '/price');
 var price_print = document.getElementById("total_price1");
 
-firebase_menu_price.on('value', snap =>
-				price_print.innerHTML = "합계 금액: " + snap.val() + "원");
-document.getElementById("total_price1").style.fontWeight = "900";
+firebase_menu_price.on('value', snap =>{
+						price = snap.val();
+						price_print.innerHTML = "합계 금액: " + price + "원"});
+price_print.style.fontWeight = "900";
 
-// 수정할 수 없는 재료 목록
+// 고정 재료 목록
 for(var i = 0; i < Material_list.length; i++){
-	var staticSymbol = "ㅇ&nbsp";
+	const staticSymbol = "ㅇ&nbsp";
 	
 	if(i == 0){
 		document.getElementById("static_list").innerHTML = staticSymbol + Material_list[i];
@@ -100,11 +102,11 @@ for(var i = 0; i < Material_list.length; i++){
 }
 
 // 재료 수정할 수 없는 칸의 메뉴명
-//document.getElementById("menu_detail").innerHTML = menu_name + "에 반드시 들어가는 재료 항목입니다.";
 var menu_detail_print = document.getElementById("menu_detail");
+
 firebase_menu_name.on('value', snap =>
-			menu_detail_print.innerHTML = snap.val() + "에 반드시 들어가는 재료 항목입니다.");
-document.getElementById("menu_detail").style.fontWeight = "900";
+			menu_detail_print.innerHTML = menu_name + "에 반드시 들어가는 재료 항목입니다.");
+menu_detail_print.style.fontWeight = "900";
 
 // 추가할 재료 버튼
 for(var i = 0; i < Material_add.length; i++){
