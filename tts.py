@@ -53,7 +53,7 @@ def run_quickstart():
 
     # Set the text input to be synthesized
     # 읽어줄 텍스트 입력하기
-    synthesis_input = texttospeech.SynthesisInput(text="안녕하세요")
+    synthesis_input = texttospeech.SynthesisInput(text="가 맞습니까?")
 
     # Build the voice request, select the language code ("en-US") and the ssml
     # voice gender ("neutral")
@@ -77,7 +77,7 @@ def run_quickstart():
 
     # The response's audio_content is binary.
     # 음성으로 변환한 파일 저장할 때 설정
-    with open("hello.mp3", "wb") as out:
+    with open("가 맞습니까.mp3", "wb") as out:
         # Write the response to the output file.
         ref.update({'stt 결과값': 0})
         out.write(response.audio_content)
