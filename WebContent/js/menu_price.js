@@ -10,30 +10,69 @@
  * final_save_list[CHAR]: 최종적으로 추가되는 재료들
  */
 
-// defalut: 치즈버거(세트)
-var menu_name = "더블버거 세트";
+/**
+	불린 값은 변경이 잘 되지만 문자열로 변환하는 것이 어려움.
+	시도는 해보겠지만 만약에 되지 않는다면 다음 창으로 값을 넘기는 방법(이것도 아직 모름)을 통해
+	결과 창에서 불린 값이 1인 해당 재료를 표시하는 방법으로 진행할 것임.
+	재료가 추가된 재료를 확인하는 방법으로는 불린 값이 1일 때 버튼 텍스트가 '추가'로 뜬다는 방법을 사용할 것임.
+ */
+
+// firebase
+var firebaseConfig = {
+	apiKey: "AIzaSyAhWZp0H5loTHL92JtrXoCEFdwt8s9DDLY",
+	authDomain: "grsn-43bdc.firebaseapp.com",
+	databaseURL: "https://grsn-43bdc-default-rtdb.firebaseio.com",
+	projectId: "grsn-43bdc",
+	storageBucket: "grsn-43bdc.appspot.com",
+	messagingSenderId: "592297355861",
+	appId: "1:592297355861:web:244776f5d914a5c93c02dc",
+	measurementId: "G-60XJK2NTE5"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+// default: 치즈버거
+var menu_name = "더블버거";
 var price = 5000;
 var count = 1;
-const Material_list = ['참깨빵 2장', '양상추', '치즈', '특별 소스'];
-var Material_add = ['토마토', '치즈', '소스', '피클 두 배'];
+const Material_list = ['빵 2장', '패티', '양상추', '소스'];
+var Material_add = ['토마토', '치즈', '소스'];
 var Material_add_bool = [];
 var soldOut = false;
-var save_list = "add ingredient";
+var save_list = "";
 var final_save_list = "submit add ingredient";
+var text = [];		// 재료 수정 잘 되는지 확인
 
-if(menu_name == "불고기버거 세트"){
+// firebase에서 가져오기(메뉴명)
+var select_menu = firebase.database().ref().child("hamburger/치즈버거/name");
+
+
+if(select_menu == "Cheese_Burger"){
+	select_menu = "치즈 버거";
+}
+
+// 메뉴 이름 쓰는 div를 변수에 저장
+var menu_name_print = document.getElementById("menu_name");
+select_menu.on('value', snap =>
+				menu_name_print.innerHTML = "선택한 메뉴(" + snap.val() + ")");
+
+// 버거별 가격
+if(menu_name == "불고기버거"){
 	price = 5900;
-}else if(menu_name == "토마토버거 세트"){
+}else if(menu_name == "토마토버거"){
 	price = 6000;
-}else if(menu_name == "더블버거 세트"){
+}else if(menu_name == "더블버거"){
 	price = 7500;
-}else if(menu_name == "케밥버거 세트"){
+}else if(menu_name == "케밥버거"){
+	price = 5000;
+}else if(menu_name == "치즈버거"){
 	price = 5000;
 }
 
-window.onload = function(){
+//window.onload = function(){
 // 상단 메뉴명
-	document.getElementById("menu_name").innerHTML = "선택한 메뉴(" + menu_name + ")";
+	//document.getElementById("menu_name").innerHTML = "선택한 메뉴(" + menu_name + ")";
 	document.getElementById("menu_name").style.fontWeight = "900";
 	document.getElementById("menu_name").style.fontSize = "40px";
 	
@@ -50,23 +89,34 @@ window.onload = function(){
 		}
 	}
 	
+	var menu_detail_print = document.getElementById("menu_detail");
 	// 재료 수정할 수 없는 칸의 메뉴명
 	document.getElementById("menu_detail").innerHTML = menu_name + "에 반드시 들어가는 재료 항목입니다.";
+	select_menu.on('value', snap =>
+				menu_detail_print.innerHTML = snap.val() + "에 반드시 들어가는 재료 항목입니다.");
 	document.getElementById("menu_detail").style.fontWeight = "900";
 	
 	// 추가할 재료 버튼
 	for(var i = 0; i < Material_add.length; i++){
+		// 재료 동적으로 넣어주기
 		document.getElementById(i).childNodes[0].textContent = Material_add[i];
+		// 중복 체크가 되지 않도록 초기화
 		Material_add_bool[i] = 0;
+		// 추가되는 항목도 배열로 해주삼.
+		text[i] = "0";
 	}
 	// 맨 아래 가격
 	// 목록을 데베에 저장해놓고 그냥 출력하는 방법도 있을 것 같다.	
 	document.getElementById("total_price1").innerHTML = "합계 금액: " + price + "원";
 	document.getElementById("total_price1").style.fontWeight = "900";
 	
-	document.getElementById("boolean_test").innerHTML = Material_add_bool;
-}
+	// 불린 초기화 출력
+	//document.getElementById("boolean_test").innerHTML = Material_add_bool;
+	// 텍스트 배열
+	//document.getElementById("boolean_test").innerHTML = text;
+//}
 
+// 추가할 재료 버튼을 클릭했을 때 호출되는 함수
 function btnClick(id){
 	// 클릭 값이 있으면,
 	if(save_list){
@@ -76,7 +126,8 @@ function btnClick(id){
 		// 클릭한 재료가 들어가지 않을 때
 		if(Material_add_bool[id] == 0){
 			// 들어간다고 표시
-			Material_add_bool[id] = 1; 
+			Material_add_bool[id] = 1;
+			
 		}else{		// 클릭한 재료가 이미 추가되었을 때
 			// 취소
 			Material_add_bool[id] = 0;
@@ -88,12 +139,13 @@ function btnClick(id){
 		Material_add_bool[id] = 1;
 	}
 	
-	document.getElementById("save_test").innerHTML = save_list;
-	document.getElementById("boolean_test").innerHTML = Material_add_bool;
-	
-	text = final_add_ingredient(Material_add, Material_add_bool);
-	document.getElementById("boolean_text").innerHTML = text;
-	System.out.println(final_save_list);
+	// 클릭한 버튼 값 표시(누적)
+	//document.getElementById("save_test").innerHTML = save_list;
+	// 중복 클릭 방지
+	//document.getElementById("boolean_test").innerHTML = Material_add_bool;
+	// 함수 파라미터: 추가 가능한 재료 항목, 중복 추가 방지 불린 값
+	//text = final_add_ingredient(Material_add, Material_add_bool);
+	final_add_ingredient(Material_add, Material_add_bool);
 }
 
 // 1로 표시된 index에 해당하는 재료를 최종적으로 추가한다.
@@ -103,18 +155,20 @@ function final_add_ingredient(ingredient, bool){
 		// 재료가 들어간다고 표시되면,
 		if(bool[i] == 1){
 			// final_save_list에 값을 넣는다.
-			final_save_list = ingredient[i];
+			//final_save_list = ingredient[i];
+			//document.getElementById("boolean_text").innerHTML = final_save_list;
+			text[i] = ingredient[i];
+			//document.getElementById("boolean_text").innerHTML = text;
+		}else{
+			// 왜 마지막 항목은 빠지지 않을까?
+			text[i] = "0";
 		}
 	}
-	return final_save_list;
+	// 최종적으로 저장된 값을 변수로 반환하여 다음 화면에 찍어주고 싶었다..
+	//return final_save_list;
 }
-
+/*
 window.addEventListener('load', function() {
-	document.getElementById("last_check_menu").innerHTML =
-		"선택한 메뉴는 " + menu_name + "이며, 추가 요청사항을 다시 한 번 더 확인해주세요.";
-	document.getElementById("last_check_menu").style.fontWeight = "900";
-
-	document.getElementById("total_added_ingredinet").innerHTML =
-		"&nbsp&nbsp추가된 재료:&nbsp" + final_save_list + "&nbsp;&nbsp;";
-	document.getElementById("total_price2").innerHTML = "&nbsp&nbsp결제할 총 금액은 " + price + "원입니다.&nbsp&nbsp";
+	
 });
+*/
