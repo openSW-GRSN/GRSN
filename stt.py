@@ -25,12 +25,13 @@ Example usage:
     python stt.py
 """
 
-# [START speech_transcribe_streaming_mic]
+# [stt 시작]
 from __future__ import division
 
 import re
 import sys
 import threading
+import time
 
 from google.cloud import speech
 
@@ -40,6 +41,9 @@ from six.moves import queue
 
 import os
 
+# json키 받아와서 서비스계정 인증
+from tts import createsound, listcreate
+
 credential_path = "polar-cyclist-322301-6eaca42ece96.json"
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
@@ -48,21 +52,28 @@ from firebase_admin import credentials
 # Import database module.
 from firebase_admin import db
 
+# 파베 키 받아와서 인증
 cred = credentials.Certificate("grsn-43bdc-firebase-adminsdk-vw9kb-d9cfd744cb.json")
 
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://grsn-43bdc-default-rtdb.firebaseio.com/'
 })
 
-ref = db.reference('stt') #db 위치 지정
-
 # Audio recording parameters
 RATE = 16000
 CHUNK = int(RATE / 10)  # 100ms
 
+global cheese
+global double
+global kebab
+global tomato
+
+global menu_play
+menu_play = 0
 
 class MicrophoneStream(object):
-    """Opens a recording stream as a generator yielding the audio chunks."""
+    """Opens a recording stream as a generator yielding the audio chunks.
+       (오디오 청크(말 문단)를 생성하는 생성기로 녹음 스트림을 연다)"""
 
     def __init__(self, rate, chunk):
         self._rate = rate
@@ -83,6 +94,7 @@ class MicrophoneStream(object):
             input=True,
             frames_per_buffer=self._chunk,
             # Run the audio stream asynchronously to fill the buffer object.
+            # 오디오 스트리밍을 비동기식으로 실행한다.
             # This is necessary so that the input device's buffer doesn't
             # overflow while the calling thread makes network requests, etc.
             stream_callback=self._fill_buffer,
@@ -97,12 +109,14 @@ class MicrophoneStream(object):
         self._audio_stream.close()
         self.closed = True
         # Signal the generator to terminate so that the client's
+        # 발전기에 신호를 보내 고객(사용자)가 종료할 수 있다.
         # streaming_recognize method will not block the process termination.
         self._buff.put(None)
         self._audio_interface.terminate()
 
     def _fill_buffer(self, in_data, frame_count, time_info, status_flags):
-        """Continuously collect data from the audio stream, into the buffer."""
+        """Continuously collect data from the audio stream, into the buffer.
+           (오디오 스트림에서 버퍼로 데이터를 계속 수집하는 중)"""
         self._buff.put(in_data)
         return None, pyaudio.paContinue
 
@@ -143,10 +157,15 @@ def listen_print_loop(responses):
     response is an interim one, print a line feed at the end of it, to allow
     the next result to overwrite it, until the response is a final one. For the
     final one, print a newline to preserve the finalized transcription.
+    서버 응답을 반복하여 인쇄한다.
+    전달된 응답은 서버가 응답을 제공할 때까지 차단하는 생성기이다. (응답을 제공해야 응답을 함)
     """
+    global menu_play
+
     num_chars_printed = 0
     for response in responses:
         if not response.results:
+
             continue
 
         # The `results` list is consecutive. For streaming, we only care about
@@ -154,6 +173,7 @@ def listen_print_loop(responses):
         # moves on to considering the next utterance.
         result = response.results[0]
         if not result.alternatives:
+
             continue
 
         # Display the transcription of the top alternative.
@@ -164,6 +184,7 @@ def listen_print_loop(responses):
         #
         # If the previous result was longer than this one, we need to print
         # some extra spaces to overwrite the previous result
+        # 대충 중간 결과는 표시하지만 리턴은 마지막에 있고, 최종적으로 알아듣고 쓰는 text는 적당히(융통적으로) 덮어써가며 이용한다는 뜻
         overwrite_chars = " " * (num_chars_printed - len(transcript))
 
         if not result.is_final:
@@ -179,15 +200,52 @@ def listen_print_loop(responses):
             # one of our keywords.
             # '주문'이 들어간 문구를 말하면 종료하고 1초뒤에 다시 실행함
             if re.search("주문", transcript, re.I):
-                playsound("hello.mp3")
+                output = "메뉴를 추천받으시겠습니까"
+                createsound(output)
+                play()
 
-                #ref.update({'stt 결과값': 1})
+                print("종료하는중...")
+                break
+                #   메뉴추천화면으로 넘어가야함
+
+            if re.search("아니요|아니오|아뇨", transcript, re.I):
+                list_play()
 
                 print("종료하는중...")
                 break
 
-            num_chars_printed = 0
+            #num_chars_printed = 0
 
+            # 백엔드 모였을때 코드
+            # ref.update({'stt 결과값': 1})
+
+def play():
+    playsound("output.mp3")
+
+def list_play():
+    output1 = "메뉴 선택 화면입니다. 현재 주문 가능한 메뉴는"
+    ref = db.reference('sales_burger')
+    menu_list = str(ref.get())
+    print(ref.get())
+    print(type(menu_list))
+
+    if re.search("cheese", menu_list, re.I):
+        listcreate("치즈버거")
+
+    if re.search("double", menu_list, re.I):
+        listcreate("더블버거")
+
+    if re.search("kebab", menu_list, re.I):
+        listcreate("케밥버거")
+
+    if re.search("tomato", menu_list, re.I):
+        listcreate("토마토버거")
+
+    list_end = 1
+    output2 = str(listcreate(list_end))
+    output2 = output2.replace("]", "")
+    createsound(output1 + output2 + "입니다")
+    playsound("output.mp3")
 
 def main():
     # See http://g.co/cloud/speech/docs/languages
@@ -217,7 +275,7 @@ def main():
         # Now, put the transcription responses to use.
         listen_print_loop(responses)
 
-        threading.Timer(1, main).start()
+        threading.Timer(0, main).start()
 
 
 if __name__ == "__main__":

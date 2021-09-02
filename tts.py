@@ -24,21 +24,7 @@ import os
 credential_path = "polar-cyclist-322301-6eaca42ece96.json"
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
-import firebase_admin
-from firebase_admin import credentials
-# Import database module.
-from firebase_admin import db
-
-cred = credentials.Certificate("grsn-43bdc-firebase-adminsdk-vw9kb-d9cfd744cb.json")
-
-firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://grsn-43bdc-default-rtdb.firebaseio.com/'
-})
-
-ref = db.reference('stt') #db 위치 지정
-
-
-def run_quickstart():
+def createsound(output):
     # [START tts_quickstart]
     """Synthesizes speech from the input string of text or ssml.
     Note: ssml must be well-formed according to:
@@ -53,7 +39,7 @@ def run_quickstart():
 
     # Set the text input to be synthesized
     # 읽어줄 텍스트 입력하기
-    synthesis_input = texttospeech.SynthesisInput(text="가 맞습니까?")
+    synthesis_input = texttospeech.SynthesisInput(text=output)
 
     # Build the voice request, select the language code ("en-US") and the ssml
     # voice gender ("neutral")
@@ -77,14 +63,21 @@ def run_quickstart():
 
     # The response's audio_content is binary.
     # 음성으로 변환한 파일 저장할 때 설정
-    with open("가 맞습니까.mp3", "wb") as out:
-        # Write the response to the output file.
-        ref.update({'stt 결과값': 0})
+    with open("output.mp3", "wb") as out:
         out.write(response.audio_content)
         print('음성파일이 저장되었습니다.')
 
     # [END tts_quickstart]
 
+output = []
+
+def listcreate(add):
+    if add != 1:
+
+        output.append(add + ". ")
+
+    if add == 1:
+        return output
 
 if __name__ == "__main__":
-    run_quickstart()
+    createsound()
