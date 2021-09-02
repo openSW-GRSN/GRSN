@@ -17,7 +17,7 @@
 	재료가 추가된 재료를 확인하는 방법으로는 불린 값이 1일 때 버튼 텍스트가 '추가'로 뜬다는 방법을 사용할 것임.
  */
 
-// firebase
+// firebase 연결
 var firebaseConfig = {
 	apiKey: "AIzaSyAhWZp0H5loTHL92JtrXoCEFdwt8s9DDLY",
 	authDomain: "grsn-43bdc.firebaseapp.com",
@@ -32,8 +32,8 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-// default: 치즈버거
-var menu_name = "더블버거";
+
+//var menu_name = "더블버거";
 var price = 5000;
 var count = 1;
 const Material_list = ['빵 2장', '패티', '양상추', '소스'];
@@ -44,14 +44,12 @@ var save_list = "";
 var final_save_list = "submit add ingredient";
 var text = [];		// 재료 수정 잘 되는지 확인
 
-// firebase에서 가져오기(메뉴명)
-var select_menu = firebase.database().ref().child("hamburger/치즈버거/name");
-
-// 메뉴 이름 쓰는 div를 변수에 저장
-var menu_name_print = document.getElementById("menu_name");
-select_menu.on('value', snap =>
-				menu_name_print.innerHTML = "선택한 메뉴(" + snap.val() + ")");
-
+/**
+ * 메뉴 선택 화면에서 선택된 메뉴 변수를 function.js import해서 읽어오거나
+ * 파이어베이스에 저장시켜 값을 읽어오고 파이어베이스 내 데이터 검색 코드를 통해
+ * 가격과 고정 재료들을 수정하는 쪽으로 코드를 구성해야 할 듯.
+ */
+/**
 // 버거별 가격
 if(menu_name == "불고기버거"){
 	price = 5900;
@@ -64,54 +62,71 @@ if(menu_name == "불고기버거"){
 }else if(menu_name == "치즈버거"){
 	price = 5000;
 }
-
+ */
 //window.onload = function(){
 // 상단 메뉴명
-	//document.getElementById("menu_name").innerHTML = "선택한 메뉴(" + menu_name + ")";
-	document.getElementById("menu_name").style.fontWeight = "900";
-	document.getElementById("menu_name").style.fontSize = "40px";
+//document.getElementById("menu_name").innerHTML = "선택한 메뉴(" + menu_name + ")";
+
+// firebase에서 가져오기(메뉴명)
+var firebase_menu_name = firebase.database().ref().child("hamburger/치즈버거/name");
+// 메뉴 이름 쓰는 div를 변수에 저장
+var menu_name_print = document.getElementById("menu_name");
+
+firebase_menu_name.on('value', snap =>
+				menu_name_print.innerHTML = "선택한 메뉴(" + snap.val() + ")");
+document.getElementById("menu_name").style.fontWeight = "900";
+document.getElementById("menu_name").style.fontSize = "40px";
+
+// 가격
+// 추후에 입력 값에 따라 가격을 가져오는 코드(if문)로 수정할 예정
+var firebase_menu_price = firebase.database().ref().child("hamburger/치즈버거/price");
+var price_print = document.getElementById("total_price1");
+
+firebase_menu_price.on('value', snap =>
+				price_print.innerHTML = "합계 금액: " + snap.val() + "원");
+document.getElementById("total_price1").style.fontWeight = "900";
+
+// 수정할 수 없는 재료 목록
+for(var i = 0; i < Material_list.length; i++){
+	var staticSymbol = "ㅇ&nbsp";
 	
-	// 수정할 수 없는 재료 목록
-	for(var i = 0; i < Material_list.length; i++){
-		var staticSymbol = "ㅇ&nbsp";
-		
-		if(i == 0){
-			document.getElementById("static_list").innerHTML = staticSymbol + Material_list[i];
-		}else{
-			document.getElementById("static_list").innerHTML
-			= document.getElementById("static_list").innerHTML + "<br/>"
-				+ staticSymbol + Material_list[i];
-		}
+	if(i == 0){
+		document.getElementById("static_list").innerHTML = staticSymbol + Material_list[i];
+	}else{
+		document.getElementById("static_list").innerHTML
+		= document.getElementById("static_list").innerHTML + "<br/>"
+			+ staticSymbol + Material_list[i];
 	}
-	
-	var menu_detail_print = document.getElementById("menu_detail");
-	// 재료 수정할 수 없는 칸의 메뉴명
-	document.getElementById("menu_detail").innerHTML = menu_name + "에 반드시 들어가는 재료 항목입니다.";
-	select_menu.on('value', snap =>
-				menu_detail_print.innerHTML = snap.val() + "에 반드시 들어가는 재료 항목입니다.");
-	document.getElementById("menu_detail").style.fontWeight = "900";
-	
-	// 추가할 재료 버튼
-	for(var i = 0; i < Material_add.length; i++){
-		// 재료 동적으로 넣어주기
-		document.getElementById(i).childNodes[0].textContent = Material_add[i];
-		// 중복 체크가 되지 않도록 초기화
-		Material_add_bool[i] = 0;
-		// 추가되는 항목도 배열로 해주삼.
-		text[i] = "0";
-	}
-	
-	price = compute_count_menu(price, count);
-	
-	// 맨 아래 가격
-	// 목록을 데베에 저장해놓고 그냥 출력하는 방법도 있을 것 같다.	
-	document.getElementById("total_price1").innerHTML = "합계 금액: " + price + "원";
-	document.getElementById("total_price1").style.fontWeight = "900";
-	
-	// 불린 초기화 출력
-	//document.getElementById("boolean_test").innerHTML = Material_add_bool;
-	// 텍스트 배열
-	//document.getElementById("boolean_test").innerHTML = text;
+}
+
+// 재료 수정할 수 없는 칸의 메뉴명
+//document.getElementById("menu_detail").innerHTML = menu_name + "에 반드시 들어가는 재료 항목입니다.";
+var menu_detail_print = document.getElementById("menu_detail");
+firebase_menu_name.on('value', snap =>
+			menu_detail_print.innerHTML = snap.val() + "에 반드시 들어가는 재료 항목입니다.");
+document.getElementById("menu_detail").style.fontWeight = "900";
+
+// 추가할 재료 버튼
+for(var i = 0; i < Material_add.length; i++){
+	// 재료 동적으로 넣어주기
+	document.getElementById(i).childNodes[0].textContent = Material_add[i];
+	// 중복 체크가 되지 않도록 초기화
+	Material_add_bool[i] = 0;
+	// 추가되는 항목도 배열로 해주삼.
+	text[i] = "0";
+}
+
+price = compute_count_menu(price, count);
+
+// 맨 아래 가격
+// 목록을 데베에 저장해놓고 그냥 출력하는 방법도 있을 것 같다.	
+//document.getElementById("total_price1").innerHTML = "합계 금액: " + price + "원";
+//document.getElementById("total_price1").style.fontWeight = "900";
+
+// 불린 초기화 출력
+//document.getElementById("boolean_test").innerHTML = Material_add_bool;
+// 텍스트 배열
+//document.getElementById("boolean_test").innerHTML = text;
 //}
 
 // 추가할 재료 버튼을 클릭했을 때 호출되는 함수
