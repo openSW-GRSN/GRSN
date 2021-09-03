@@ -37,10 +37,10 @@ function addKebabburger(check){
 }
 
 //치즈버거 메뉴판에 추가 또는 빼기
-function addCheeseburger(check){
+function addTomatoburger(check){
 	if(check==1){
 		var dbRefObject = firebase.database().ref();
-	    dbRefObject.child("setMenu/menu4").set("cheeseburger");
+	    dbRefObject.child("setMenu/menu4").set("tomatoburger");
 	}
 	else if(check==2){
 		var dbRefObject = firebase.database().ref();
