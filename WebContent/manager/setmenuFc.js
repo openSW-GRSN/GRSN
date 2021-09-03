@@ -47,3 +47,14 @@ function addTomatoburger(check){
 	    dbRefObject.child("setMenu/menu4").remove();
 	}
 }
+
+//db에서 값을 읽어와서 메뉴판을 구성하는 코드
+function setMenuCheeseburger(menuNum){
+	if(menuNum==1){
+		if(demo.innerHTML=="cheeseburger"){
+			document.write("<dl>");
+			document.write("<dt><h1>치즈 버거</h1></dt>");
+			document.write("<img align=\"middle\" width=\"150\" height=\"150\" src=\"images/cheeseburger.jpg\">");
+		}
+	}
+}
