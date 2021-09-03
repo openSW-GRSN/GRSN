@@ -2,6 +2,7 @@
 <html>
 <head>
 <script src="./functions.js"></script>
+<script src="./manager/setmenuFc.js"></script>
 	<style>
 		body{
 			background-color:#FFE3A8;
@@ -39,11 +40,17 @@
 <title>메뉴 선택</title>
 </head>
 <body>
-<form action="checkSalesRate.html" id="sales"> <!-- 나중에 결제 화면으로 링크 바꾸기 -->
+ <!-- 나중에 결제 화면으로 링크 바꾸기 -->
 	<p align="center">
 	메뉴를 선택해주세요!
 	</p>
 	
+	<p>오늘의 판매메뉴</p>
+	 <p id="demo">메뉴1</p>
+	 <p id="demo2">메뉴2</p>
+	 <p id="demo3">메뉴3</p>
+	 <p id="demo4">메뉴4</p>
+
 	
 	<hr/>	<!-- 전체 화면의 가로 분할 선 -->
 <dl>
@@ -56,7 +63,6 @@
 		</button>
 </a>
 <hr/>
-	
 	
 	
 	
@@ -81,7 +87,6 @@
 		취소하기
 		</button>
 	<h1>주문 수량 </h1>
-
 
 	</div>
 	<hr/>
@@ -160,15 +165,24 @@
 
 <br>
 <!-- 아랫부분 수정 -->
-<input type="submit" value="결정!" class="submitBtn">
 
 	<button type="button"
 		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
 		onClick="sendSales()">
-		전송하기
+		결정하기
 		</button>
+		
+	<a href="./selectIngredient/selectIngredient_main.html">
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		>
+		다음으로
+		</button>
+	</a>
 
-</form>
+
+
+
  <script>
   var firebaseConfig = {
         	    apiKey: "AIzaSyAhWZp0H5loTHL92JtrXoCEFdwt8s9DDLY",
@@ -182,7 +196,35 @@
         	  };
             // Initialize Firebase
             firebase.initializeApp(firebaseConfig);
-</script> 
+
+			//첫번째 메뉴
+        	var demo = document.getElementById("demo");
+            var menu1 = document.getElementById("setMenu/menu1");
+            var dbRef = firebase.database().ref().child("setMenu/menu1");
+            dbRef.on('value',snap => demo.innerHTML = snap.val());
+            
+          	//두번째 메뉴
+            var demo2 = document.getElementById("demo2");
+            var menu2 = document.getElementById("setMenu/menu2");
+            var dbRef = firebase.database().ref().child("setMenu/menu2");
+            dbRef.on('value',snap => demo2.innerHTML = snap.val());
+            
+            //세번째 메뉴
+            var demo3 = document.getElementById("demo3");
+            var menu3 = document.getElementById("setMenu/menu3");
+            var dbRef = firebase.database().ref().child("setMenu/menu3");
+            dbRef.on('value',snap => demo3.innerHTML = snap.val());
+            
+            //네번째 메뉴
+            var demo4 = document.getElementById("demo4");
+            var menu4 = document.getElementById("setMenu/menu4");
+            var dbRef = firebase.database().ref().child("setMenu/menu4");
+            dbRef.on('value',snap => demo4.innerHTML = snap.val());
+        
+            </script> 
+
+
+
 
 </body>
 </html>
