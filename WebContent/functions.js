@@ -3,33 +3,23 @@ var sales_tomatoburger=0;
 var sales_kebabburger=0;
 var sales_doubleburger=0;
 
-var text="";
-var recommend_select_hamburger='';
+var total_cheeseburger=0;		//그날의 판매수량
 
 
 var today=new Date();
 var alert_string="이미 0개 입니다!";
 
-var total_sales=sales_cheeseburger+sales_tomatoburger+sales_doubleburger+sales_kebabburger;
 
-
-
-function sendSales(){
-	location.href="test.html?치즈버거: "+sales_cheeseburger;
-	
-}
-
-
-	
 
 //치즈버거
 function count_sales_cheeseburger(){	//치즈버거 주문 개수
-	
 	sales_cheeseburger+=1;
 	alert("치즈 버거 "+sales_cheeseburger+"개");
 	
+	 return sales_cheeseburger;
 	 var dbRefObject = firebase.database().ref();
-     dbRefObject.child("sales_cheeseburger").set(sales_cheeseburger);
+     dbRefObject.child("sales_burger/sales_cheeseburger").set(sales_cheeseburger);
+    
 }
 function cancel_sales_cheeseburger(){	//치즈버거 주문 취소
 	sales_cheeseburger-=1;
@@ -39,9 +29,10 @@ function cancel_sales_cheeseburger(){	//치즈버거 주문 취소
 	}
 	alert("치즈 버거 "+sales_cheeseburger+"개");
 	var dbRefObject = firebase.database().ref();
-    dbRefObject.child("sales_cheeseburger").set(sales_cheeseburger);
-
+    dbRefObject.child("sales_burger/sales_cheeseburger").set(sales_cheeseburger);
 }
+
+
 
 //케밥버거
 function count_sales_kebabburger(){	//케밥버거 주문 개수
@@ -49,7 +40,7 @@ function count_sales_kebabburger(){	//케밥버거 주문 개수
 	alert("케밥 버거 "+sales_kebabburger+"개");
 	
 	var dbRefObject = firebase.database().ref();
-    dbRefObject.child("sales_kebabburger").set(sales_kebabburger);
+    dbRefObject.child("sales_burger/sales_kebabburger").set(sales_kebabburger);
 
 }
 function cancel_sales_kebabburger(){	//케밥버거 주문 취소
@@ -60,7 +51,7 @@ function cancel_sales_kebabburger(){	//케밥버거 주문 취소
 	}
 	alert("케밥 버거 "+sales_kebabburger+"개");
 	var dbRefObject = firebase.database().ref();
-    dbRefObject.child("sales_kebabburger").set(sales_kebabburger);
+    dbRefObject.child("sales_burger/sales_kebabburger").set(sales_kebabburger);
 }
 
 
@@ -70,7 +61,7 @@ function count_sales_tomatoburger(){	//토마토버거 주문 개수
 	alert("토마토 버거 "+sales_tomatoburger+"개");
 	
 	var dbRefObject = firebase.database().ref();
-    dbRefObject.child("sales_tomatoburger").set(sales_tomatoburger);
+    dbRefObject.child("sales_burger/sales_tomatoburger").set(sales_tomatoburger);
 }
 function cancel_sales_tomatoburger(){	//토마토버거 주문 취소
 	sales_tomatoburger-=1;
@@ -80,7 +71,7 @@ function cancel_sales_tomatoburger(){	//토마토버거 주문 취소
 	}
 	alert("토마토 버거 "+sales_tomatoburger+"개");
 	var dbRefObject = firebase.database().ref();
-    dbRefObject.child("sales_tomatoburger").set(sales_tomatoburger);
+    dbRefObject.child("sales_burger/sales_tomatoburger").set(sales_tomatoburger);
 }
 
 //더블 버거
@@ -88,7 +79,7 @@ function count_sales_doubleburger(){	//더블버거 주문 개수
 	sales_doubleburger+=1;
 	alert("더블 버거 "+sales_doubleburger+"개");
 	var dbRefObject = firebase.database().ref();
-    dbRefObject.child("sales_doubleburger").set(sales_doubleburger);
+    dbRefObject.child("sales_burger/sales_doubleburger").set(sales_doubleburger);
 }
 function cancel_sales_doubleburger(){	//더블버거 주문 취소
 	sales_doubleburger-=1;
@@ -98,48 +89,53 @@ function cancel_sales_doubleburger(){	//더블버거 주문 취소
 	}
 	alert("더블 버거 "+sales_doubleburger+"개");
 	var dbRefObject = firebase.database().ref();
-    dbRefObject.child("sales_doubleburger").set(sales_doubleburger);
+    dbRefObject.child("sales_burger/sales_doubleburger").set(sales_doubleburger);
 }
 
 //모든 손님들의 총 주문량
 
-var all_sales_cheeseburger;
-function count_all_sales(){
-	
+function sendSales(sales_cheeseburger){
+	alert(sales_cheeseburger);	
 }
+
 
 
 
 
 //메뉴 추천 기능 만들기
-var alergy_num;
-var taste;
-var recommended_menus=["tomatoburger","cheeseburger","doubleburger","kebabburger"];
-
+var allergy_num;	//1: 육류알러지 2: 토마토 알러지 3: 유제품 알러지
+var recommended_menus=["kebabburger","tomatoburger","doubleburger","cheeseburger"];
 
 //알러지
-function recommendation_alergy(alergy_num){
-	if(alergy_num=="meat"){
-		//육류 선택시
-		recommended_menus.splice(2,2);
-		alert(recommended_menus); //확인용
-		location.href="alergy_meat.html?"+recommended_menu;
-		
+function recommendation_allergy(allergy_num){
+	if(allergy_num==1){	//육류 알러지인 경우
+		writeAllergy2("meet","cheeseburger","tomatoburger");
 	}
+	else if(allergy_num==2){	//토마토 알러지인 경우
+		writeAllergy3("tomato","cheeseburger","kebabburger","doubleburger");
+	}
+	else if(allergy_num==3){	//유제품 알러지인 경우
+		writeAllergy3("milk","kebabburger","tomatoburger","doubleburger");
+	}
+	else{
+		alert("오류");
+	}
+}
 
-	else if(alergy_num=="tomato"){
-		recommended_menus.splice(0,1);
-		alert(recommended_menus);
-		location.href="alergy_tomato.html?"+recommended_menu;
-	}
-		
-	else if (alergy_num=="milk"){
-		recommended_menus.splice(1,1);
-		alert(recommended_menus);
-		location.href="alergy_milk.html?"+recommended_menu;
-	
-	}
-
+//알러지에 따른 추천 메뉴를 db에 저장-추천메뉴2개인 경우
+function writeAllergy2(allergy,menu1, menu2){
+	firebase.database().ref('allergyMenu/'+allergy).set({
+		recommend1:menu1,
+		recommend2:menu2
+	});
+}
+//추천menu가 3개인 경우
+function writeAllergy3(allergy,menu1, menu2,menu3){
+	firebase.database().ref('allergyMenu/'+allergy).set({
+		recommend1:menu1,
+		recommend2:menu2,
+		recommend3:menu3
+	});
 }
 
 //입맛
