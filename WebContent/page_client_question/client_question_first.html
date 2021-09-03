@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
-<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
-<script src="../functions.js"></script>
+
 <!-- 캐시 삭제 -->
 <meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT"/>
 <meta http-equiv="Expires" content="-1"/>
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Cache-Control" content="no-cache"/>
 
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+
 <link rel="stylesheet" href="../css/custom.css">
+<script src="../functions.js"></script>
+
 
 <title>메뉴 추천 질문</title>
 <style>
@@ -39,6 +41,9 @@
 </head>
 
 <body>
+	<h2>메뉴 추천 질문</h2>
+	
+	<body>
 	<h2>다음 항목 중 알레르기 반응이 있는 것을 모두 선택해주세요.</h2>
 	
 	<br/>
@@ -46,22 +51,20 @@
 	<div>
 		
 		<button class="custom_button" value="meat" onClick="recommendation_allergy(1)">육류</button>
-		
-		
-		
+
 		<button class="custom_button" value="tomato" onClick="recommendation_allergy(2)">토마토</button>
-		
-		
-		
+	
 		<button class="custom_button" value="milk" onClick="recommendation_allergy(3)">유제품</button><br/>
 		
 		
 	</div>
-	<p>
-		<button class="custom_button" style="width: 180px;"
-			onclick="location.href='client_question_lastpage.html'">
-			다음 항목으로</button>
-	</p>
+
+<br><br><br><br><br><br><br><br><br><br><br>
+
+	<a href="client_question_lastpage.html">
+		<button class="custom_button">다음</button>
+	</a>
+
 	
 <script>
   var firebaseConfig = {
@@ -76,6 +79,8 @@
         	  };
             // Initialize Firebase
             firebase.initializeApp(firebaseConfig);
+            
+            
 </script>
 </body>
 </html>
