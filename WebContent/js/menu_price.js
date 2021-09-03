@@ -35,7 +35,7 @@ firebase.initializeApp(firebaseConfig);
 var menu_name = "더블버거";
 var price = 5000;
 var count = 1;
-const Material_list = ['빵 2장', '패티', '양상추', '소스'];
+//const Material_list = ['빵 2장', '패티', '양상추', '소스'];
 var Material_add = ['감자튀김(중)', '음료(중)', '케첩+5'];
 var Material_add_bool = [];
 var soldOut = false;
@@ -55,18 +55,20 @@ var text = [];		// 재료 수정 잘 되는지 확인
 
 // 파이어베이스 리얼 타임 상위 경로
 var path = "test/치즈버거";
+
 // firebase에서 가져오기(메뉴명)
-var firebase_menu_name = firebase.database().ref().child(path+'/name');
+var firebase_menu_name = firebase.database().ref(path + '/name');
 // 메뉴 이름 쓰는 div를 변수에 저장
 var menu_name_print = document.getElementById("menu_name");
 
 firebase_menu_name.on('value', snap => {
-				menu_name = snap.val();
-				menu_name_print.innerHTML = "선택한 메뉴(" + menu_name + ")"});
+	menu_name = snap.val();
+	menu_name_print.innerHTML = "선택한 메뉴(" + menu_name + ")"
+});
 menu_name_print.style.fontWeight = "900";
 menu_name_print.style.fontSize = "40px";
 /*
-// 버거별 가격
+// 버거별 가격(추후에 다시 해볼 예정)
 var path_name = '';
 if(menu_name == "Cheese_Burger"){
 	path_name = 'test/치즈버거/price';
@@ -80,24 +82,44 @@ if(menu_name == "Cheese_Burger"){
 }
 */
 // 버거 가격
-var firebase_menu_price = firebase.database().ref().child(path + '/price');
+var firebase_menu_price = firebase.database().ref(path + '/price');
 var price_print = document.getElementById("total_price1");
 
 firebase_menu_price.on('value', snap =>{
-						price = snap.val();
-						price_print.innerHTML = "합계 금액: " + price + "원"});
+	price = snap.val();
+	price_print.innerHTML = "합계 금액: " + price + "원"
+});
 price_print.style.fontWeight = "900";
 
 // 고정 재료 목록
-for(var i = 0; i < Material_list.length; i++){
+var firebase_menu_meterial_list = firebase.database().ref(path + '/Material_list');
+var meterial_list_print = document.getElementById("static_list");
+
+//meterial_list_print.innerHTML = firebase_menu_meterial_list.once('value').then();
+
+// 우선은 정적으로 연결하고 다 끝나면 파이어베이스 해당 노드에 위치한 값들을 동적으로 읽어오는 코드로 수정할 것.
+for(var i = 0; i < 4; i++){
 	const staticSymbol = "ㅇ&nbsp";
+	var firebase_menu_meterial_list_child = firebase_menu_meterial_list.child(i);
+	var MaterialList;
 	
 	if(i == 0){
-		document.getElementById("static_list").innerHTML = staticSymbol + Material_list[i];
+		//meterial_list_print.innerHTML = staticSymbol + Material_list[i];
+		
+		firebase_menu_meterial_list_child.on('value', snap =>{
+			MaterialList = snap.val();
+			meterial_list_print.innerHTML = staticSymbol + MaterialList;
+		});
 	}else{
-		document.getElementById("static_list").innerHTML
-		= document.getElementById("static_list").innerHTML + "<br/>"
-			+ staticSymbol + Material_list[i];
+		/*
+		meterial_list_print.innerHTML
+		= meterial_list_print.innerHTML + "<br/>" + staticSymbol + Material_list[i];
+		*/
+		firebase_menu_meterial_list_child.on('value', snap =>{
+			MaterialList = snap.val();
+			meterial_list_print.innerHTML =
+				meterial_list_print.innerHTML + "<br/>" + staticSymbol + MaterialList;
+		});
 	}
 }
 
