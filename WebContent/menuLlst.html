@@ -55,13 +55,13 @@
 	<hr/>	<!-- 전체 화면의 가로 분할 선 -->
 <dl>
 <dt><h1>오늘의 추천메뉴입니다.</h1>
-<a href="recommend_popup.html">
-	<button type="button"
-		style="color:black; background-color:#f59b25; font-size:2em; 
-		font-family: 'Cafe24Oneprettynight';">
-		오늘의 추천 메뉴확인하기
-		</button>
-</a>
+
+	<div>
+		<font size=5> - 버거 : </font> <font id="demo5" size=5> </font>		
+		<br>
+		<font size=5> - 추천 문구 : </font> <font id="demo6" size=5> </font>
+	</div>
+	
 <hr/>
 	
 	<script>
@@ -224,6 +224,18 @@
             var dbRef = firebase.database().ref().child("setMenu/menu4");
             dbRef.on('value',snap => demo4.innerHTML = snap.val());
         
+	    // 은근슬쩍 낀 오늘의 추천 메뉴 띄우는 부분 - 햄버거
+            var demo5 = document.getElementById("demo5");
+            var recommend_hamburger2 = document.getElementById("recommend/recommend_hamburger");
+            var dbRef = firebase.database().ref().child("recommend/recommend_hamburger");
+            dbRef.on('value',snap => demo5.innerHTML = snap.val());
+        
+ 	    // 은근슬쩍 낀 오늘의 추천 메뉴 띄우는 부분 - 추천 문구
+            var demo6 = document.getElementById("demo6");
+            var recommend_ment2 = document.getElementById("recommend/recommend_ment");
+            var dbRef = firebase.database().ref().child("recommend/recommend_ment");
+            dbRef.on('value',snap => demo6.innerHTML = snap.val());
+	 
             </script> 
 
 
