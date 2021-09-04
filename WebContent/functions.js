@@ -104,18 +104,21 @@ function sendSales(sales_cheeseburger){
 
 //메뉴 추천 기능 만들기
 var allergy_num;	//1: 육류알러지 2: 토마토 알러지 3: 유제품 알러지
-var recommended_menus=["kebabburger","tomatoburger","doubleburger","cheeseburger"];
+//var recommended_menus=["kebabburger","tomatoburger","doubleburger","cheeseburger"]; 전체 메뉴
 
 //알러지
 function recommendation_allergy(allergy_num){
 	if(allergy_num==1){	//육류 알러지인 경우
 		writeAllergy2("meet","cheeseburger","tomatoburger");
+		writeAllergyNum(1);
 	}
 	else if(allergy_num==2){	//토마토 알러지인 경우
 		writeAllergy3("tomato","cheeseburger","kebabburger","doubleburger");
+		writeAllergyNum(2);
 	}
 	else if(allergy_num==3){	//유제품 알러지인 경우
 		writeAllergy3("milk","kebabburger","tomatoburger","doubleburger");
+		writeAllergyNum(3);
 	}
 	else{
 		alert("오류");
@@ -137,39 +140,59 @@ function writeAllergy3(allergy,menu1, menu2,menu3){
 		recommend3:menu3
 	});
 }
+//allergynum값 넘기기
+function writeAllergyNum(allergy_num){
+	var dbRefObject = firebase.database().ref();
+    dbRefObject.child("allergyNum").set(allergy_num);
+}
 
 //입맛
-function recommendation_taste(taste){
 
-	if(taste=="hot"){
-		if(recommended_menus.includes('doubleburger')||recommended_menus.includes('kebabburger')){
-			recommended_menus=["doubleburger","kebabburger"];
-			alert(recommended_menus);
+function writeTasteMenu(taste_menu){
+	var dbRefObject = firebase.database().ref();
+    dbRefObject.child("tasteMenu").set(taste_menu);
+}
+
+
+function recommendation_taste(taste){	//1:fresh, 2:hot, 3:simple
+	if(taste==1){
+		if(demo.innerHTML==1){	//육류 알러지
+			writeTasteMenu("tomatoburger");
 		}
-		else{
-			alert("죄송합니다. 해당하는 메뉴가 없습니다.");
+		else if(demo.innerHTML==2){	//토마토 알러지
+			writeTasteMenu("cheeseburger");
+		}
+		else{	//유제품 알러지
+			writeTasteMenu("tomatoburger");
 		}
 	}
-	else if(taste=="simple"){
-		if(recommended_menus.includes('cheeseburger')){
-			recommended_menus=["cheeseburger"];
-			alert(recommended_menus);
+	else if(taste==2){	//매운맛
+		if(demo.innerHTML==1){	//육류알러지
+			writeTasteMenu("tomatoburger");
 		}
-		else{
-			alert("죄송합니다. 해당하는 메뉴가 없습니다.");
+		else if(demo.innerHTML==2){	//토마토 알러지
+			writeTasteMenu("kebabburger");
+		}
+		else{	//유제품 알러지
+			writeTasteMenu("doubleburger");
 		}
 	}
-	else if(taste=="fresh"){
-		if(recommended_menus.includes('tomatoburger')){
-			recommended_menus=["tomatoburger"];
-			alert(recommended_menus);
+	else if(taste==3){	//담백한 맛
+		if(demo.innerHTML==1){	//육류알러지
+			writeTasteMenu("cheeseburger");
 		}
-		else{
-			alert("죄송합니다. 해당하는 메뉴가 없습니다.");
+		else if(demo.innerHTML==2){	//토마토알러지
+			writeTasteMenu("cheeseburger");
+		}
+		else{	//유제품 알러지
+			writeTasteMenu("tomatoburger");
 		}
 	}
 }
+	
 
+
+//추천 메뉴
 function recommend_cheese_burger(){
 	recommend_select_hamburger = "cheese burger";
 	alert("치즈 버거가 선택되었습니다.");
