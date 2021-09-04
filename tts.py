@@ -25,7 +25,7 @@ credential_path = "polar-cyclist-322301-6eaca42ece96.json"
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
 def createsound(output):
-    # [START tts_quickstart]
+    # [START createsound]
     """Synthesizes speech from the input string of text or ssml.
     Note: ssml must be well-formed according to:
         https://www.w3.org/TR/speech-synthesis/

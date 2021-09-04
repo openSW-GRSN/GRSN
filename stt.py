@@ -163,6 +163,7 @@ def listen_print_loop(responses):
     global menu_play
 
     num_chars_printed = 0
+
     for response in responses:
         if not response.results:
 
@@ -177,7 +178,10 @@ def listen_print_loop(responses):
             continue
 
         # Display the transcription of the top alternative.
+        global transcript
         transcript = result.alternatives[0].transcript
+
+        global output3
 
         # Display interim results, but with a carriage return at the end of the
         # line, so subsequent lines will overwrite them.
@@ -200,15 +204,56 @@ def listen_print_loop(responses):
             # one of our keywords.
             # '주문'이 들어간 문구를 말하면 종료하고 1초뒤에 다시 실행함
             if re.search("주문", transcript, re.I):
-                output = "메뉴를 추천받으시겠습니까"
+                output = "메뉴를 추천받으시겠습니까. 메뉴추천은 알레르기가 있는 분들을 위한 서비스입니다."
                 createsound(output)
                 play()
 
                 print("종료하는중...")
                 break
-                #   메뉴추천화면으로 넘어가야함
 
-            if re.search("아니요|아니오|아뇨", transcript, re.I):
+            if re.search("네|예|추천해주세요|추천해 주세요", transcript, re.I):
+                # 메뉴추천화면으로 넘어감
+                output = "메뉴 추천 화면입니다. '육류', '토마토', '유제품' 중 알레르기 반응이 있는 것을 선택해주세요."
+                createsound(output)
+                play()
+
+            if re.search("육류|융뉴|융류|역류|이용료|고기", transcript, re.I):
+                # 육류 버튼이 선택됨(눌림)
+                output3 = "육류"
+                print(output3)
+
+                print(output3)
+                output4 = "고객님의 알레르기 제품으로" + output3 + " 를 선택하셨습니다. 다음 화면으로 이동합니다."
+                createsound(output4)
+                play()
+
+                print("종료하는중...")
+                break
+            elif re.search("토마토", transcript, re.I):
+                # 토마토 버튼이 선택됨(눌림)
+                output3 = "토마토"
+
+                print(output3)
+                output4 = "고객님의 알레르기 제품으로" + output3 + " 를 선택하셨습니다. 다음 화면으로 이동합니다."
+                createsound(output4)
+                play()
+
+                print("종료하는중...")
+                break
+            elif re.search("유제품|유제", transcript, re.I):
+                # 유제품 버튼이 선택됨(눌림)
+                output3 = "유제품"
+
+                print(output3)
+                output4 = "고객님의 알레르기 제품으로" + output3 + " 를 선택하셨습니다. 다음 화면으로 이동합니다."
+                createsound(output4)
+                play()
+
+                print("종료하는중...")
+                break
+
+            elif re.search("아니요|아니오|아뇨", transcript, re.I):
+                #   메뉴선택화면으로 넘어감
                 list_play()
 
                 print("종료하는중...")
@@ -219,26 +264,49 @@ def listen_print_loop(responses):
             # 백엔드 모였을때 코드
             # ref.update({'stt 결과값': 1})
 
+# def allergy_list():
+#     if re.search("육류|융뉴|융류|고기", transcript, re.I):
+#         # 육류 버튼이 선택됨(눌림)
+#
+#         output3 = "육류"
+#         print(output3)
+#         createsound(output3)
+#     elif re.search("토마토", transcript, re.I):
+#         # 육류 버튼이 선택됨(눌림)
+#         output3 = "토마토"
+#         createsound(output3)
+#     elif re.search("유제품|유제", transcript, re.I):
+#         # 육류 버튼이 선택됨(눌림)
+#         output3 = "유제품"
+#         createsound(output3)
+#
+#         print(output3)
+#         output4 = "고객님의 알레르기 제품으로" + output3 + "를 선택하셨습니다. 다음 화면으로 이동합니다."
+#         createsound(output4)
+#         play()
+
+
+#메뉴선택화면
 def play():
     playsound("output.mp3")
 
 def list_play():
     output1 = "메뉴 선택 화면입니다. 현재 주문 가능한 메뉴는"
-    ref = db.reference('sales_burger')
+    ref = db.reference('setMenu')
     menu_list = str(ref.get())
     print(ref.get())
     print(type(menu_list))
 
-    if re.search("cheese", menu_list, re.I):
+    if re.search("cheese|치즈", menu_list, re.I):
         listcreate("치즈버거")
 
-    if re.search("double", menu_list, re.I):
+    if re.search("double|더블", menu_list, re.I):
         listcreate("더블버거")
 
-    if re.search("kebab", menu_list, re.I):
+    if re.search("kebab|케밥", menu_list, re.I):
         listcreate("케밥버거")
 
-    if re.search("tomato", menu_list, re.I):
+    if re.search("tomato|토마토", menu_list, re.I):
         listcreate("토마토버거")
 
     list_end = 1
