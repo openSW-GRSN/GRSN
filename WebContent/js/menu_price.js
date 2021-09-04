@@ -4,7 +4,6 @@
  * price[INT]: 금액
  * count[INT]: 개수
  * Material_add[CHAR]: 고객의 기호에 맞게 추가하는 재료
- * soldOut[BOOL]: 품절 여부 (0: 수량 남음, 1: 품절)
  * Material_add_bool[BOOLEAN]: 들어가는 재료를 표시(0: 추가 안 함, 1: 추가함)
  * save_list[CHAR]: 클릭한 재료
  * final_save_list[CHAR]: 최종적으로 추가되는 재료들
@@ -40,7 +39,6 @@ var count = 1;
 //const Material_list = ['빵 2장', '패티', '양상추', '소스'];
 var Material_add = ['감자튀김(중)', '음료(중)', '케첩(+5)'];
 var Material_add_bool = [];
-var soldOut = false;
 var save_list = "";
 //var final_save_list = "submit add ingredient";
 //var text = [];		// 재료 수정 잘 되는지 확인
