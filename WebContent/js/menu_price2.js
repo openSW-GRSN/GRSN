@@ -28,11 +28,66 @@ firebase_menu_name.on('value', snap => {
 	menu_name_print.style.fontWeight = "900";
 });
 
+// 사이드 메뉴(?) 추가
+var firebase_material_add = firebase.database().ref(path + '/save_order');
+var material_add_print = document.getElementById("total_added_ingredinet");
+var material_add_bool;
+var material_add = [];
+var material_list_print;
 
+firebase_material_add.get().then((data)=>{
+	for(var i = 0; i < data.val().length; i++){
+		material_add_bool = data.child(i).val();
+		//console.log(material_add_bool);
+		
+		// material_add 배열에 이름을 부여
+		switch(i){
+			case 0:
+			material_add[0] = "감자튀김(중)";
+			break;
+			
+			case 1:
+			material_add[1] = "음료(중)";
+			break;
+			
+			case 2:
+			material_add[2] = "케첩(+5개)";
+			break;
+			
+			default:
+			break;
+		}
+		// 값에 1이 들어있으면 재료를 추가
+		if(material_add_bool == 1){
+			// material_list_print에 값이 들어있으면,
+			if(material_list_print){
+				material_list_print = material_list_print + ', ' + material_add[i];
+			}else{		// 값이 들어있지 않으면,
+				material_list_print = material_add[i];
+			}
+		}
+	}
+	//console.log(material_list_print);
+	// material_list_print에 아무런 값이 없을 때와 있을 때
+	if(material_list_print == undefined){
+		document.getElementById("total_added_ingredinet").innerHTML =
+		"&nbsp&nbsp추가된 재료가 없습니다.&nbsp;&nbsp;";
+	}else{
+		document.getElementById("total_added_ingredinet").innerHTML =
+			"&nbsp&nbsp추가된 재료:&nbsp" + material_list_print + "&nbsp;&nbsp;";
+	}
+});
 
+// 가격 읽어오기
+var firebase_menu_price = firebase.database().ref(path + '/price');
+var price_print = document.getElementById("total_price2");
+var price;
+
+firebase_menu_price.on('value', snap =>{
+	price = snap.val();
+	price_print.innerHTML = "&nbsp&nbsp결제할 총 금액은 " + price + "원입니다.&nbsp&nbsp";
+});
 /*
-document.getElementById("total_added_ingredinet").innerHTML =
-	"&nbsp&nbsp추가된 재료:&nbsp" + final_save_list + "&nbsp;&nbsp;";
 document.getElementById("total_price2").innerHTML =
 	"&nbsp&nbsp결제할 총 금액은 " + price + "원입니다.&nbsp&nbsp";
 */

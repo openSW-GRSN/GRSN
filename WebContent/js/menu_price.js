@@ -203,7 +203,7 @@ function addButtonClick(id){
 	firebase.database().ref(path + '/save_order').set({
 	    0: Material_add_bool[0],
 	    1: Material_add_bool[1],
-	    2 : Material_add_bool[2]
+	    2: Material_add_bool[2]
 	  });
 	// 클릭한 버튼 값 표시(누적)
 	//document.getElementById("save_test").innerHTML = save_list;
