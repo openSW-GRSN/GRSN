@@ -71,6 +71,21 @@ global tomato
 global menu_play
 menu_play = 0
 
+global start_first
+global menu_chchun
+global menu_allergie
+global menu_flavor
+global menu_finish
+global again_start
+
+start_first = 0
+menu_chchun = 0
+menu_allergie = 0
+menu_flavor = 0
+menu_finish = 0
+again_start = 1
+
+
 class MicrophoneStream(object):
     """Opens a recording stream as a generator yielding the audio chunks.
        (오디오 청크(말 문단)를 생성하는 생성기로 녹음 스트림을 연다)"""
@@ -181,7 +196,12 @@ def listen_print_loop(responses):
         global transcript
         transcript = result.alternatives[0].transcript
 
-        global output3
+        global start_first
+        global menu_chchun
+        global menu_allergie
+        global menu_flavor
+        global menu_finish
+        global again_start
 
         # Display interim results, but with a carriage return at the end of the
         # line, so subsequent lines will overwrite them.
@@ -207,54 +227,124 @@ def listen_print_loop(responses):
                 output = "메뉴를 추천받으시겠습니까. 메뉴추천은 알레르기가 있는 분들을 위한 서비스입니다."
                 createsound(output)
                 play()
+                start_first = 1
 
                 print("종료하는중...")
                 break
 
-            if re.search("네|예|추천해주세요|추천해 주세요", transcript, re.I):
+            if start_first == 1 and re.search("네|예|추천해주세요", transcript, re.I):
                 # 메뉴추천화면으로 넘어감
                 output = "메뉴 추천 화면입니다. '육류', '토마토', '유제품' 중 알레르기 반응이 있는 것을 선택해주세요."
                 createsound(output)
                 play()
 
-            if re.search("육류|융뉴|융류|역류|이용료|고기", transcript, re.I):
+                menu_chchun = 1
+                start_first = 0
+
+                print("종료하는중...")
+                break
+
+            if menu_chchun == 1 and re.search("육류|융뉴|융류|고기", transcript, re.I):
                 # 육류 버튼이 선택됨(눌림)
                 output3 = "육류"
-                print(output3)
-
-                print(output3)
-                output4 = "고객님의 알레르기 제품으로" + output3 + " 를 선택하셨습니다. 다음 화면으로 이동합니다."
-                createsound(output4)
+                list_allergie(output3)
                 play()
+
+                menu_chchun = 0
+                menu_allergie = 1
 
                 print("종료하는중...")
                 break
-            elif re.search("토마토", transcript, re.I):
-                # 토마토 버튼이 선택됨(눌림)
+
+            if menu_chchun == 1 and re.search("토마토", transcript, re.I):
+                # 육류 버튼이 선택됨(눌림)
                 output3 = "토마토"
-
-                print(output3)
-                output4 = "고객님의 알레르기 제품으로" + output3 + " 를 선택하셨습니다. 다음 화면으로 이동합니다."
-                createsound(output4)
+                list_allergie(output3)
                 play()
+
+                menu_chchun = 0
+                menu_allergie = 1
 
                 print("종료하는중...")
                 break
-            elif re.search("유제품|유제", transcript, re.I):
-                # 유제품 버튼이 선택됨(눌림)
+
+            if menu_chchun == 1 and re.search("유제품|유제", transcript, re.I):
+                # 육류 버튼이 선택됨(눌림)
                 output3 = "유제품"
-
-                print(output3)
-                output4 = "고객님의 알레르기 제품으로" + output3 + " 를 선택하셨습니다. 다음 화면으로 이동합니다."
-                createsound(output4)
+                list_allergie(output3)
                 play()
+
+                menu_chchun = 0
+                menu_allergie = 1
 
                 print("종료하는중...")
                 break
 
-            elif re.search("아니요|아니오|아뇨", transcript, re.I):
+            if menu_allergie == 1 and re.search("맛", transcript, re.I):
+                output = "고객님께서 좋아하시는 맛은 어떤 맛인가요? 상큼한 맛, 화끈한 맛, 담백한 맛 중에 선택해주세요"
+                createsound(output)
+                play()
+
+                menu_allergie = 0
+                menu_flavor = 1
+
+                print("종료하는중...")
+                break
+
+            if menu_flavor == 1 and re.search("상큼", transcript, re.I):
+                # 육류 버튼이 선택됨(눌림)
+                output3 = "상큼"
+                list_flavor(output3)
+                play()
+
+                menu_flavor = 0
+                menu_finish = 1
+
+                print("종료하는중...")
+                break
+
+            if menu_flavor == 1 and re.search("화끈", transcript, re.I):
+                # 육류 버튼이 선택됨(눌림)
+                output3 = "화끈"
+                list_flavor(output3)
+                play()
+
+                menu_flavor = 0
+                menu_finish = 1
+
+                print("종료하는중...")
+                break
+
+            if menu_flavor == 1 and re.search("담백", transcript, re.I):
+                # 육류 버튼이 선택됨(눌림)
+                output3 = "담백"
+                list_flavor(output3)
+                play()
+
+                menu_flavor = 0
+                menu_finish = 1
+
+                print("종료하는중...")
+                break
+
+            if menu_finish == 1:
+                ref = db.reference('tasteMenu')
+                taste_menu = str(ref.get())
+                output = "질문에 답변해주셔서 감사합니다. 고객님이 드실 수 있을만한 메뉴는" + taste_menu + "입니다"
+                createsound(output)
+                play()
+
+                menu_finish = 0
+                again_start = 1
+
+                print("종료하는중...")
+                break
+
+            if start_first == 1 and re.search("아니요|아니오|아뇨", transcript, re.I):
                 #   메뉴선택화면으로 넘어감
                 list_play()
+
+                start_first = 0
 
                 print("종료하는중...")
                 break
@@ -263,28 +353,6 @@ def listen_print_loop(responses):
 
             # 백엔드 모였을때 코드
             # ref.update({'stt 결과값': 1})
-
-# def allergy_list():
-#     if re.search("육류|융뉴|융류|고기", transcript, re.I):
-#         # 육류 버튼이 선택됨(눌림)
-#
-#         output3 = "육류"
-#         print(output3)
-#         createsound(output3)
-#     elif re.search("토마토", transcript, re.I):
-#         # 육류 버튼이 선택됨(눌림)
-#         output3 = "토마토"
-#         createsound(output3)
-#     elif re.search("유제품|유제", transcript, re.I):
-#         # 육류 버튼이 선택됨(눌림)
-#         output3 = "유제품"
-#         createsound(output3)
-#
-#         print(output3)
-#         output4 = "고객님의 알레르기 제품으로" + output3 + "를 선택하셨습니다. 다음 화면으로 이동합니다."
-#         createsound(output4)
-#         play()
-
 
 #메뉴선택화면
 def play():
@@ -313,7 +381,19 @@ def list_play():
     output2 = str(listcreate(list_end))
     output2 = output2.replace("]", "")
     createsound(output1 + output2 + "입니다")
+    play()
+
+def list_allergie(food):
+    output4 = "고객님의 알레르기 제품으로" + food + ".를 선택하셨습니다. 맛 선택 화면으로 이동합니다."
+    createsound(output4)
+    play()
+
+def list_flavor(flavor):
+    output5 = flavor + "맛을 선택하셨습니다. 다음 화면으로 이동합니다."
+    createsound(output5)
     playsound("output.mp3")
+
+
 
 def main():
     # See http://g.co/cloud/speech/docs/languages
