@@ -157,42 +157,43 @@ function writeTasteMenu(taste_menu){
 function recommendation_taste(taste){	//1:fresh, 2:hot, 3:simple
 	if(taste==1){
 		if(demo.innerHTML==1){	//육류 알러지
-			writeTasteMenu("tomatoburger");
+			writeTasteMenu("토마토버거");
 		}
 		else if(demo.innerHTML==2){	//토마토 알러지
-			writeTasteMenu("cheeseburger");
+			writeTasteMenu("치즈버거");
 		}
 		else{	//유제품 알러지
-			writeTasteMenu("tomatoburger");
+			writeTasteMenu("토마토버거");
 		}
 	}
 	else if(taste==2){	//매운맛
 		if(demo.innerHTML==1){	//육류알러지
-			writeTasteMenu("tomatoburger");
+			writeTasteMenu("토마토버거");
 		}
 		else if(demo.innerHTML==2){	//토마토 알러지
-			writeTasteMenu("kebabburger");
+			writeTasteMenu("케밥버거");
 		}
 		else{	//유제품 알러지
-			writeTasteMenu("doubleburger");
+			writeTasteMenu("더블버거");
 		}
 	}
 	else if(taste==3){	//담백한 맛
 		if(demo.innerHTML==1){	//육류알러지
-			writeTasteMenu("cheeseburger");
+			writeTasteMenu("치즈버거");
 		}
 		else if(demo.innerHTML==2){	//토마토알러지
-			writeTasteMenu("cheeseburger");
+			writeTasteMenu("치즈버거");
 		}
 		else{	//유제품 알러지
-			writeTasteMenu("tomatoburger");
+			writeTasteMenu("토마토버거");
 		}
 	}
 }
 	
+//추천메뉴 result창 함수
 
 
-//추천 메뉴
+//오늘의 추천 메뉴
 function recommend_cheese_burger(){
 	recommend_select_hamburger = "cheese burger";
 	alert("치즈 버거가 선택되었습니다.");
