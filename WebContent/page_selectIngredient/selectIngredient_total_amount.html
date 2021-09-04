@@ -3,12 +3,6 @@
 <head>
 <meta charset="UTF-8">
 
-<!-- 캐시 삭제 -->
-<meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT"/>
-<meta http-equiv="Expires" content="-1"/>
-<meta http-equiv="Pragma" content="no-cache"/>
-<meta http-equiv="Cache-Control" content="no-cache"/>
-
 <link rel="stylesheet" href="../css/custom.css">
 
 <title>결제 전 마지막 페이지</title>
@@ -69,12 +63,15 @@
 
 <div>
 	<button class="custom_button button_detail">취소</button>
-	&nbsp;&nbsp;&nbsp;
+	&nbsp;
 	<button class="custom_button button_detail">카드 결제</button>
-	&nbsp;&nbsp;&nbsp;
+	&nbsp;
 	<button class="custom_button button_detail">현금 결제</button>
 </div>
+<!-- firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
 
-<script type="text/javascript" src="../js/menu_price2.js"></script>
+<script type="module" src="../js/menu_price2.js"></script>
 </body>
 </html>

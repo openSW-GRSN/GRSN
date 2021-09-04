@@ -2,11 +2,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- 캐시 삭제 -->
-<meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT"/>
-<meta http-equiv="Expires" content="-1"/>
-<meta http-equiv="Pragma" content="no-cache"/>
-<meta http-equiv="Cache-Control" content="no-cache"/>
 
 <!-- 각 디바이스의 모니터를 따라가도록 만든 설정인데 잘 모르겠다. -->
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -97,11 +92,11 @@
 
 <div>
 	<button id="0" class="custom_button add_ingredient"
-			onClick='btnClick(this.id);'>재료0</button>
+			onClick='addButtonClick(this.id);'>재료0</button>
 	<button id="1" class="custom_button add_ingredient"
-			onClick='btnClick(this.id);'>재료1</button>
+			onClick='addButtonClick(this.id);'>재료1</button>
 	<button id="2" class="custom_button add_ingredient"
-			onClick='btnClick(this.id);'>재료2</button>
+			onClick='addButtonClick(this.id);'>재료2</button>
 	<!-- <button id="3" class="custom_button add_ingredient"
 			onClick='btnClick(this.id);'>재료3</button> -->
 </div>
@@ -120,11 +115,9 @@
 &nbsp;&nbsp;
 <span id="boolean_text">글자 출력</span>
  -->
-
 <!-- firebase -->
 <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
-<!--<script type="module"></script>-->
 <script type="text/javascript" src="../js/menu_price.js"></script>
 
 </body>

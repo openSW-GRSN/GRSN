@@ -12,7 +12,7 @@ var firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-
+/*
 // firebase에서 읽기
 var demo = document.getElementById("demo");
 var preObject = document.getElementById("object");
@@ -23,3 +23,4 @@ dbRef.on('value',snap => demo.innerHTML = snap.val());
 dbRef.on('value',snap => {
 	preObject.innerText = JSON.stringify(snap.val(),null,3);
 });
+*/
