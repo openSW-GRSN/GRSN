@@ -48,7 +48,9 @@ var selectMenu = '여기에 메뉴 이름(영문)이 들어가야 함.';
 var firebase_count_check = firebase.database().ref('Menu');
 firebase_count_check.orderByChild('count').startAt(1).once('value', function(data){
     console.log(data.val());
-	//firebase_count_check.
+	firebase_count_check.get().then((data)=>{
+		console.log(data.val());
+	});
 	//selectMenu = data.child('name').val();
 });
 
