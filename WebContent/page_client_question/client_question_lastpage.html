@@ -54,7 +54,7 @@
 	</div>
 	<br><br><br><br><br><br><br>
 	<a href="client_question_result.html">
-		<button class="custom_button">결과 보기</button>
+		<button id="goFourthPg" class="custom_button">결과 보기</button>
 	</a>
 	
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>	
@@ -80,6 +80,14 @@
             var dbRef = firebase.database().ref().child("allergyNum");
             dbRef.on('value',snap => demo.innerHTML = snap.val());
            
+            var firebase_page_check = firebase.database().ref('page_num');
+
+        	firebase_page_check.on('value', snap =>{
+                var page_num_test = snap.val();
+                if(page_num_test == 4){
+                	goFourthPg.click();
+                }
+        	});
             
 </script>
 </body>
