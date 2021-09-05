@@ -1,3 +1,4 @@
+<!-- 2페이지 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,7 +63,7 @@
 <br><br><br><br><br><br><br><br><br><br><br>
 
 	<a href="client_question_lastpage.html">
-		<button class="custom_button">다음</button>
+		<button id="goThirdPg" class="custom_button">다음</button>
 	</a>
 
 	
@@ -79,8 +80,16 @@
         	  };
             // Initialize Firebase
             firebase.initializeApp(firebaseConfig);
-            
-            
+           
+    var firebase_page_check = firebase.database().ref('page_num');
+
+	firebase_page_check.on('value', snap =>{
+        var page_num_test = snap.val();
+        if(page_num_test == 3){
+        	goThirdPg.click();
+        }
+	});
+        
 </script>
 </body>
 </html>
