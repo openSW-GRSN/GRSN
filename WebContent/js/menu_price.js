@@ -72,12 +72,16 @@ var price_print = document.getElementById("total_price1");
 
 firebase_menu_price.on('value', snap =>{
 	price = snap.val();
-	price_print.innerHTML = "합계 금액: " + price + "원"
-	price_print.style.fontWeight = "900";
 	
 	firebase.database().ref(path + '/cheese_burger/count').on('value', snap=>{
-		firebase.database().ref('/total').set( price * snap.val() );
-	})
+		total_price = price * snap.val();
+		firebase.database().ref('/total').set( total_price );
+	});
+	
+	price_print.innerHTML = "합계 금액: " + total_price + "원";
+	price_print.style.fontWeight = "900";
+	
+	
 });
 
 // 메뉴 소개글
