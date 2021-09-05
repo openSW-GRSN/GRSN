@@ -103,7 +103,7 @@
 </div>
 <br/>
 <footer class="footer" style="border: 1px solid #ffe3a8;">
-	<button class="custom_button normal_button"
+	<button class="custom_button normal_button" id="goSeventhPg"
 			style="float: right; border: 1px solid transparent;"
 			onclick="location.href='selectIngredient_total_amount.html'">확인</button>
 	<div id="total_price1" class="guide_text"
@@ -117,6 +117,20 @@
 <span id="boolean_text">글자 출력</span>
  -->
 <!-- firebase -->
+
+<script>
+var firebase_page_check = firebase.database().ref('page_num');
+
+firebase_page_check.on('value', snap =>{
+    var page_num_test = snap.val();
+    if(page_num_test == 7){
+    	goSeventhPg.click();
+    }
+});
+
+
+</script>
+
 <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
 <script type="text/javascript" src="../js/menu_price.js"></script>
