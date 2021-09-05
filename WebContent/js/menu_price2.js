@@ -14,18 +14,29 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-var path = 'Menu';		// 경로
-
-// 선택된 메뉴
-var firebase_menu_name = firebase.database().ref(path + '/cheese_burger/name');
-var menu_name_print = document.getElementById("last_check_menu");
+var path = 'Menu/';		// 경로
+var selectMenu = '여기에 메뉴 이름(영문)이 들어가야 함.';
 var menu_name;
 
-firebase_menu_name.on('value', snap => {
-	menu_name = snap.val();
-	menu_name_print.innerHTML =
-		"선택한 메뉴는 " + menu_name + "이며, 추가 요청사항을 다시 한 번 더 확인해주세요.";
-	menu_name_print.style.fontWeight = "900";
+// count 안을 확인해서 1 이상인 곳이 있으면 가져오기
+var firebase_count_check = firebase.database().ref('Menu');
+firebase_count_check.orderByChild('count').startAt(1).once('child_added', function(data){
+    console.log(data.val());
+    console.log(data.key);
+	selectMenu = data.key;
+	console.log(selectMenu);
+	
+	// 선택된 메뉴
+	var firebase_menu_name = firebase.database().ref(path + selectMenu + '/name');
+	var menu_name_print = document.getElementById("last_check_menu");
+	
+	firebase_menu_name.on('value', snap => {
+		menu_name = snap.val();
+		menu_name_print.innerHTML =
+			"선택한 메뉴는 " + menu_name + "이며, 추가 요청사항을 다시 한 번 더 확인해주세요.";
+		menu_name_print.style.fontWeight = "900";
+	});
+	
 });
 
 // 사이드 메뉴(?) 추가
@@ -87,7 +98,3 @@ firebase_menu_price.on('value', snap =>{
 	price = snap.val();
 	price_print.innerHTML = "&nbsp&nbsp결제할 총 금액은 " + price + "원입니다.&nbsp&nbsp";
 });
-/*
-document.getElementById("total_price2").innerHTML =
-	"&nbsp&nbsp결제할 총 금액은 " + price + "원입니다.&nbsp&nbsp";
-*/

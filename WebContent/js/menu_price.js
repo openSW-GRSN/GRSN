@@ -9,13 +9,6 @@
  * final_save_list[CHAR]: 최종적으로 추가되는 재료들
  */
 
-/**
-	불린 값은 변경이 잘 되지만 문자열로 변환하는 것이 어려움.
-	시도는 해보겠지만 만약에 되지 않는다면 다음 창으로 값을 넘기는 방법(이것도 아직 모름)을 통해
-	결과 창에서 불린 값이 1인 해당 재료를 표시하는 방법으로 진행할 것임.
-	재료가 추가된 재료를 확인하는 방법으로는 불린 값이 1일 때 버튼 텍스트가 '추가'로 뜬다는 방법을 사용할 것임.
- */
-
 // firebase 연결
 var firebaseConfig = {
 	apiKey: "AIzaSyAhWZp0H5loTHL92JtrXoCEFdwt8s9DDLY",
@@ -31,7 +24,7 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-var path = 'Menu';		// 경로
+var path = 'Menu/';		// 경로
 
 var menu_name = "더블버거";
 var price = 5000;
@@ -46,77 +39,72 @@ var selectMenu = '여기에 메뉴 이름(영문)이 들어가야 함.';
 
 // count 안을 확인해서 1 이상인 곳이 있으면 가져오기
 var firebase_count_check = firebase.database().ref('Menu');
-firebase_count_check.orderByChild('count').startAt(1).once('value', function(data){
+firebase_count_check.orderByChild('count').startAt(1).once('child_added', function(data){
     console.log(data.val());
-	firebase_count_check.get().then((data)=>{
-		console.log(data.val());
-	});
-	//selectMenu = data.child('name').val();
-});
-
-//console.log(selectMenu);
-
-// firebase에서 가져오기(메뉴명)
-var firebase_menu_name = firebase.database().ref(path + '/cheese_burger/name');
-// 메뉴 이름 쓰는 div를 변수에 저장
-var menu_name_print = document.getElementById("menu_name");
-
-firebase_menu_name.on('value', snap => {
-	menu_name = snap.val();
-	menu_name_print.innerHTML = "선택한 메뉴(" + menu_name + ")"
-	menu_name_print.style.fontWeight = "900";
-	menu_name_print.style.fontSize = "40px";
-});
-
-// 가격 읽어오기
-var firebase_menu_price = firebase.database().ref(path + '/cheese_burger/price');
-var price_print = document.getElementById("total_price1");
-
-firebase_menu_price.on('value', snap =>{
-	price = snap.val();
+    console.log(data.key);
+	selectMenu = data.key;
 	
-	firebase.database().ref(path + '/cheese_burger/count').on('value', snap=>{
-		total_price = price * snap.val();
-		firebase.database().ref('/total').set( total_price );
+	// firebase에서 가져오기(메뉴명)
+	var firebase_menu_name = firebase.database().ref(path + selectMenu + '/name');
+	// 메뉴 이름 쓰는 div를 변수에 저장
+	var menu_name_print = document.getElementById("menu_name");
+	
+	firebase_menu_name.on('value', snap => {
+		menu_name = snap.val();
+		menu_name_print.innerHTML = "선택한 메뉴(" + menu_name + ")"
+		menu_name_print.style.fontWeight = "900";
+		menu_name_print.style.fontSize = "40px";
 	});
 	
-	price_print.innerHTML = "합계 금액: " + total_price + "원";
-	price_print.style.fontWeight = "900";
+	// 메뉴 소개글
+	var menu_detail_print = document.getElementById("menu_detail");
 	
+	firebase_menu_name.on('value', snap =>{
+				menu_detail_print.innerHTML = menu_name + "에 반드시 들어가는 재료 항목입니다."
+				menu_detail_print.style.fontWeight = "900";
+	});
 	
-});
-
-// 메뉴 소개글
-var menu_detail_print = document.getElementById("menu_detail");
-
-firebase_menu_name.on('value', snap =>{
-			menu_detail_print.innerHTML = menu_name + "에 반드시 들어가는 재료 항목입니다."
-			menu_detail_print.style.fontWeight = "900";
-});
-
-// 기본으로 들어가는 재료 읽어오기
-var firebase_menu_meterial_list = firebase.database().ref(path + '/cheese_burger/Material_list');
-var meterial_list_print = document.getElementById("static_list");
-
-// 우선은 정적으로 연결하고 다 끝나면 파이어베이스 해당 노드에 위치한 값들을 동적으로 읽어오는 코드로 수정할 것.
-for(var i = 0; i < 4; i++){
-	const staticSymbol = "ㅇ&nbsp";
-	var firebase_menu_meterial_list_child = firebase_menu_meterial_list.child(i);
-	var MaterialList;		// 이런 값을 menu_price2.js로 넘겨주려고 쓴 건가?
+	// 가격 읽어오기
+	var firebase_menu_price = firebase.database().ref(path + selectMenu + '/price');
+	var price_print = document.getElementById("total_price1");
+	var total_price;
 	
-	if(i == 0){
-		firebase_menu_meterial_list_child.on('value', snap =>{
-			MaterialList = snap.val();
-			meterial_list_print.innerHTML = staticSymbol + MaterialList;
+	firebase_menu_price.on('value', snap =>{
+		price = snap.val();
+		console.log(price);
+		
+		firebase.database().ref(path + selectMenu + '/count').on('value', snap=>{
+			total_price = price * snap.val();
+			firebase.database().ref('/total').set( total_price );
+			price_print.innerHTML = "합계 금액: " + total_price + "원";
+			price_print.style.fontWeight = "900";
 		});
-	}else{
-		firebase_menu_meterial_list_child.on('value', snap =>{
-			MaterialList = snap.val();
-			meterial_list_print.innerHTML =
-				meterial_list_print.innerHTML + "<br/>" + staticSymbol + MaterialList;
-		});
+	});
+	
+	// 기본으로 들어가는 재료 읽어오기
+	var firebase_menu_meterial_list = firebase.database().ref(path + selectMenu + '/Material_list');
+	var meterial_list_print = document.getElementById("static_list");
+	
+	// 우선은 정적으로 연결하고 다 끝나면 파이어베이스 해당 노드에 위치한 값들을 동적으로 읽어오는 코드로 수정할 것.
+	for(var i = 0; i < 4; i++){
+		const staticSymbol = "ㅇ&nbsp";
+		var firebase_menu_meterial_list_child = firebase_menu_meterial_list.child(i);
+		var MaterialList;		// 이런 값을 menu_price2.js로 넘겨주려고 쓴 건가?
+		
+		if(i == 0){
+			firebase_menu_meterial_list_child.on('value', snap =>{
+				MaterialList = snap.val();
+				meterial_list_print.innerHTML = staticSymbol + MaterialList;
+			});
+		}else{
+			firebase_menu_meterial_list_child.on('value', snap =>{
+				MaterialList = snap.val();
+				meterial_list_print.innerHTML =
+					meterial_list_print.innerHTML + "<br/>" + staticSymbol + MaterialList;
+			});
+		}
 	}
-}
+});
 
 // 추가 가능한 재료(이 역시도 우선은 정적으로 코드를 짬.)
 var firebase_menu_meterial_add = firebase.database().ref(path + '/Material_add');
@@ -183,7 +171,7 @@ function addButtonClick(id){
 	console.log(save_list);
 	
 	// 추가 주문 데베에 저장
-	firebase.database().ref(path + '/save_order').set({
+	firebase.database().ref(path + 'save_order').set({
 	    0: Material_add_bool[0],
 	    1: Material_add_bool[1],
 	    2: Material_add_bool[2]
