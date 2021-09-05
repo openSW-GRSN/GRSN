@@ -65,8 +65,7 @@
 <hr/>
 	
 	
-<!-- <!-- 첫번째 메뉴 -->
-첫번째 메뉴
+ <!-- 첫번째 메뉴 -->
 <dl>
 <dt><h1>치즈 버거</h1></dt>
 	<dd>
@@ -91,7 +90,7 @@
 	<hr/>
 </dl>
 	
-두번째 메뉴
+
 <dl>
 <dt><h1>더블 버거</h1></dt>
 	<dd>
@@ -115,7 +114,7 @@
 	<hr/>
 </dl>
 
-세번째 메뉴
+
 <dl>
 <dt><h1>토마토 버거</h1></dt>
 	<dd>
@@ -138,7 +137,7 @@
 	<hr/>
 </dl>
 
-네번째 메뉴
+
 <dl>
 <dt><h1>케밥 버거</h1></dt>
 	<dd>
@@ -171,7 +170,7 @@
 		</button> -->
 		
 	<a href="./page_selectIngredient/selectIngredient_main.html">
-	<button type="button"
+	<button type="button" id="goSixthPg"
 		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
 		>
 		다음으로
@@ -231,6 +230,15 @@
             var dbRef = firebase.database().ref().child("recommend/recommend_ment");
             dbRef.on('value',snap => demo6.innerHTML = snap.val());
 	 
+            
+            var firebase_page_check = firebase.database().ref('page_num_sh');
+
+        	firebase_page_check.on('value', snap =>{
+                var page_num_test = snap.val();
+                if(page_num_test == 6){
+                	goSixthPg.click();
+                }
+        	});
             </script> 
 
 
