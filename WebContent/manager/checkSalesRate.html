@@ -22,34 +22,76 @@
 	</style>
 
 <meta charset="UTF-8">
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
 <title>판매량 체크하기</title>
 </head>
 <body>
 
 <center>
-<p>오늘의 판매량</p>
+<p>현재 판매 현황</p>
 </center>
 
 <!-- 메뉴별 판매량 확인 -->
 <!-- post.jsp -->
 
 		<!-- 총 판매량 확인 -->
-	
-		<script language="JavaScript">
-		<!-- //나중엔 DB에서 읽어오기
-			document.write("오늘의 판매량"+today);
-			document.write('</br>');
-			document.write("치즈버거: "+sales_cheeseburger+"개"); 
-			document.write('</br>');
-			document.write("토마토버거: "+sales_cheeseburger+"개"); 
-			document.write('</br>');
-			document.write("더블버거: "+sales_cheeseburger+"개"); 
-			document.write('</br>');
-			document.write("케밥버거: "+sales_cheeseburger+"개"); 
-			document.write('</br>');
-			document.write("총: "+total_sales+"개");
-		//-->
-		</script>
+		
+
+     </br>
+	 <font size=6> - 치즈버거 판매량 : </font> <font id="demo7" size=6> </font>
+	 </br>
+	 </br>	
+	 <font size=6> - 더블버거 판매량 : </font> <font id="demo8" size=6> </font>
+	 </br>
+	 </br>		
+	 <font size=6> - 케밥버거 판매량 : </font> <font id="demo9" size=6> </font>	
+	 </br>
+	 </br>	
+	 <font size=6> - 토마토버거 판매량 : </font> <font id="demo10" size=6> </font>	
+	 </br>	
+	 
+		<script>
+ 		 var firebaseConfig = {
+        	    apiKey: "AIzaSyAhWZp0H5loTHL92JtrXoCEFdwt8s9DDLY",
+        	    authDomain: "grsn-43bdc.firebaseapp.com",
+        	    databaseURL: "https://grsn-43bdc-default-rtdb.firebaseio.com",
+        	    projectId: "grsn-43bdc",
+        	    storageBucket: "grsn-43bdc.appspot.com",
+        	    messagingSenderId: "592297355861",
+        	    appId: "1:592297355861:web:244776f5d914a5c93c02dc",
+        	    measurementId: "G-60XJK2NTE5"
+        	  };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+
+			//첫번째 메뉴
+        	var demo7 = document.getElementById("demo7");
+            var sales_cheeseburger = document.getElementById("sales_burger/sales_cheeseburger");
+            var dbRef = firebase.database().ref().child("sales_burger/sales_cheeseburger");
+            dbRef.on('value',snap => demo7.innerHTML = snap.val());
+            
+          	//두번째 메뉴
+            var demo8 = document.getElementById("demo8");
+            var sales_doubleburger = document.getElementById("sales_burger/sales_doubleburger");
+            var dbRef = firebase.database().ref().child("sales_burger/sales_doubleburger");
+            dbRef.on('value',snap => demo8.innerHTML = snap.val());
+            
+            //세번째 메뉴
+            var demo9 = document.getElementById("demo9");
+            var sales_kebabburger = document.getElementById("sales_burger/sales_kebabburger");
+            var dbRef = firebase.database().ref().child("sales_burger/sales_kebabburger");
+            dbRef.on('value',snap => demo9.innerHTML = snap.val());
+            
+            //네번째 메뉴
+            var demo10 = document.getElementById("demo10");
+            var sales_tomatoburger = document.getElementById("sales_burger/sales_tomatoburger");
+            var dbRef = firebase.database().ref().child("sales_burger/sales_tomatoburger");
+            dbRef.on('value',snap => demo10.innerHTML = snap.val());
+        
+            </script> 
+		
+		
 		
 </body>
 </html>
