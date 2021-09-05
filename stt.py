@@ -75,6 +75,7 @@ global order_burger  # 고객님이 선택한 햄버거
 global topping  # 토핑리스트
 global add_topp  # 고객님이 추가한 토핑(재료)
 topping = list()
+global top_str
 
 
 class MicrophoneStream(object):
@@ -191,8 +192,9 @@ def listen_print_loop(responses):
         global order_burger     # 고객님이 선택한 햄버거
         global topping          # 토핑리스트
         global add_topp         # 고객님이 추가한 토핑(재료)
-                # 토핑은 여러개 추가할 수 있음
+        global top_str
 
+        ref_page = db.reference()
 
         # Display interim results, but with a carriage return at the end of the
         # line, so subsequent lines will overwrite them.
@@ -215,6 +217,7 @@ def listen_print_loop(responses):
             # one of our keywords.
             # '주문'이 들어간 문구를 말하면 종료하고 1초뒤에 다시 실행함
             if re.search("주문", transcript, re.I):
+                ref_page.update({'page_num': 1})
                 output = "메뉴를 추천받으시겠습니까? 메뉴추천은 알레르기가 있는 분들을 위한 서비스입니다."
                 createsound(output)
                 play()
@@ -225,6 +228,7 @@ def listen_print_loop(responses):
             # <메뉴 추천> 중 1단계 알레르기제품 고르기
             if re.search("네|예|추천해 주세요|추천해", transcript, re.I):
                 # '네'라고 말하면 메뉴 추천 화면으로 넘어감
+                ref_page.update({'page_num': 2})
                 output = "메뉴 추천 화면입니다. '육류', '토마토', '유제품' 중 알레르기 반응이 있는 것을 선택해주세요."
                 createsound(output)
                 play()
@@ -270,8 +274,9 @@ def listen_print_loop(responses):
                 break
 
             # 메뉴추천 중 2단계 맛 선택
-            if re.search("맛 선택|맛선택", transcript, re.I):
+            if re.search("맛 선택|맛선택|선택", transcript, re.I):
                 # '맛 선택'이라고 말하면 맛 선택 화면으로 넘어감
+                ref_page.update({'page_num': 3})
                 output = "고객님께서 좋아하시는 맛은 어떤 맛인가요? 상큼한 맛, 화끈한 맛, 담백한 맛 중에 선택해주세요"
                 createsound(output)
                 play()
@@ -312,6 +317,7 @@ def listen_print_loop(responses):
             # 메뉴 추천 중 3단계 추천결과
             if re.search("결과|결과 보기|결과보기", transcript, re.I):
                 # '결과'를 말하면 메뉴추천의 결과 화면으로 넘어감
+                ref_page.update({'page_num': 4})
                 ref = db.reference('tasteMenu')
                 taste_menu = str(ref.get())
                 output = "질문에 답변해주셔서 감사합니다. 고객님이 드실 수 있을만한 메뉴는." + taste_menu + " 입니다. '메뉴'를 말씀하시면 메뉴리스트로 이동하니, 추천받은 버거종류를 선택해주세요"
@@ -325,6 +331,7 @@ def listen_print_loop(responses):
             elif re.search("아니요|아니오|아뇨|메뉴", transcript, re.I):
                 #  '아니오'라고 하면 메뉴 선택 화면으로 넘어감
                 list_play()
+                ref_page.update({'page_num': 5})
 
                 print("종료하는중...")
                 break
@@ -372,6 +379,7 @@ def listen_print_loop(responses):
 
             # 2단계 재료 추가
             if re.search("재료|재료추가|재료 추가|자료", transcript, re.I):
+                ref_page.update({'page_num': 6})
                 # '재료추가'를 말하면 오른쪽 하단의'다음으로'버튼이 눌리면서 다음 화면(재료추가화면)으로 넘어감
                 output = "고객님이 주문하신 햄버거에 '감자튀김', '음료' 그리고 '케첩 5개'를 재료로 추가하실 수 있습니다. 추가할 재료를 모두 선택해주세요"
                 createsound(output)
@@ -402,7 +410,7 @@ def listen_print_loop(responses):
                 print("종료하는중...")
                 break
 
-            if re.search("케첩|케찹", transcript, re.I):
+            if re.search("케첩|케찹|캡처", transcript, re.I):
                 # 케첩 버튼이 선택됨(눌림), 토핑리스트에 케첩 추가
                 add_topp = "케첩 5개"
                 topping.append('케첩 5개')
@@ -426,9 +434,10 @@ def listen_print_loop(responses):
             # 최종 결제 화면
             if re.search("결제", transcript, re.I):
                 # '결제'를 말하면 연주황색 '확인'버튼이 눌리면서 결제창으로 넘어감
+                ref_page.update({'page_num': 7})
                 ref = db.reference('tatal')
                 total = str(ref.get())
-                createsound("선택된 메뉴는" + order_burger + "이며 추가된 재료는" + add_topp + "입니다. 총 결제 금액은" + total + "입니다")
+                createsound("선택된 메뉴는" + order_burger + "이며 추가된 재료는" + top_str + "입니다. 총 결제 금액은" + total + "입니다")
                 playsound("output.mp3")
 
                 print("종료하는중...")
