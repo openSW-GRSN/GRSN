@@ -74,6 +74,7 @@ global choice_taste  # 고객님이 선택한 맛
 global order_burger  # 고객님이 선택한 햄버거
 global topping  # 토핑리스트
 global add_topp  # 고객님이 추가한 토핑(재료)
+topping = list()
 
 
 class MicrophoneStream(object):
@@ -190,7 +191,7 @@ def listen_print_loop(responses):
         global order_burger     # 고객님이 선택한 햄버거
         global topping          # 토핑리스트
         global add_topp         # 고객님이 추가한 토핑(재료)
-        topping = list()        # 토핑은 여러개 추가할 수 있음
+                # 토핑은 여러개 추가할 수 있음
 
 
         # Display interim results, but with a carriage return at the end of the
@@ -227,6 +228,9 @@ def listen_print_loop(responses):
                 output = "메뉴 추천 화면입니다. '육류', '토마토', '유제품' 중 알레르기 반응이 있는 것을 선택해주세요."
                 createsound(output)
                 play()
+
+                print("종료하는중...")
+                break
 
             if re.search("육류|융뉴|융류|역류|이용료|고기", transcript, re.I):
                 # 육류 버튼이 선택됨(눌림)
@@ -369,7 +373,7 @@ def listen_print_loop(responses):
             # 2단계 재료 추가
             if re.search("재료|재료추가|재료 추가|자료", transcript, re.I):
                 # '재료추가'를 말하면 오른쪽 하단의'다음으로'버튼이 눌리면서 다음 화면(재료추가화면)으로 넘어감
-                output = "고객님이 주문하신 햄버거에 '감자튀김', '음료', '케첩 5개'를 재료로 추가하실 수 있습니다. 추가할 재료를 모두 선택해주세요"
+                output = "고객님이 주문하신 햄버거에 '감자튀김', '음료' 그리고 '케첩 5개'를 재료로 추가하실 수 있습니다. 추가할 재료를 모두 선택해주세요"
                 createsound(output)
                 playsound("output.mp3")
 
@@ -410,8 +414,9 @@ def listen_print_loop(responses):
 
             if re.search("확인", transcript, re.I):
                 # 음성을 들려주기만할 뿐 액티비티는 x
-                top_str = "".join(topping)
                 print(topping)
+                top_str = str(topping)
+                print(top_str)
                 createsound("추가된 재료는" + top_str +"입니다. '결제'를 말씀하시면 결제창으로 이동합니다")
                 playsound("output.mp3")
 
