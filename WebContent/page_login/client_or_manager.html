@@ -1,4 +1,3 @@
-  
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +7,8 @@
 <meta http-equiv="Expires" content="-1"/>
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Cache-Control" content="no-cache"/>
-
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
 
 <link rel="stylesheet" href="../css/custom.css">
 
@@ -56,11 +56,35 @@
 </head>
 <body>
 	<div class="center">
-		<button class="custom_button button_detail"
+		<button class="custom_button button_detail" id="goFirstPg"
 			onclick="location.href='../page_client_question/client_question_main.html'">매장용 화면</button>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<button class="custom_button button_detail"
 			onclick="location.href='./password.html'">매니저 화면</button>
 	</div>
+	<script>
+	
+	  var firebaseConfig = {
+      	    apiKey: "AIzaSyAhWZp0H5loTHL92JtrXoCEFdwt8s9DDLY",
+      	    authDomain: "grsn-43bdc.firebaseapp.com",
+      	    databaseURL: "https://grsn-43bdc-default-rtdb.firebaseio.com",
+      	    projectId: "grsn-43bdc",
+      	    storageBucket: "grsn-43bdc.appspot.com",
+      	    messagingSenderId: "592297355861",
+      	    appId: "1:592297355861:web:244776f5d914a5c93c02dc",
+      	    measurementId: "G-60XJK2NTE5"
+      	  };
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+	
+	    var firebase_page_check = firebase.database().ref('page_num');
+
+        	firebase_page_check.on('value', snap =>{
+                var page_num_test = snap.val();
+                if(page_num_test == 1){
+                	goFirstPg.click();
+                }
+        	});
+     </script>
 </body>
 </html>
