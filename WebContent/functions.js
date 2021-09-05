@@ -194,22 +194,22 @@ function recommendation_taste(taste){	//1:fresh, 2:hot, 3:simple
 
 //오늘의 추천 메뉴
 function recommend_cheese_burger(){
-	recommend_select_hamburger = "cheese burger";
+	recommend_select_hamburger = "치즈 버거";
 	alert("치즈 버거가 선택되었습니다.");
 }
 
 function recommend_double_burger(){
-	recommend_select_hamburger =  "double burger";
+	recommend_select_hamburger =  "더블 버거";
 	alert("더블 버거가 선택되었습니다.");
 }
 
 function recommend_kebab_burger(){
-	recommend_select_hamburger = "kebab burger";
+	recommend_select_hamburger = "케밥 버거";
 	alert("케밥 버거가 선택되었습니다.");
 }
 
 function recommend_tomato_burger(){
-	recommend_select_hamburger = "tomato burger";
+	recommend_select_hamburger = "토마토 버거";
 	alert("토마토 버거가 선택되었습니다.");
 }
 
