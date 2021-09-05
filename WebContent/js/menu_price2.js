@@ -14,10 +14,10 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-var path = "test/치즈버거";		// 경로
+var path = 'Menu';		// 경로
 
 // 선택된 메뉴
-var firebase_menu_name = firebase.database().ref(path + '/name');
+var firebase_menu_name = firebase.database().ref(path + '/cheese_burger/name');
 var menu_name_print = document.getElementById("last_check_menu");
 var menu_name;
 
@@ -79,7 +79,7 @@ firebase_material_add.get().then((data)=>{
 });
 
 // 가격 읽어오기
-var firebase_menu_price = firebase.database().ref(path + '/price');
+var firebase_menu_price = firebase.database().ref('total');
 var price_print = document.getElementById("total_price2");
 var price;
 

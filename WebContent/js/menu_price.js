@@ -48,10 +48,11 @@ var selectMenu = '여기에 메뉴 이름(영문)이 들어가야 함.';
 var firebase_count_check = firebase.database().ref('Menu');
 firebase_count_check.orderByChild('count').startAt(1).once('value', function(data){
     console.log(data.val());
-	selectMenu = data.child('name').val();
+	//firebase_count_check.
+	//selectMenu = data.child('name').val();
 });
 
-console.log(selectMenu);
+//console.log(selectMenu);
 
 // firebase에서 가져오기(메뉴명)
 var firebase_menu_name = firebase.database().ref(path + '/cheese_burger/name');
@@ -73,6 +74,10 @@ firebase_menu_price.on('value', snap =>{
 	price = snap.val();
 	price_print.innerHTML = "합계 금액: " + price + "원"
 	price_print.style.fontWeight = "900";
+	
+	firebase.database().ref(path + '/cheese_burger/count').on('value', snap=>{
+		firebase.database().ref('/total').set( price * snap.val() );
+	})
 });
 
 // 메뉴 소개글
@@ -146,8 +151,6 @@ for(var i = 0; i < 3; i++){
 	//text[i] = "0";
 }
 
-price = compute_count_menu(price, count);
-
 // 추가할 재료 버튼을 클릭했을 때 호출되는 함수
 function addButtonClick(id){
 	// 클릭 값이 있으면,
@@ -179,9 +182,4 @@ function addButtonClick(id){
 	    1: Material_add_bool[1],
 	    2: Material_add_bool[2]
 	  });
-}
-
-// 정적 변수에서 계산해보고.. 디비에 저장? 흠 잘 모르겠군..
-function compute_count_menu(price, count){
-	return price*count;
 }
