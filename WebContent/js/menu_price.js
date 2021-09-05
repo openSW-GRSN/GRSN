@@ -24,18 +24,15 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-var path = 'Menu/';		// 경로
+var path = 'Menu/';		// 파이어베이스 루트 경로
 
-var menu_name = "더블버거";
-var price = 5000;
-var count = 1;
-//const Material_list = ['빵 2장', '패티', '양상추', '소스'];
-var Material_add = ['감자튀김(중)', '음료(중)', '케첩(+5)'];
-var Material_add_bool = [];
-var save_list = "";
-//var final_save_list = "submit add ingredient";
-//var text = [];		// 재료 수정 잘 되는지 확인
-var selectMenu = '여기에 메뉴 이름(영문)이 들어가야 함.';
+var menu_name;			// 버거 이름
+var price;				// 가격
+var count;				// 수량
+var Material_add = ['감자튀김(중)', '음료(중)', '케첩(+5)'];		// 추가 주문 가능한 목록 저장
+var Material_add_bool = [];		// 추가 주문 가능한 목록 유무 판단(0: 추가X, 1: 추가)
+var save_list = "";		// 추가 주문 가능한 목록 저장
+var selectMenu = '';	// 메뉴명(영문)
 
 // count 안을 확인해서 1 이상인 곳이 있으면 가져오기
 var firebase_count_check = firebase.database().ref('Menu');
@@ -46,7 +43,6 @@ firebase_count_check.orderByChild('count').startAt(1).once('child_added', functi
 	
 	// firebase에서 가져오기(메뉴명)
 	var firebase_menu_name = firebase.database().ref(path + selectMenu + '/name');
-	// 메뉴 이름 쓰는 div를 변수에 저장
 	var menu_name_print = document.getElementById("menu_name");
 	
 	firebase_menu_name.on('value', snap => {
@@ -84,12 +80,11 @@ firebase_count_check.orderByChild('count').startAt(1).once('child_added', functi
 	// 기본으로 들어가는 재료 읽어오기
 	var firebase_menu_meterial_list = firebase.database().ref(path + selectMenu + '/Material_list');
 	var meterial_list_print = document.getElementById("static_list");
-	
-	// 우선은 정적으로 연결하고 다 끝나면 파이어베이스 해당 노드에 위치한 값들을 동적으로 읽어오는 코드로 수정할 것.
+	//console.log(firebase_menu_meterial_list.child());
 	for(var i = 0; i < 4; i++){
 		const staticSymbol = "ㅇ&nbsp";
 		var firebase_menu_meterial_list_child = firebase_menu_meterial_list.child(i);
-		var MaterialList;		// 이런 값을 menu_price2.js로 넘겨주려고 쓴 건가?
+		var MaterialList;
 		
 		if(i == 0){
 			firebase_menu_meterial_list_child.on('value', snap =>{
@@ -106,7 +101,7 @@ firebase_count_check.orderByChild('count').startAt(1).once('child_added', functi
 	}
 });
 
-// 추가 가능한 재료(이 역시도 우선은 정적으로 코드를 짬.)
+// 추가 가능한 재료
 var firebase_menu_meterial_add = firebase.database().ref(path + '/Material_add');
 var MaterialAdd;
 
@@ -115,8 +110,8 @@ var firebase_menu_meterial_add_child0 = firebase_menu_meterial_add.child(0);
 var meterial_add_print0 = document.getElementById(0);
 
 firebase_menu_meterial_add_child0.on('value', snap =>{
-		MaterialAdd = snap.val();
-		meterial_add_print0.childNodes[0].textContent = MaterialAdd;
+	MaterialAdd = snap.val();
+	meterial_add_print0.childNodes[0].textContent = MaterialAdd;
 });
 
 // i = 1
@@ -124,8 +119,8 @@ var firebase_menu_meterial_add_child1 = firebase_menu_meterial_add.child(1);
 var meterial_add_print1 = document.getElementById(1);
 
 firebase_menu_meterial_add_child1.on('value', snap =>{
-		MaterialAdd = snap.val();
-		meterial_add_print1.childNodes[0].textContent = MaterialAdd;
+	MaterialAdd = snap.val();
+	meterial_add_print1.childNodes[0].textContent = MaterialAdd;
 });
 
 // i = 2
@@ -133,17 +128,25 @@ var firebase_menu_meterial_add_child2 = firebase_menu_meterial_add.child(2);
 var meterial_add_print2 = document.getElementById(2);
 
 firebase_menu_meterial_add_child2.on('value', snap =>{
-		MaterialAdd = snap.val();
-		meterial_add_print2.childNodes[0].textContent = MaterialAdd;
+	MaterialAdd = snap.val();
+	meterial_add_print2.childNodes[0].textContent = MaterialAdd;
 });
 
 // 추가할 재료 버튼
 for(var i = 0; i < 3; i++){
 	// 중복 체크가 되지 않도록 초기화
 	Material_add_bool[i] = 0;
-	// 추가되는 항목도 배열로 해주삼.
-	//text[i] = "0";
 }
+
+// 다음 페이지로 넘어갈지 확인
+var firebase_page_check = firebase.database().ref('page_num');
+
+firebase_page_check.on('value', snap =>{
+		var page_num_test = snap.val();
+		if(page_num_test == 7){
+			nextPage.click();
+		}
+});
 
 // 추가할 재료 버튼을 클릭했을 때 호출되는 함수
 function addButtonClick(id){
