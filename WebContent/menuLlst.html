@@ -231,7 +231,7 @@
             dbRef.on('value',snap => demo6.innerHTML = snap.val());
 	 
             
-            var firebase_page_check = firebase.database().ref('page_num_sh');
+            var firebase_page_check = firebase.database().ref('page_num');
 
         	firebase_page_check.on('value', snap =>{
                 var page_num_test = snap.val();
