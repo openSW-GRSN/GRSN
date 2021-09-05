@@ -63,7 +63,7 @@
 	</div>
 	
 <hr/>
-	
+
 	
 <!-- <!-- 첫번째 메뉴 -->
 <dl>
@@ -195,6 +195,30 @@
         	  };
             // Initialize Firebase
             firebase.initializeApp(firebaseConfig);
+
+			//첫번째 메뉴
+        	var demo = document.getElementById("demo");
+            var menu1 = document.getElementById("setMenu/menu1");
+            var dbRef = firebase.database().ref().child("setMenu/menu1");
+            dbRef.on('value',snap => demo.innerHTML = snap.val());
+            
+          	//두번째 메뉴
+            var demo2 = document.getElementById("demo2");
+            var menu2 = document.getElementById("setMenu/menu2");
+            var dbRef = firebase.database().ref().child("setMenu/menu2");
+            dbRef.on('value',snap => demo2.innerHTML = snap.val());
+            
+            //세번째 메뉴
+            var demo3 = document.getElementById("demo3");
+            var menu3 = document.getElementById("setMenu/menu3");
+            var dbRef = firebase.database().ref().child("setMenu/menu3");
+            dbRef.on('value',snap => demo3.innerHTML = snap.val());
+            
+            //네번째 메뉴
+            var demo4 = document.getElementById("demo4");
+            var menu4 = document.getElementById("setMenu/menu4");
+            var dbRef = firebase.database().ref().child("setMenu/menu4");
+            dbRef.on('value',snap => demo4.innerHTML = snap.val());
         
 	    // 은근슬쩍 낀 오늘의 추천 메뉴 띄우는 부분 - 햄버거
             var demo5 = document.getElementById("demo5");
