@@ -195,6 +195,10 @@ def listen_print_loop(responses):
         global top_str
 
         ref_page = db.reference()
+        ref_ke_count = db.reference('Menu/kebab_burger')
+        ref_che_count = db.reference('Menu/cheese_burger')
+        ref_dou_count = db.reference('Menu/double_burger')
+        ref_tom_count = db.reference('Menu/tomato_burger')
 
         # Display interim results, but with a carriage return at the end of the
         # line, so subsequent lines will overwrite them.
@@ -339,6 +343,7 @@ def listen_print_loop(responses):
             # 1단계 메뉴 선택하기 (예 : 치즈를 말하면 치즈버거가 선택됨)
             if re.search("치즈|cheese", transcript, re.I):
                 # 치즈버거 '선택하기'버튼이 눌림
+                ref_che_count.update({'count': 1})
                 order_burger = "치즈버거"
                 output = order_burger + " 를 선택하셨습니다. '재료 추가'를 말씀하시면 재료 추가 화면으로 이동합니다."
                 createsound(output)
@@ -349,6 +354,7 @@ def listen_print_loop(responses):
 
             if re.search("토마토버거|토마토 버거", transcript, re.I):
                 # 토마토버거 '선택하기'버튼이 눌림
+                ref_tom_count.update({'count': 1})
                 order_burger = "토마토버거"
                 output = order_burger + " 를 선택하셨습니다. '재료 추가'를 말씀하시면 재료 추가 화면으로 이동합니다."
                 createsound(output)
@@ -359,6 +365,7 @@ def listen_print_loop(responses):
 
             if re.search("더블", transcript, re.I):
                 # 더블버거 '선택하기'버튼이 눌림
+                ref_dou_count.update({'count': 1})
                 order_burger = "더블버거"
                 output = order_burger + " 를 선택하셨습니다. '재료 추가'를 말씀하시면 재료 추가 화면으로 이동합니다."
                 createsound(output)
@@ -369,6 +376,7 @@ def listen_print_loop(responses):
 
             if re.search("케밥|kebab|개밥|캐밥|개 밥", transcript, re.I):
                 # 케밥버거 '선택하기'버튼이 눌림
+                ref_ke_count.update({'count': 1})
                 order_burger = "케밥버거"
                 output = order_burger + " 를 선택하셨습니다. '재료 추가'를 말씀하시면 재료 추가 화면으로 이동합니다."
                 createsound(output)
