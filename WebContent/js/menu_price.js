@@ -31,7 +31,7 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-var path = "test/치즈버거";		// 경로
+var path = 'Menu';		// 경로
 
 var menu_name = "더블버거";
 var price = 5000;
@@ -42,15 +42,19 @@ var Material_add_bool = [];
 var save_list = "";
 //var final_save_list = "submit add ingredient";
 //var text = [];		// 재료 수정 잘 되는지 확인
+var selectMenu = '여기에 메뉴 이름(영문)이 들어가야 함.';
 
-/**
- * 메뉴 선택 화면에서 선택된 메뉴 변수를 function.js import해서 읽어오거나
- * 파이어베이스에 저장시켜 값을 읽어오고 파이어베이스 내 데이터 검색 코드를 통해
- * 가격과 고정 재료들을 수정하는 쪽으로 코드를 구성해야 할 듯.
- */
+// count 안을 확인해서 1 이상인 곳이 있으면 가져오기
+var firebase_count_check = firebase.database().ref('Menu');
+firebase_count_check.orderByChild('count').startAt(1).once('value', function(data){
+    console.log(data.val());
+	selectMenu = data.child('name').val();
+});
+
+console.log(selectMenu);
 
 // firebase에서 가져오기(메뉴명)
-var firebase_menu_name = firebase.database().ref(path + '/name');
+var firebase_menu_name = firebase.database().ref(path + '/cheese_burger/name');
 // 메뉴 이름 쓰는 div를 변수에 저장
 var menu_name_print = document.getElementById("menu_name");
 
@@ -61,10 +65,8 @@ firebase_menu_name.on('value', snap => {
 	menu_name_print.style.fontSize = "40px";
 });
 
-//export const export_menu_name = menu_name;
-
 // 가격 읽어오기
-var firebase_menu_price = firebase.database().ref(path + '/price');
+var firebase_menu_price = firebase.database().ref(path + '/cheese_burger/price');
 var price_print = document.getElementById("total_price1");
 
 firebase_menu_price.on('value', snap =>{
@@ -82,7 +84,7 @@ firebase_menu_name.on('value', snap =>{
 });
 
 // 기본으로 들어가는 재료 읽어오기
-var firebase_menu_meterial_list = firebase.database().ref(path + '/Material_list');
+var firebase_menu_meterial_list = firebase.database().ref(path + '/cheese_burger/Material_list');
 var meterial_list_print = document.getElementById("static_list");
 
 // 우선은 정적으로 연결하고 다 끝나면 파이어베이스 해당 노드에 위치한 값들을 동적으로 읽어오는 코드로 수정할 것.
@@ -136,21 +138,6 @@ firebase_menu_meterial_add_child2.on('value', snap =>{
 		meterial_add_print2.childNodes[0].textContent = MaterialAdd;
 });
 
-// 스냅샷 가져오는 코드
-firebase_menu_meterial_add_child2.get().then((snapshot) => {
-  if (snapshot.exists()) {
-	MaterialAdd = snapshot.val();
-    console.log(MaterialAdd);
-	//document.getElementById("save_test").innerHTML = MaterialAdd;
-  } else {
-    console.log("No data available");
-  }
-}).catch((error) => {
-  console.error(error);
-});
-
-
-
 // 추가할 재료 버튼
 for(var i = 0; i < 3; i++){
 	// 중복 체크가 되지 않도록 초기화
@@ -160,17 +147,6 @@ for(var i = 0; i < 3; i++){
 }
 
 price = compute_count_menu(price, count);
-
-// 맨 아래 가격
-// 목록을 데베에 저장해놓고 그냥 출력하는 방법도 있을 것 같다.	
-//document.getElementById("total_price1").innerHTML = "합계 금액: " + price + "원";
-//document.getElementById("total_price1").style.fontWeight = "900";
-
-// 불린 초기화 출력
-//document.getElementById("boolean_test").innerHTML = Material_add_bool;
-// 텍스트 배열
-//document.getElementById("boolean_test").innerHTML = text;
-//}
 
 // 추가할 재료 버튼을 클릭했을 때 호출되는 함수
 function addButtonClick(id){
@@ -203,33 +179,6 @@ function addButtonClick(id){
 	    1: Material_add_bool[1],
 	    2: Material_add_bool[2]
 	  });
-	// 클릭한 버튼 값 표시(누적)
-	//document.getElementById("save_test").innerHTML = save_list;
-	// 중복 클릭 방지
-	//document.getElementById("boolean_test").innerHTML = Material_add_bool;
-	// 함수 파라미터: 추가 가능한 재료 항목, 중복 추가 방지 불린 값
-	//text = final_add_ingredient(Material_add, Material_add_bool);
-	//final_add_ingredient(Material_add, Material_add_bool);
-}
-
-// 1로 표시된 index에 해당하는 재료를 최종적으로 추가한다.
-function final_add_ingredient(ingredient, bool){
-	// bool의 개수에 맞게 for문 실행
-	for(var i = 0; i < bool.length; i++){
-		// 재료가 들어간다고 표시되면,
-		if(bool[i] == 1){
-			// final_save_list에 값을 넣는다.
-			final_save_list = ingredient[i];
-			document.getElementById("boolean_text").innerHTML = final_save_list;
-			text[i] = ingredient[i];
-			document.getElementById("boolean_text").innerHTML = text;
-		}else{
-			// 왜 마지막 항목은 빠지지 않을까?
-			text[i] = "0";
-		}
-	}
-	// 최종적으로 저장된 값을 변수로 반환하여 다음 화면에 찍어주고 싶었다..
-	//return final_save_list;
 }
 
 // 정적 변수에서 계산해보고.. 디비에 저장? 흠 잘 모르겠군..
