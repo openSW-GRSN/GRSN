@@ -1,4 +1,3 @@
-// menu_price.js가 임포트 되지 않아 다시 여기서 연결한다 ^0^ (추후에 개선을 해야겠지만...)
 // firebase 연결
 var firebaseConfig = {
     apiKey: "AIzaSyAhWZp0H5loTHL92JtrXoCEFdwt8s9DDLY",
@@ -15,7 +14,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 var path = 'Menu/';        // 경로
-var selectMenu = '여기에 메뉴 이름(영문)이 들어가야 함.';
+var selectMenu;      // 선택된 메뉴명
 var menu_name;
 
 // count 안을 확인해서 1 이상인 곳이 있으면 가져오기
