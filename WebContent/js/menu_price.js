@@ -1,14 +1,3 @@
-/**
- * 변수명 리스트
- * menu_name[CHAR]: 메뉴명 
- * price[INT]: 금액
- * count[INT]: 개수
- * Material_add[CHAR]: 고객의 기호에 맞게 추가하는 재료
- * Material_add_bool[BOOLEAN]: 들어가는 재료를 표시(0: 추가 안 함, 1: 추가함)
- * save_list[CHAR]: 클릭한 재료
- * final_save_list[CHAR]: 최종적으로 추가되는 재료들
- */
-
 // firebase 연결
 var firebaseConfig = {
 	apiKey: "AIzaSyAhWZp0H5loTHL92JtrXoCEFdwt8s9DDLY",
@@ -105,7 +94,7 @@ firebase_count_check.orderByChild('count').startAt(1).once('child_added', functi
 var firebase_menu_meterial_add = firebase.database().ref(path + '/Material_add');
 var MaterialAdd;
 
-// i = 0
+// i = 0 (감자튀김)
 var firebase_menu_meterial_add_child0 = firebase_menu_meterial_add.child(0);
 var meterial_add_print0 = document.getElementById(0);
 
@@ -114,7 +103,7 @@ firebase_menu_meterial_add_child0.on('value', snap =>{
 	meterial_add_print0.childNodes[0].textContent = MaterialAdd;
 });
 
-// i = 1
+// i = 1 (음료)
 var firebase_menu_meterial_add_child1 = firebase_menu_meterial_add.child(1);
 var meterial_add_print1 = document.getElementById(1);
 
@@ -123,7 +112,7 @@ firebase_menu_meterial_add_child1.on('value', snap =>{
 	meterial_add_print1.childNodes[0].textContent = MaterialAdd;
 });
 
-// i = 2
+// i = 2 (케첩)
 var firebase_menu_meterial_add_child2 = firebase_menu_meterial_add.child(2);
 var meterial_add_print2 = document.getElementById(2);
 
