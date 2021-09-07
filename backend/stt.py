@@ -45,7 +45,7 @@ import os
 from tts import createsound, listcreate
 
 # api 서비스계정 키 인증
-# 대회에 제출할 때는 키파일 삭제
+# 대회에 제출할 때는 키 파일 삭제
 credential_path = "polar-cyclist-322301-6eaca42ece96.json"
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
