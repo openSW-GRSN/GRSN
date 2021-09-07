@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" href="../css/custom.css">
+
+<title>재료 제외/추가 창</title>
+
+<style>
+    .basic_ingredient{ padding: 5px; border: 2px solid black; float: up; background-color: #ffffff; }
+    .select_ingredinet{ margin: 10px; text-align: center; }
+    .guide_text{
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 10px;
+    }
+    .custom_button{
+        border: none;
+        outline: none;
+        height: 60px;
+        width: 130px;
+        padding: 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 25px;
+        box-shadow: 1px 4px 0 black;
+    }
+    .custom_button:active{
+        box-shadow: 1px 1px 0 black;
+        position: relative;
+        top: 2px;
+    }
+    .add_ingredient{
+        background-color: #009000; /* pickle */
+        height: 80px;
+        width: 150px;
+    }
+    .patty_color{
+        background-color: #754100; /* patty */
+        color: white;
+    }
+    .footer{
+        bottom: 0;
+        height: 50px;
+        padding: 0;
+    }
+</style>
+</head>
+
+<body>
+<div>
+    <button class="custom_button" style="float: left;"
+        onClick="location.href='../menuLlst.html'">이전 화면</button>
+    <div id="menu_name" style="text-align: center;">
+        <h1>선택한 음식 (불고기 세트)</h1>
+    </div>
+</div>
+
+<br/>
+<hr>
+
+<div class="basic_ingredient">
+    <p></p>
+    <div id="menu_detail" style="text-align: center">
+        <p><b>불고기 세트에 반드시 들어가는 재료 항목입니다. (제외나 추가가 불가능합니다.)</b></p>
+    </div>
+     <ul id="static_list" style="list-style-type: circle;">
+         <li>참깨빵 2장</li>
+         <li>불고기 패티 1장</li>
+         <li>양상추</li>
+         <li>콜라 1인</li>
+         <li>감자튀김(중)</li>
+     </ul>
+</div>
+<div class="select_ingredinet">
+     <p>아래는 고객님의 기호에 맞게 추가가 가능합니다.</p>
+</div>
+
+<div class="guide_text patty_color" style="text-align: center">
+    추가할 항목들을 모두 선택해주세요.
+    <span id="add_list"></span>
+</div>
+
+<div>
+    <button id="0" class="custom_button add_ingredient"
+            onClick='addButtonClick(this.id);'>재료0</button>
+    <button id="1" class="custom_button add_ingredient"
+            onClick='addButtonClick(this.id);'>재료1</button>
+    <button id="2" class="custom_button add_ingredient"
+            onClick='addButtonClick(this.id);'>재료2</button>
+    <!-- <button id="3" class="custom_button add_ingredient"
+            onClick='btnClick(this.id);'>재료3</button> -->
+</div>
+<br/>
+<footer class="footer" style="border: 1px solid #ffe3a8;">
+    <button id="nextPage" class="custom_button normal_button"
+            style="float: right; border: 1px solid transparent;"
+            onclick="location.href='selectIngredient_total_amount.html'">확인</button>
+    <div id="total_price1" class="guide_text"
+        style="background-color: white; color: black"><b>합계 금액: 0원</b></div>
+</footer>
+<br/>
+    
+<!-- firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+<script type="text/javascript" src="../js/menu_price.js"></script>
+
+</body>
+</html>

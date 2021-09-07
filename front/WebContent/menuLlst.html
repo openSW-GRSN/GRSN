@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="./functions.js"></script>
+<script src="./manager/setmenuFc.js"></script>
+	<style>
+		body{
+			background-color:#FFE3A8;
+			background-repeat:repeat;
+			background-attachment:fixed;
+			color:black;
+			
+			font-family: 'Cafe24Oneprettynight';
+			}
+		@font-face {/* 제목 부분의 폰트 */
+   			 	font-family: 'BMEULJIRO';
+    			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BMEULJIRO.woff') format('woff');
+    			font-weight: normal;
+    			font-style: normal;
+				}
+		@font-face {/* 내용 부분의 폰트 */
+    			font-family: 'Cafe24Oneprettynight';
+   				src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
+    			font-weight: normal;
+    			font-style: normal;
+				}	
+				
+		p1{
+			font-family: 'Cafe24Oneprettynight';
+			font-size:30px;
+		
+		}
+		
+		
+	</style>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+<title>메뉴 선택</title>
+</head>
+<body>
+ <!-- 나중에 결제 화면으로 링크 바꾸기 -->
+	<p align="center">
+	메뉴를 선택해주세요!
+	</p>
+	
+	<p>오늘의 판매메뉴</p>
+	 <p id="demo">메뉴1</p>
+	 <p id="demo2">메뉴2</p>
+	 <p id="demo3">메뉴3</p>
+	 <p id="demo4">메뉴4</p>
+
+	
+	<hr/>	<!-- 전체 화면의 가로 분할 선 -->
+<dl>
+<dt><h1>오늘의 추천메뉴입니다.</h1>
+
+	<div>
+		<font size=5> - 버거 : </font> <font id="demo5" size=5> </font>		
+		<br>
+		<font size=5> - 추천 문구 : </font> <font id="demo6" size=5> </font>
+	</div>
+	
+<hr/>
+	
+	
+ <!-- 첫번째 메뉴 -->
+<dl>
+<dt><h1>치즈 버거</h1></dt>
+	<dd>
+	<img align="middle" width="150" height="150" src="images/cheeseburger.jpg">
+	<p1>진한 치즈맛이 느껴지는 치즈 버거입니다.</p1>
+	</dd>
+	
+	<div align="right">
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="count_sales_cheeseburger()"> 
+		선택하기
+		</button>
+	
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="cancel_sales_cheeseburger()"> 
+		취소하기
+		</button>
+
+	</div>
+	<hr/>
+</dl>
+	
+
+<dl>
+<dt><h1>더블 버거</h1></dt>
+	<dd>
+	<img align="middle" width="150" height="150" src="images/doubleburger.jpg">
+	<p1>패티가 두 배! 더욱 진해진 고기 맛을 느끼세요.</p1>
+	</dd>
+	
+	<div align="right">
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="count_sales_doubleburger()">
+		선택하기
+		</button>
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="cancel_sales_doubleburger()">
+		취소하기
+		</button>	
+	</div>
+	</div>
+	<hr/>
+</dl>
+
+
+<dl>
+<dt><h1>토마토 버거</h1></dt>
+	<dd>
+	<img align="middle" width="150" height="150" src="images/tomatoburger.jpg">
+	<p1>신선한 토마토와 패티의 조합을 즐기세요!</p1>
+	</dd>
+	
+	<div align="right">
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="count_sales_tomatoburger()">
+		선택하기
+		</button>
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="cancel_sales_tomatoburger()">
+		취소하기
+		</button>	
+	</div>
+	<hr/>
+</dl>
+
+
+<dl>
+<dt><h1>케밥 버거</h1></dt>
+	<dd>
+	<img align="middle" width="150" height="150" src="images/kebabburger.jpg">
+	<p1>이국적인 케밥의 맛을 햄버거에서?!</p1>
+	</dd>
+	
+	<div align="right">
+		<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="count_sales_kebabburger()">
+		선택하기
+		</button>
+	<button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="cancel_sales_kebabburger()">
+		취소하기
+		</button>
+	</div>
+	<hr/>
+</dl>
+
+<br>
+<!-- 아랫부분 수정 -->
+
+	<!-- <button type="button"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		onClick="sendSales()">
+		결정하기
+		</button> -->
+		
+	<a href="./page_selectIngredient/selectIngredient_main.html">
+	<button type="button" id="goSixthPg"
+		style="color:black; background-color:#f59b25; font-size:2em; font-family: 'Cafe24Oneprettynight';"
+		>
+		다음으로
+		</button>
+	</a>
+
+
+
+
+ <script>
+  var firebaseConfig = {
+        	    apiKey: "AIzaSyAhWZp0H5loTHL92JtrXoCEFdwt8s9DDLY",
+        	    authDomain: "grsn-43bdc.firebaseapp.com",
+        	    databaseURL: "https://grsn-43bdc-default-rtdb.firebaseio.com",
+        	    projectId: "grsn-43bdc",
+        	    storageBucket: "grsn-43bdc.appspot.com",
+        	    messagingSenderId: "592297355861",
+        	    appId: "1:592297355861:web:244776f5d914a5c93c02dc",
+        	    measurementId: "G-60XJK2NTE5"
+        	  };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+
+			//첫번째 메뉴
+        	var demo = document.getElementById("demo");
+            var menu1 = document.getElementById("setMenu/menu1");
+            var dbRef = firebase.database().ref().child("setMenu/menu1");
+            dbRef.on('value',snap => demo.innerHTML = snap.val());
+            
+          	//두번째 메뉴
+            var demo2 = document.getElementById("demo2");
+            var menu2 = document.getElementById("setMenu/menu2");
+            var dbRef = firebase.database().ref().child("setMenu/menu2");
+            dbRef.on('value',snap => demo2.innerHTML = snap.val());
+            
+            //세번째 메뉴
+            var demo3 = document.getElementById("demo3");
+            var menu3 = document.getElementById("setMenu/menu3");
+            var dbRef = firebase.database().ref().child("setMenu/menu3");
+            dbRef.on('value',snap => demo3.innerHTML = snap.val());
+            
+            //네번째 메뉴
+            var demo4 = document.getElementById("demo4");
+            var menu4 = document.getElementById("setMenu/menu4");
+            var dbRef = firebase.database().ref().child("setMenu/menu4");
+            dbRef.on('value',snap => demo4.innerHTML = snap.val());
+        
+	    // 은근슬쩍 낀 오늘의 추천 메뉴 띄우는 부분 - 햄버거
+            var demo5 = document.getElementById("demo5");
+            var recommend_hamburger2 = document.getElementById("recommend/recommend_hamburger");
+            var dbRef = firebase.database().ref().child("recommend/recommend_hamburger");
+            dbRef.on('value',snap => demo5.innerHTML = snap.val());
+        
+ 	    // 은근슬쩍 낀 오늘의 추천 메뉴 띄우는 부분 - 추천 문구
+            var demo6 = document.getElementById("demo6");
+            var recommend_ment2 = document.getElementById("recommend/recommend_ment");
+            var dbRef = firebase.database().ref().child("recommend/recommend_ment");
+            dbRef.on('value',snap => demo6.innerHTML = snap.val());
+	 
+            
+            var firebase_page_check = firebase.database().ref('page_num');
+
+        	firebase_page_check.on('value', snap =>{
+                var page_num_test = snap.val();
+                if(page_num_test == 6){
+                	goSixthPg.click();
+                }
+        	});
+            </script> 
+
+
+
+
+</body>
+</html>

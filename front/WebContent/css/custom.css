@@ -1,0 +1,20 @@
+@charset "UTF-8";
+@font-face {
+	font-family: 'Cafe24Oneprettynight';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body{
+	font-family: 'Cafe24Oneprettynight';
+	font-size: 25px;
+	background-color: #ffe3a8;
+}
+
+button, input{
+	font-family: 'Cafe24Oneprettynight';
+	font-size: 25px;
+	background-color: #f59b25;
+	color: white;
+}
